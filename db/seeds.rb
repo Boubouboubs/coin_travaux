@@ -37,17 +37,18 @@ puts "CSV parsed!!!"
 puts "creation of main projects main_projects_companies"
 CSV.foreach(db_main_projects, headers: :first_row, col_sep: ";") do |row|
   address = "#{row["Address"]}, #{row["Postcode"]}, #{row["City"]}"
-  main_company_project = Project.create!(address: address, surface: row["Surface"], user: camille)
-  ProjectCompany.create(project: main_company_project, company: Company.first)
+  main_company_project = Project.create!(property_type: row["Property_type"], address: address, surface: row["Surface"], user: camille)
+  projectcompany = ProjectCompany.create(project: main_company_project, company: Company.first)
+  Review.create!(project_company: projectcompany, rating: row["Rating"], comment: row["Reviews"])
 end
 
 # Projects A FAIRE DEMAIN.
 puts "creation of projects and projects companies"
 CSV.foreach(db_projects, headers: :first_row, col_sep: ";") do |row|
   address = "#{row["Address"]}, #{row["Postcode"]}, #{row["City"]}"
-  project = Project.create!(address: address, surface: row["Surface"], user: users.sample)
-  ProjectCompany.create(project: project, company: Company.all.sample)
-  Review.create
+  project = Project.create!(property_type: row["Property_type"], address: address, surface: row["Surface"], user: users.sample)
+  projectcompany = ProjectCompany.create(project: project, company: Company.all.sample)
+  Review.create!(project_company: projectcompany, rating: row["Rating"], comment: row["Reviews"])
 end
 
 
