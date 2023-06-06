@@ -10,9 +10,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_05_140200) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_05_153755) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.date "creation_date"
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "project_companies", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_project_companies_on_company_id"
+    t.index ["project_id"], name: "index_project_companies_on_project_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.date "visit_date"
+    t.string "property_type"
+    t.string "address"
+    t.integer "surface"
+    t.float "latitude"
+    t.float "longitude"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "quotes", force: :cascade do |t|
+    t.bigint "project_company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_company_id"], name: "index_quotes_on_project_company_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.float "rating"
+    t.text "comment"
+    t.bigint "project_company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_company_id"], name: "index_reviews_on_project_company_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +68,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_140200) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.bigint "company_id", null: false
+    t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "project_companies", "companies"
+  add_foreign_key "project_companies", "projects"
+  add_foreign_key "projects", "users"
+  add_foreign_key "quotes", "project_companies"
+  add_foreign_key "reviews", "project_companies"
+  add_foreign_key "users", "companies"
 end
