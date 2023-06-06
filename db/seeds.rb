@@ -16,7 +16,7 @@ users << david = User.create!(email: "serrano.david.liaca@gmail.com", password: 
 users << amal = User.create!(email: "amal.rabbani@gmail.com", password: "123456", first_name: "Amal", last_name: "Rabbani", phone_number: "0611223377")
 users << boubou = User.create!(email: "boubouboubs@gmail.com", password: "123456", first_name: "Stéphanie", last_name: "Boubou", phone_number: "0611223388")
 users << celine = User.create!(email: "celine.chader@gmail.com", password: "123456", first_name: "Céline", last_name: "Chader", phone_number: "0611223399")
-puts "#{users.size} users created!"
+puts "#{users.size} users created, seedons mes braves!"
 
 camille.photo.attach(io: File.open('app/assets/images/camille.jpg'), filename: "#{camille.first_name}.jpg")
 celine.photo.attach(io: File.open('app/assets/images/celine.jpg'), filename: "#{celine.first_name}.jpg")
@@ -28,44 +28,61 @@ david.photo.attach(io: File.open('app/assets/images/david.jpg'), filename: "#{da
 puts "parsing CSV companies"
 CSV.foreach(filepath, headers: :first_row, col_sep: ";") do |row|
   address = "#{row["Address"]}, #{row["Postcode"]}, #{row["City"]}"
-  company = Company.create!(name: row[0], address: address, creation_date: row["creation_date" ])
-  user = User.create!(email: row["Email"], company: company, password: "123456", phone_number: row["Phone_number"], first_name: row["First_name"], last_name: row["Last_name"])
+  company = Company.create!(
+    name: row[0],
+    address: address,
+    creation_date: row["creation_date"]
+  )
+  user = User.create!(
+    email: row["Email"],
+    company: company,
+    password: "123456",
+    phone_number: row["Phone_number"],
+    first_name: row["First_name"],
+    last_name: row["Last_name"]
+  )
 end
 puts "CSV parsed!!!"
 
 # Main company 2 projects
-puts "creation of main projects main_projects_companies"
+puts "parsing of main projects, projects company, reviews"
 CSV.foreach(db_main_projects, headers: :first_row, col_sep: ";") do |row|
   address = "#{row["Address"]}, #{row["Postcode"]}, #{row["City"]}"
-  main_company_project = Project.create!(property_type: row["Property_type"], address: address, surface: row["Surface"], user: camille)
-  projectcompany = ProjectCompany.create(project: main_company_project, company: Company.first)
-  Review.create!(project_company: projectcompany, rating: row["Rating"], comment: row["Reviews"])
+  main_company_project = Project.create!(
+    property_type: row[0],
+    address: address,
+    surface: row["Surface"],
+    user: camille)
+  projectcompany = ProjectCompany.create(
+    project: main_company_project,
+    company: Company.first
+  )
+  Review.create!(
+    project_company: projectcompany,
+    rating: row["Rating"],
+    comment: row["Reviews"]
+  )
 end
+puts "CSV parsed"
 
-# Projects A FAIRE DEMAIN.
-puts "creation of projects and projects companies"
+puts "parsing of secondary projects, projects companies, reviews"
 CSV.foreach(db_projects, headers: :first_row, col_sep: ";") do |row|
   address = "#{row["Address"]}, #{row["Postcode"]}, #{row["City"]}"
-  project = Project.create!(property_type: row["Property_type"], address: address, surface: row["Surface"], user: users.sample)
-  projectcompany = ProjectCompany.create(project: project, company: Company.all.sample)
-  Review.create!(project_company: projectcompany, rating: row["Rating"], comment: row["Reviews"])
+  project = Project.create!(
+    property_type: row[0],
+    address: address,
+    surface: row["Surface"],
+    user: users.sample
+  )
+  projectcompany = ProjectCompany.create(
+    project: project,
+    company: Company.all.sample
+  )
+  Review.create!(
+    project_company: projectcompany,
+    rating: row["Rating"],
+    comment: row["Reviews"]
+  )
 end
-
-
-
-# csv_data.each do |project|
-#     project = Project.create!(project)
-#     project.user = users.sample
-#     project.save!
-#   end
-
-
-
-# projects.each do |project|
-#   project = Project.create!(project)
-#   project.user = users.sample
-#   project.save!
-  # project.companies << Company.where.not(id: Company.first.id).sample
-# end
-
-#Reviews
+puts "CSV parsed"
+puts "all done, nothing to see, go work now or go to sleep!"
