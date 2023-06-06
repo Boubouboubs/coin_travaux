@@ -2,6 +2,7 @@ Company.destroy_all
 User.destroy_all
 
 require "csv"
+#require "open uri"
 
 filepath = Rails.root.join("db", "DB_entrepreneurs.csv")
 db_projects = Rails.root.join("db", "DB_projects.csv")
@@ -33,7 +34,7 @@ end
 puts "CSV parsed!!!"
 
 # Main company 2 projects
-puts "creation of main_company_projects"
+puts "creation of main projects main_projects_companies"
 CSV.foreach(db_main_projects, headers: :first_row, col_sep: ";") do |row|
   address = "#{row["Address"]}, #{row["Postcode"]}, #{row["City"]}"
   main_company_project = Project.create!(address: address, surface: row["Surface"], user: camille)
@@ -41,16 +42,29 @@ CSV.foreach(db_main_projects, headers: :first_row, col_sep: ";") do |row|
 end
 
 # Projects A FAIRE DEMAIN.
-# puts "creation of projects"
-# CSV.foreach(db_projects, headers: :first_row, col_sep: ";") do |row|
-#   address = "#{row["Address"]}, #{row["Postcode"]}, #{row["City"]}"
-#   projects = Project.create!(address: address, surface: row["Surface"], user: user)
+puts "creation of projects and projects companies"
+CSV.foreach(db_projects, headers: :first_row, col_sep: ";") do |row|
+  address = "#{row["Address"]}, #{row["Postcode"]}, #{row["City"]}"
+  project = Project.create!(address: address, surface: row["Surface"], user: users.sample)
+  ProjectCompany.create(project: project, company: Company.all.sample)
+  Review.create
+end
+
+
+
+# csv_data.each do |project|
+#     project = Project.create!(project)
+#     project.user = users.sample
+#     project.save!
+#   end
+
+
+
+# projects.each do |project|
+#   project = Project.create!(project)
+#   project.user = users.sample
+#   project.save!
+  # project.companies << Company.where.not(id: Company.first.id).sample
 # end
 
-
-# # projects.each do |project|
-# #   project = Project.create!(project)
-# #   project.user = users.sample
-# #   project.save!
-# #   project.companies << Company.where.not(id: Company.first.id).sample
-# # end
+#Reviews
