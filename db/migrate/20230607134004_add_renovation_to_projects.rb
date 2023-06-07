@@ -3,3 +3,4 @@ class AddRenovationToProjects < ActiveRecord::Migration[7.0]
     add_column :projects, :renovation_type, :string
   end
 end
+ 

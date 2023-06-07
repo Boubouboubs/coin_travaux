@@ -18,11 +18,11 @@ users << boubou = User.create!(email: "boubouboubs@gmail.com", password: "123456
 users << celine = User.create!(email: "celine.chader@gmail.com", password: "123456", first_name: "Céline", last_name: "Chader", phone_number: "0611223399")
 puts "#{users.size} users created, seedons mes braves!"
 
-camille.photo.attach(io: File.open('app/assets/images/camille.jpg'), filename: "#{camille.first_name}.jpg")
-celine.photo.attach(io: File.open('app/assets/images/celine.jpg'), filename: "#{celine.first_name}.jpg")
-boubou.photo.attach(io: File.open('app/assets/images/boubou.jpg'), filename: "#{boubou.first_name}.jpg")
-amal.photo.attach(io: File.open('app/assets/images/amal.jpg'), filename: "#{amal.first_name}.jpg")
-david.photo.attach(io: File.open('app/assets/images/david.jpg'), filename: "#{david.first_name}.jpg")
+camille.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686144517/users/camille_rblw3n.jpg'), filename: "#{camille.first_name}.jpg")
+celine.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686144517/users/celine_iukwgc.png'), filename: "#{celine.first_name}.jpg")
+boubou.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686144517/users/boubou_ktspsm.jpg'), filename: "#{boubou.first_name}.jpg")
+amal.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686144516/users/amal_jiocgl.jpg'), filename: "#{amal.first_name}.jpg")
+david.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686144516/users/david_xdat6x.jpg'), filename: "#{david.first_name}.jpg")
 
 # Entrepreneurs entreprises
 puts "parsing CSV companies"
@@ -84,7 +84,7 @@ end
 puts "CSV parsed"
 
 puts "parsing of secondary projects, projects companies, reviews"
-CSV.foreach(db_projects, headers: :first_row, col_sep: ";") do |row|
+CSV.foreach(db_projects, headers: :first_row, col_sep: ";").with_index do |row, index|
   address = "#{row["Address"]}, #{row["Postcode"]}, #{row["City"]}"
   project = Project.create!(
     property_type: row[0],
@@ -101,8 +101,8 @@ CSV.foreach(db_projects, headers: :first_row, col_sep: ";") do |row|
 
   projectcompany = ProjectCompany.create(
     project: project,
-    company: Company.all.sample
-  )
+    company: Company.order(:created_at)[index + 1]
+c  )
   Review.create!(
     project_company: projectcompany,
     rating: row["Rating"],

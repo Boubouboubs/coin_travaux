@@ -14,11 +14,7 @@
           <h2><%= company.name %></h2>
           <p><%= company.description.truncate(50) %> <strong>voir plus.</strong></p>
           <div class="d-flex justify-content-between">
-            <p><strong> <% company.reviews.each do |review|%>
-              <% @company_rating << review.rating %>
-              <% end %>
-              <%= (@company_rating.sum / @company_rating.size).round(1) %>/5
-            </strong></p>
+            <p><strong><%= company.average_rating %>/5</strong></p>
             <p><span class="badge bg-secondary"><% %></span></p>
           </div>
         </div>

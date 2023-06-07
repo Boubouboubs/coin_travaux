@@ -14,4 +14,8 @@ class Company < ApplicationRecord
 
     project_with_photos.photos.first
   end
+
+  def average_rating
+    reviews.average(:rating)
+  end
 end
