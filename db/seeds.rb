@@ -35,13 +35,12 @@ CSV.foreach(filepath, headers: :first_row, col_sep: ";") do |row|
     creation_date: row["creation_date"]
   )
 
-  logos = row['Logo'].split(',').map { |url| url.strip }
-  logos.each do |url|
+  logo = row['Logo'].split(',').map { |url| url.strip }
+  logo.each do |url|
     file = URI.open(url)
-    company.logos.attach(io: file, filename: "nes.png", content_type: "image/png")
-    company.save
+    company.logo.attach(io: file, filename: "nes.png", content_type: "image/png")
+    company.save!
   end
-
 
   user = User.create!(
     email: row["Email"],
@@ -55,61 +54,61 @@ end
 puts "CSV parsed!!!"
 
 # Main company 2 projects
-# puts "parsing of main projects, projects company, reviews"
-# CSV.foreach(db_main_projects, headers: :first_row, col_sep: ";") do |row|
-#   address = "#{row["Address"]}, #{row["Postcode"]}, #{row["City"]}"
-#   main_company_project = Project.create!(
-#     property_type: row[0],
-#     address: address,
-#     surface: row["Surface"],
-#     user: camille
-#   )
+puts "parsing of main projects, projects company, reviews"
+CSV.foreach(db_main_projects, headers: :first_row, col_sep: ";") do |row|
+  address = "#{row["Address"]}, #{row["Postcode"]}, #{row["City"]}"
+  main_company_project = Project.create!(
+    property_type: row[0],
+    address: address,
+    surface: row["Surface"],
+    user: camille
+  )
 
-#   photo_urls = row['link_to_photos'].split(',').map { |url| url.strip }
-#   photo_urls.each do |url|
-#     file = URI.open(url)
-#     main_company_project.photos.attach(io: file, filename: "nes.png", content_type: "image/png")
-#     main_company_project.save
-#   end
+  photo_urls = row['link_to_photos'].split(',').map { |url| url.strip }
+  photo_urls.each do |url|
+    file = URI.open(url)
+    main_company_project.photos.attach(io: file, filename: "nes.png", content_type: "image/png")
+    main_company_project.save
+  end
 
-#   projectcompany = ProjectCompany.create(
-#     project: main_company_project,
-#     company: Company.first
-#   )
-#   Review.create!(
-#     project_company: projectcompany,
-#     rating: row["Rating"],
-#     comment: row["Reviews"]
-#   )
-# end
-# puts "CSV parsed"
+  projectcompany = ProjectCompany.create(
+    project: main_company_project,
+    company: Company.first
+  )
+  Review.create!(
+    project_company: projectcompany,
+    rating: row["Rating"],
+    comment: row["Reviews"]
+  )
+end
+puts "CSV parsed"
 
-# puts "parsing of secondary projects, projects companies, reviews"
-# CSV.foreach(db_projects, headers: :first_row, col_sep: ";") do |row|
-#   address = "#{row["Address"]}, #{row["Postcode"]}, #{row["City"]}"
-#   project = Project.create!(
-#     property_type: row[0],
-#     address: address,
-#     surface: row["Surface"],
-#     user: users.sample
-#   )
-#   photo_urls = row['link_to_photos'].split(',').map { |url| url.strip }
-#   photo_urls.each do |url|
-#     file = URI.open(url)
-#     project.photos.attach(io: file, filename: "nes.png", content_type: "image/png")
-#     project.save
-#   end
+puts "parsing of secondary projects, projects companies, reviews"
+CSV.foreach(db_projects, headers: :first_row, col_sep: ";") do |row|
+  address = "#{row["Address"]}, #{row["Postcode"]}, #{row["City"]}"
+  project = Project.create!(
+    property_type: row[0],
+    address: address,
+    surface: row["Surface"],
+    user: users.sample
+  )
+  photo_urls = row['link_to_photos'].split(',').map { |url| url.strip }
+  photo_urls.each do |url|
+    file = URI.open(url)
+    project.photos.attach(io: file, filename: "nes.png", content_type: "image/png")
+    project.save
+  end
 
-#   projectcompany = ProjectCompany.create(
-#     project: project,
-#     company: Company.all.sample
-#   )
-#   Review.create!(
-#     project_company: projectcompany,
-#     rating: row["Rating"],
-#     comment: row["Reviews"]
-#   )
-# end
+  projectcompany = ProjectCompany.create(
+    project: project,
+    company: Company.all.sample
+  )
+  Review.create!(
+    project_company: projectcompany,
+    rating: row["Rating"],
+    comment: row["Reviews"]
+  )
+end
 puts "CSV parsed"
 
 puts "all done, nothing to see, go work now or go to sleep!"
