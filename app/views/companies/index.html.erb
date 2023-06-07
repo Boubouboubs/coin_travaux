@@ -1,10 +1,10 @@
-<div class="mx-auto my-4 col col-11">
-  <div class="d-flex justify-content-center flex-wrap">
+<div class="container my-4">
+  <div class="row d-flex">
 
   <% @companies.each do |company| %>
-    <div class="col-12 col-md-3 mx-5 mb-5">
+    <div class="col-4 mb-5">
       <%= link_to company_path(company), style:"text-decoration: none" do %>
-        <div class="card-company my-2">
+        <div class="card-company my-2 mx-5">
         <% if company.project_photo %>
           <%= image_tag company.project_photo, crop: :fill %>
         <% else %>
