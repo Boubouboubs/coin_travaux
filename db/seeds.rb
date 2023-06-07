@@ -34,6 +34,14 @@ CSV.foreach(filepath, headers: :first_row, col_sep: ";") do |row|
     address: address,
     creation_date: row["creation_date"]
   )
+
+  logo = row['Logo'].split(',').map { |url| url.strip }
+  logo.each do |url|
+    file = URI.open(url)
+    company.logo.attach(io: file, filename: "nes.png", content_type: "image/png")
+    company.save!
+  end
+
   user = User.create!(
     email: row["Email"],
     company: company,
@@ -53,14 +61,16 @@ CSV.foreach(db_main_projects, headers: :first_row, col_sep: ";") do |row|
     property_type: row[0],
     address: address,
     surface: row["Surface"],
-    user: camille)
+    user: amal
+  )
 
   photo_urls = row['link_to_photos'].split(',').map { |url| url.strip }
   photo_urls.each do |url|
     file = URI.open(url)
-    project.photos.attach(io: file, filename: "nes.png", content_type: "image/png")
-    project.save
-    
+    main_company_project.photos.attach(io: file, filename: "nes.png", content_type: "image/png")
+    main_company_project.save
+  end
+
   projectcompany = ProjectCompany.create(
     project: main_company_project,
     company: Company.first
@@ -100,4 +110,5 @@ CSV.foreach(db_projects, headers: :first_row, col_sep: ";") do |row|
   )
 end
 puts "CSV parsed"
+
 puts "all done, nothing to see, go work now or go to sleep!"
