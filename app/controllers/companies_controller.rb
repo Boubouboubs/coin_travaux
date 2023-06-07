@@ -6,6 +6,7 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    @companies = company.find(params[:id])
+    authorize @company
+    # @companies = company.find(params[:id])
   end
 end
