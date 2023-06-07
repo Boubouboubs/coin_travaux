@@ -16,8 +16,9 @@
 
 .banner-container {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  grid-gap: 1em;
+  grid-template-columns: 1.7fr 1fr;
+  grid-gap: 0em;
+  margin-top: -1em;
   .main-banner-infos {
     text-align: right;
   }
@@ -27,7 +28,7 @@
 .banner-img {
   width: 100%;
   position: relative;
-  bottom: -5em;
+  bottom: -3em;
   left: -2em;
 }
 
