@@ -1,35 +1,30 @@
-<div class="container">
+<div class="mx-auto my-4 col col-11">
+  <div class="d-flex justify-content-center flex-wrap">
 
-  <div class="d-flex flex-row">
-
-    <div class="col col-3">
-      <% @companies.each do |company| %>
-        <div class="col-12 col-sm-6 col-md-4 my-3">
-          <%= link_to company_path(company), style:"text-decoration: none" do %>
-            <div class="card-company my-2">
-              <% if company.projects.last&.photos %>
-                <%= image_tag company.projects.last&.photos.first, crop: :fill %>
-              <% else %>
-                <img src="" alt="", height=300, width=400>
+  <% @companies.each do |company| %>
+    <div class="col-12 col-md-3 mx-5 mb-5">
+      <%= link_to company_path(company), style:"text-decoration: none" do %>
+        <div class="card-company my-2">
+        <% if company.project_photo %>
+          <%= image_tag company.project_photo, crop: :fill %>
+        <% else %>
+          <img src="" alt="", height=300, width=400>
+        <% end %>
+        <div class="card-company-infos">
+          <h2><%= company.name %></h2>
+          <p><%= company.description.truncate(50) %> <strong>voir plus.</strong></p>
+          <div class="d-flex justify-content-between">
+            <p><strong> <% company.reviews.each do |review|%>
+              <% @company_rating << review.rating %>
               <% end %>
-              <div class="card-company-infos">
-                <h2><%= company.name %></h2>
-                <p><%= company.description.truncate(50) %> <strong>voir plus.</strong></p>
-                <div class="d-flex justify-content-between">
-                  <p><strong> <% company.reviews.each do |review|%>
-                    <% @company_rating << review.rating %>
-                    <% end %>
-                    <%= (@company_rating.sum / @company_rating.size).round(1) %>/5
-                  </strong></p>
-                  <p><span class="badge bg-secondary"><% %></span></p>
-                </div>
-              </div>
-            </div>
-          <% end %>
+              <%= (@company_rating.sum / @company_rating.size).round(1) %>/5
+            </strong></p>
+            <p><span class="badge bg-secondary"><% %></span></p>
+          </div>
+        </div>
         </div>
       <% end %>
     </div>
-
+  <% end %>
   </div>
-
 </div>
