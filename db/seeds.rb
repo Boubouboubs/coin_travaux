@@ -2,7 +2,7 @@ Company.destroy_all
 User.destroy_all
 
 require "csv"
-#require "open uri"
+require "open-uri"
 
 filepath = Rails.root.join("db", "DB_entrepreneurs.csv")
 db_projects = Rails.root.join("db", "DB_projects.csv")
@@ -30,6 +30,7 @@ CSV.foreach(filepath, headers: :first_row, col_sep: ";") do |row|
   address = "#{row["Address"]}, #{row["Postcode"]}, #{row["City"]}"
   company = Company.create!(
     name: row[0],
+    description: row["Description"],
     address: address,
     creation_date: row["creation_date"]
   )
@@ -53,6 +54,13 @@ CSV.foreach(db_main_projects, headers: :first_row, col_sep: ";") do |row|
     address: address,
     surface: row["Surface"],
     user: camille)
+
+  photo_urls = row['link_to_photos'].split(',').map { |url| url.strip }
+  photo_urls.each do |url|
+    file = URI.open(url)
+    project.photos.attach(io: file, filename: "nes.png", content_type: "image/png")
+    project.save
+    
   projectcompany = ProjectCompany.create(
     project: main_company_project,
     company: Company.first
@@ -74,6 +82,13 @@ CSV.foreach(db_projects, headers: :first_row, col_sep: ";") do |row|
     surface: row["Surface"],
     user: users.sample
   )
+  photo_urls = row['link_to_photos'].split(',').map { |url| url.strip }
+  photo_urls.each do |url|
+    file = URI.open(url)
+    project.photos.attach(io: file, filename: "nes.png", content_type: "image/png")
+    project.save
+  end
+
   projectcompany = ProjectCompany.create(
     project: project,
     company: Company.all.sample
