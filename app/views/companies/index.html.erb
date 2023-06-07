@@ -4,21 +4,22 @@
     <% @companies.each do |company| %>
       <div class="col-12 col-sm-6 col-md-4 my-3">
         <%= link_to company_path(company), style:"text-decoration: none" do %>
-          <div class="card-product my-2">
+          <div class="card-company my-2">
             <% if company.projects.last&.photos %>
-              <%= image_tag company.projects.last&.photos.first %>
+              <%= image_tag company.projects.last&.photos.first, crop: :fill %>
             <% else %>
               <img src="" alt="", height=300, width=400>
             <% end %>
-            <div class="card-product-infos">
+            <div class="card-company-infos">
               <h2><%= company.name %></h2>
               <p><%= company.description.truncate(50) %> <strong>voir plus.</strong></p>
               <div class="d-flex justify-content-between">
-                <p><strong> <% company.reviews.each do |review|%> /5</strong></p>
-                  <%= @company_rating << review.rating %>
+                <p><strong> <% company.reviews.each do |review|%>
+                  <% @company_rating << review.rating %>
                   <% end %>
-
-                <p><span class="badge bg-secondary"><%= company.address %></span></p>
+                  <%= (@company_rating.sum / @company_rating.size).round(1) %>/5
+                </strong></p>
+                <p><span class="badge bg-secondary"><% %></span></p>
               </div>
             </div>
           </div>
