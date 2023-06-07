@@ -1,5 +1,8 @@
 class CompaniesController < ApplicationController
   def index
-    @companies = Company.all
+    @companies = policy_scope(Company)
+    @projects = @companies
+    @user_project = current_user.projects
+
   end
 end
