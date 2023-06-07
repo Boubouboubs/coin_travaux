@@ -1,0 +1,8 @@
+  <%= simple_form_for @project do |f| %>
+    <%= f.input :property_type %>
+    <%= f.input :surface %>
+    <%= f.input :renovation_type, collection: Project::RENOVATION_TYPE %>
+    <%= f.input :visit_date %>
+    <%= f.input :address %>
+    <%= f.submit 'OK', class: "btn btn-primary" %>
+<% end %>
