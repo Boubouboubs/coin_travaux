@@ -1,8 +1,7 @@
 class CompaniesController < ApplicationController
   def index
     @companies = policy_scope(Company)
-    @projects = @companies.projects
-    @user_project = Project.find(params[:id])
-
+    @user_project = Project.find(params[:project_id])
+    @company_rating = []
   end
 end

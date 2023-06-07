@@ -5,8 +5,8 @@
       <div class="col-12 col-sm-6 col-md-4 my-3">
         <%= link_to company_path(company), style:"text-decoration: none" do %>
           <div class="card-product my-2">
-            <% if company.projects.last.photos.first %>
-              <%= cl_image_tag company.projects.last.photos.first %>
+            <% if company.projects.last&.photos %>
+              <%= image_tag company.projects.last&.photos.first %>
             <% else %>
               <img src="" alt="", height=300, width=400>
             <% end %>
@@ -14,8 +14,11 @@
               <h2><%= company.name %></h2>
               <p><%= company.description.truncate(50) %> <strong>voir plus.</strong></p>
               <div class="d-flex justify-content-between">
-                <p><strong> <%= company.price %> €</strong></p>
-                <p><span class="badge bg-secondary"><%= company.category %></span></p>
+                <p><strong> <% company.reviews.each do |review|%> /5</strong></p>
+                  <%= @company_rating << review.rating %>
+                  <% end %>
+
+                <p><span class="badge bg-secondary"><%= company.address %></span></p>
               </div>
             </div>
           </div>
@@ -23,7 +26,6 @@
       </div>
     <% end %>
   </div>
-
 
 
 </div>
