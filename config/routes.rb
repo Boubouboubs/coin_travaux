@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :projects, only: [:create, :show, :update] do
     resources :project_companies, only: [:create]
-    resources :compagnies, only: [:index]
+    resources :companies, only: [:index]
   end
 
   resources :companies, only: [:show]
