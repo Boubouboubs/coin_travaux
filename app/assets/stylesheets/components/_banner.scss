@@ -1,0 +1,57 @@
+.banner {
+  background-color: $violet;
+  width: 100%;
+  height: 33em;
+}
+
+.container-home {
+  width: 70%;
+  margin: 0 auto;
+  padding-top: 25px;
+  position: relative;
+}
+
+.banner-img {
+  position: absolute;
+  bottom: -216px;
+  left: -100px ;
+  width: 70%;
+}
+
+.banner .title {
+  font-family: "Pangolin";
+  font-size: 60px;
+  color: white;
+  margin-right: 30%;
+  margin-bottom: -3px;
+}
+
+.banner h2 {
+  color: white;
+  font-weight: 300;
+  font-family: "Inter";
+  font-size: 30px;
+  text-align: right;
+  padding-top: 2em;
+}
+
+.banner h3 {
+  color: $turquoise;
+  font-family: "Inter";
+  font-weight: 900;
+  font-size: 30px;
+  text-align: right;
+  margin-top: 0.5em;
+}
+
+.btn-big-white {
+  background-color: white;
+  color: $dark-blue;
+  font-family: "Pangolin";
+  font-size: 20px;
+  padding-left: 55px;
+  padding-right: 55px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 10px;
+}
