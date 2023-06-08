@@ -120,6 +120,10 @@ GEM
       railties (>= 3.2)
     erubi (1.12.0)
     execjs (2.8.1)
+    faraday (2.7.6)
+      faraday-net_http (>= 2.0, < 3.1)
+      ruby2_keywords (>= 0.0.4)
+    faraday-net_http (3.0.2)
     ffi (1.15.5)
     font-awesome-sass (6.4.0)
       sassc (~> 2.0)
@@ -139,6 +143,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jwt (2.7.0)
     loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -223,6 +228,7 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.2.5)
+    ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -252,6 +258,10 @@ GEM
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
+    twilio-ruby (6.0.2)
+      faraday (>= 0.9, < 3.0)
+      jwt (>= 1.5, < 3.0)
+      nokogiri (>= 1.6, < 2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
@@ -302,6 +312,7 @@ DEPENDENCIES
   sprockets-rails
   stimulus-rails
   turbo-rails
+  twilio-ruby
   tzinfo-data
   web-console
   webdrivers
