@@ -10,21 +10,19 @@
   </nav>
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-      <div class= "row">
-        <div class="col-12 mt-4">
-          <h2><%= cl_image_tag @company.logo.key, class:"avatar" %> <%= @company.name %></h2>
-          <p><%= @company.description %></p>
-        </div>
+      <div class="mt-2">
+        <h2><%= cl_image_tag @company.logo.key, class:"avatar" %> <%= @company.name %></h2>
+        <p><%= @company.description %></p>
       </div>
     </div>
     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
       <div class= "row">
-        <div class="col-6 mt-4">
+        <div class="col-6 mt-2">
           <h2><%= cl_image_tag @company.logo.key, class:"avatar" %> <%= @company.name %></h2>
           <p><%= @company.name %></p>
           <p><%= @company.address %></p>
         </div>
-        <div class="col-6 mt-4">
+        <div class="col-6 mt-2">
         <p><strong>Site et réseaux sociaux</strong></p>
         <p>www.<%= @company.name %>.com</p>
           <div class="row mt-4">
@@ -35,45 +33,41 @@
         </div>
       </div>
     </div>
+    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
   </div>
-  
-  <hr class="celine">
 
-  <div class="row d-flex mx-4">
+<div class="row d-flex mx-2">
     <% @company.projects.each do |project| %>
       <div class="col-4 mb-5">
-        <div class="card-company my-2">
-          <div class="card-image"><%= cl_image_tag project.photos.first.key, crop: :fill %></div>
-          <div class="card-company-infos">
-            <div class="row">
-              <p><strong>Ville du projet: <%= project.city %></strong></p>
-              <p><strong>Propriété: <%= project.property_type %></strong></p>
-              <p><strong>Surface: <%= project.surface %> m2</strong></p>
+        <div class="card-company my-2 mx-5">
+            <div class="card-image"><%= cl_image_tag project.photos.first.key, crop: :fill %></div>
+            <div class="card-company-infos">
+               <div class="row">
+                <p><strong>Ville du projet: <%= project.address %></strong></p>
+                <p><strong>Propriété: <%= project.property_type %></strong></p>
+                <p><strong>Surface: <%= project.surface %>m2</strong></p>
+              </div>
             </div>
           </div>
-        </div>
       </div>
-    <% end %>
-  </div>
+      <% end %>
 
-  <hr class="celine">
+</div class="row d-flex mx-2 col-4 mb-5">
+   <h2><a id="Avis"></a>Avis</h2>
+  <% @company.reviews.each do |review| %>
+    <div>
+      <p><%= cl_image_tag review.project_company.project.user.photo.key, class:"avatar" %> <%= review.project_company.project.user.first_name %> <%= review.project_company.project.user.last_name.first %>.</p>
+      <p class="light-gray">
+        <% review.rating.round.times do %>
+          <i class="fa-solid fa-star" style="color: #fecc00;"></i>
+        <% end %>
+        <em><%= review.created_at.strftime('Publié le %d/%m/%Y à %Hh%M')%></em>
+      </p>
+      <p><%= review.comment %></p>
+      <hr>
+    </div>
+  <% end %>
+</div>
 
-  <h4><%= @company.reviews.count %> avis de nos clients pour <%= @company.name %></h4>
-  <div class="row d-flex mx-4 mb-5">
-    <h2><a id="Avis"></a>Avis</h2>
-    <% @company.reviews.each do |review| %>
-      <div class="">
-        <p><%= cl_image_tag review.project_company.project.user.photo.key, class:"avatar" %> <%= review.project_company.project.user.first_name %> <%= review.project_company.project.user.last_name.first %>.</p>
-        <p class="light-gray">
-          <% review.rating.round.times do %>
-            <i class="fa-solid fa-star" style="color: #fecc00;"></i>
-          <% end %>
-          <em><%= review.created_at.strftime('Publié le %d/%m/%Y à %Hh%M')%></em>
-        </p>
-        <p><%= review.comment %></p>
-        <hr>
-      </div>
-    <% end %>
-  </div>
 
 </div>

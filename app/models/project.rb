@@ -7,5 +7,5 @@ class Project < ApplicationRecord
   has_many :quotes, through: :project_companies
 
   has_many_attached :photos
-
 end
+
