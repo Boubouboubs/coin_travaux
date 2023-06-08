@@ -12,10 +12,6 @@
     <% end %>
   </div>
 
-<div>
-  <%= form.collection_select :city_id, City.order(:name), :id, :name %>
-</div>
-
 </div>
 
 <div class="bg-primary">
@@ -34,8 +30,8 @@
               <h2><%= cl_image_tag company.logo.key, class:"avatar" %> <%= company.name %></h2>
               <p><%= company.description.truncate(50) %> <strong>voir plus.</strong></p>
               <div class="d-flex justify-content-between">
-                <p><strong><%= company.average_rating %>/5</strong></p>
-                  <% review.rating.round.times do %>
+                <p><em><%= company.average_rating %>/5</em></p>
+                  <% company.average_rating.round.times do %>
                     <i class="fa-solid fa-star" style="color: #fecc00;"></i>
                   <% end %>
               </div>
