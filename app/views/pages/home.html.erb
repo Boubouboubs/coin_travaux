@@ -1,17 +1,11 @@
-
-
-<div>
-  <div class="banner">
-    <div class="container-home">
-      <div class="title">COIN TRAVAUX</div>
-      <%# <div class="title">TRAVAUX</div> %>
-      <br>
-      <%= image_tag "illu-home.png", alt: "illustration-home-coin-travaux", class:"banner-img" %>
+<div class="banner">
+  <h1>COIN TRAVAUX</h1>
+  <div class="banner-container">
+    <%= image_tag "illu-home.png", alt: "illustration-home-coin-travaux", class:"banner-img" %>
+    <div class="main-banner-infos">
       <h2>Choisir le bon entrepreneur ?</h2>
       <h3>Un jeu d’enfant !</h3>
-      <br>
-      <br>
-      <div class="text-end" ><%=link_to "Je crée mon projet !", new_project_path, class:"btn-big-white text-decoration-none" %></div>
+      <%=link_to "Je crée mon projet !", new_project_path, class:"btn-big-white text-decoration-none text-end" %>
     </div>
   </div>
 </div>
