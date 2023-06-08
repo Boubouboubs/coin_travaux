@@ -1,8 +1,18 @@
-  <%= simple_form_for @project do |f| %>
-    <%= f.input :property_type %>
-    <%= f.input :surface %>
-    <%= f.input :renovation_type, collection: Project::RENOVATION_TYPE %>
-    <%= f.input :visit_date %>
-    <%= f.input :address %>
-    <%= f.submit 'OK', class: "btn btn-primary" %>
-<% end %>
+<div class= "container">
+  <div class="col-10 col-md-4 card shadow zoom">
+      <%= simple_form_for @project do |f| %>
+        <%= f.input :property_type,
+                    as: :radio_buttons,
+                    collection_wrapper_tag: 'div',
+                    collection_wrapper_class: 'category-wrapper',
+                    item_wrapper_class: 'category-item me-1',
+                    input_html: {class: 'category-selector'},
+                    collection: Project::PROPERTY_TYPE %>
+        <%= f.input :surface %>
+        <%= f.input :renovation_type, collection: Project::RENOVATION_TYPE, as: :check_boxes %>
+        <%= f.input :visit_date %>
+        <%= f.input :address %>
+        <div class= "my-class" type="checkbox"><%= f.submit "C'est parti !", class: "btn btn-primary" %></div>
+    <% end %>
+  </div>
+</div>
