@@ -13,9 +13,6 @@ class CompaniesController < ApplicationController
       end
     end
     @user_project = Project.find(params[:project_id])
-
-
-
   end
 
   def show
