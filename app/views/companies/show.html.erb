@@ -1,13 +1,12 @@
 <div class="container">
   <div class="card-banner-show my-4" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= cl_image_path @company.project_photo.key %>);"></div>
-    <div class="card-company my-2 mx-5">
-      <div class="card-company-infos">
-      <nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">À propos de nous</button>
-    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Détails de l'entreprise</button>
-    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Avis</button>
-  </div>
+
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">À propos de nous</button>
+      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Détails de l'entreprise</button>
+      <button class="nav-link" ><a href="#Avis" style="text-decoration: none">Avis</a></button>
+    </div>
   </nav>
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
@@ -36,5 +35,26 @@
     </div>
     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
   </div>
+
+<div class="row d-flex mx-2">
+    <% @company.projects.each do |project| %>
+      <div class="col-4 mb-5">
+        <div class="card-company my-2 mx-5">
+            <div class="card-image"><%= cl_image_tag project.photos.first.key, crop: :fill %></div>
+            <div class="card-company-infos">
+               <div class="row">
+                <p><strong>Ville du projet: <%= project.address %></strong></p>
+                <p><strong>Type de de propriété<%= project.property_type %></strong></p>
+                <p><strong><%= project.surface %>m2</strong></p>
+              </div>
+            </div>
+          </div>
+      </div>
+      <% end %>
+
+</div>
+   <h5><a id="Avis"></a>Avis</h5>
+
+
 
 </div>
