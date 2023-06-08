@@ -103,6 +103,7 @@ CSV.foreach(db_projects, headers: :first_row, col_sep: ";").with_index do |row, 
     project: project,
     company: Company.order(:created_at)[index + 1]
   )
+
   Review.create!(
     project_company: projectcompany,
     rating: row["Rating"],
