@@ -1,0 +1,60 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between">
+    <div id="project-place-info">
+      <h3 class="mb-4"><i class="fa-solid fa-sheet-plastic"></i> Mon bien </h3>
+      <ul class="list-unstyled">
+        <li class="mt-2"><strong>Adresse -</strong> <%= @project.address.gsub(/[^a-z0-9\s]/i, '') %></li>
+        <li class="mt-2"><strong>Surface -</strong> <%= @project.surface %> m²</li>
+        <li class="mt-2"><strong>Type de bien -</strong> <%= @project.property_type %></li>
+        <li class="mt-2"><strong>Type de rénovation -</strong> <%= @project.renovation_type %></li>
+      </ul>
+
+      <h3 class="my-4"><i class="fa-solid fa-helmet-safety"></i> Entreprise sélectionnée </h3>
+      <ul class="list-unstyled">
+        <li><%= cl_image_tag @chosen_company.logo.key, class:"avatar"%> <strong><%= @chosen_company.name%></strong></li>
+        <li><small>
+          <%= @chosen_company.description.truncate(150)%>
+          <strong><%= link_to "Voir plus", company_path(@chosen_company), class: "text-decoration-none" %></strong>
+        </small></li>
+      </ul>
+
+    </div>
+    <div id="project-virtual-visit">
+      <h3><i class="fa-solid fa-eye"></i> Ma visite virtuelle</h3>
+      prévue le <strong><%= @project.created_at.strftime("%d/%m/%Y")%></strong>
+    </div>
+  </div>
+
+  <% if Date.today < @project.created_at %>
+    <%# <%= render quotes-in-show %> %
+    <h3>Mes devis </h3>
+    <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">Entreprise</th>
+      <th scope="col">Devis</th>
+      <th scope="col">Tarif</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"> <%= @chosen_company.name%></th>
+      <td><%= link_to "Voir le devis" %></td>
+      <td><%= @project.quotes.price %></td>
+    </tr>
+    <tr>
+      <th scope="row"> <%= @chosen_company.name%> </th>
+      <td>Jacob</td>
+      <td><%= @project.quotes.price %></td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td><%= @project.quotes.price %></td>
+    </tr>
+  </tbody>
+</table>
+  <% elsif Date.today > @project.created_at %>
+    OK !!!
+  <% end %>
+</div>
