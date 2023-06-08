@@ -8,6 +8,8 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @chosen_company = @project.companies.order(:created_at).first
+    @second_company = @project.companies.order(:created_at).second
+    @third_company = @project.companies.order(:created_at).last
     authorize @project
   end
 
