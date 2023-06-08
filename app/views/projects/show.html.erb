@@ -26,7 +26,6 @@
   </div>
 
   <% if Date.today < @project.created_at %>
-    <%# <%= render quotes-in-show %>
     <h3>Mes devis </h3>
     <table class="table table-sm">
   <thead>
@@ -37,11 +36,12 @@
     </tr>
   </thead>
   <tbody>
+    <% if @chosen_company.quotes.present? %><tr>
     <tr>
       <th scope="row"> <%= @chosen_company.name%></th>
       <td><small><%= link_to "Voir le devis" %></small></td>
-      <td> €</td>
-    </tr>
+      <td><%= @project.quotes.price %>€</td>
+    </tr><% end %>
     <% if @second_company.present? %><tr>
       <th scope="row"> <%= @second_company.name%> </th>
       <td><small><%= link_to "Voir le devis" %></small></td>
@@ -55,6 +55,6 @@
   </tbody>
 </table>
   <% elsif Date.today > @project.created_at %>
-    OK !!!
+
   <% end %>
 </div>
