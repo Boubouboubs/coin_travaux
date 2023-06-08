@@ -1,4 +1,5 @@
 class Project < ApplicationRecord
+  PROPERTY_TYPE = ["Appartement neuf", "Appartement ancien", "Maison ancienne", "Maison neuve"]
   RENOVATION_TYPE = ["Rénovation de tout l'appartement", "Rénovation d'une pièce", "Extension", "Rénovation de quelques pièces", "Réaménagement de l’espace"]
   belongs_to :user
   has_many :project_companies
@@ -7,3 +8,4 @@ class Project < ApplicationRecord
 
   has_many_attached :photos
 end
+
