@@ -1,4 +1,4 @@
-<div class="bg-info p-4">
+<div class="bg-info px-4 py-2">
 
   <div>
     <%= form_with url: project_companies_path, method: :get, class: "d-flex" do |f| %>
@@ -14,7 +14,7 @@
 
 </div>
 
-<div class="bg-primary">
+<div class="bg-primary px-4">
   résultats
 </div>
 
@@ -28,13 +28,15 @@
             <div class="card-image"><%= cl_image_tag company.project_photo.key, crop: :fill %></div>
             <div class="card-company-infos">
               <h2><%= cl_image_tag company.logo.key, class:"avatar" %> <%= company.name %></h2>
-              <p><%= company.description.truncate(50) %> <strong>voir plus.</strong></p>
               <div class="d-flex justify-content-between">
-                <p><em><%= company.average_rating %>/5</em></p>
+                <p><em>
                   <% company.average_rating.round.times do %>
                     <i class="fa-solid fa-star" style="color: #fecc00;"></i>
                   <% end %>
+                  <%= company.average_rating %>/5
+                </em></p>
               </div>
+              <p><%= company.description.truncate(50) %> <strong>voir plus.</strong></p>
             </div>
           </div>
         <% end %>
