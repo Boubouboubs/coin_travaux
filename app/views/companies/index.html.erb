@@ -2,9 +2,9 @@
 
   <div>
     <%= form_with url: project_companies_path, method: :get, class: "d-flex" do |f| %>
-      <%= f.select :average_rating, (0..5) %>
+      <%= f.select :stars, (0..5) %>
       <%= f.select :photos, ["avec", "sans"] %>
-      <%= f.select :existence_years, [">1 an"] %>
+      <%= f.select :existence_years, ["De 2 à 5 ans", "De 5 à 10 ans", "Plus de 10 ans"] %>
       <%= button_tag(type: "submit", class: "btn btn-search") do %>
           <i class="fa-solid fa-magnifying-glass"></i>
       <% end %>
