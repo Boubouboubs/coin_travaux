@@ -8,5 +8,7 @@ class Project < ApplicationRecord
 
   has_many_attached :photos
 
+  def city
+    address.split(',').last.strip.capitalize
+  end
 end
-
