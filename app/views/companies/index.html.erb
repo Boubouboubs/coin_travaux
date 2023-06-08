@@ -1,21 +1,17 @@
-<div class="container">
+<div class="container my-5">
 
-  <div class="row">
+  <div class="row d-flex mx-2">
     <% @companies.each do |company| %>
-      <div class="col-12 col-sm-6 col-md-4 my-3">
+      <div class="col-4 mb-5">
         <%= link_to company_path(company), style:"text-decoration: none" do %>
-          <div class="card-product my-2">
-            <% if company.project_companies(1).last.photo.first %>
-              <%= cl_image_tag company.project_companies.last.photo.first %>
-            <% else %>
-              <img src="" alt="", height=300, width=400>
-            <% end %>
-            <div class="card-product-infos">
-              <h2><%= company.name %></h2>
+          <div class="card-company my-2 mx-5">
+            <div class="card-image"><%= cl_image_tag company.project_photo.key, crop: :fill %></div>
+            <div class="card-company-infos">
+              <h2><%= cl_image_tag company.logo.key, class:"avatar" %> <%= company.name %></h2>
               <p><%= company.description.truncate(50) %> <strong>voir plus.</strong></p>
               <div class="d-flex justify-content-between">
-                <p><strong> <%= company.price %> €</strong></p>
-                <p><span class="badge bg-secondary"><%= company.category %></span></p>
+                <p><strong><%= company.average_rating %>/5</strong></p>
+                <p><span class="badge bg-secondary"><% %></span></p>
               </div>
             </div>
           </div>
@@ -23,7 +19,5 @@
       </div>
     <% end %>
   </div>
-
-
 
 </div>
