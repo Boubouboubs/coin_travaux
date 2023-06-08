@@ -61,7 +61,7 @@ CSV.foreach(db_main_projects, headers: :first_row, col_sep: ";") do |row|
     property_type: row[0],
     address: address,
     surface: row["Surface"],
-    user: amal
+    user: users.sample
   )
 
   photo_urls = row['link_to_photos'].split(',').map { |url| url.strip }
@@ -107,7 +107,8 @@ CSV.foreach(db_projects, headers: :first_row, col_sep: ";").with_index do |row, 
   Review.create!(
     project_company: projectcompany,
     rating: row["Rating"],
-    comment: row["Reviews"]
+    comment: row["Reviews"],
+    created_at: Time.now - rand(5..45).days
   )
 end
 puts "CSV parsed"
