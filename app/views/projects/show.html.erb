@@ -1,7 +1,13 @@
 <div class="container mt-5">
   <div class="d-flex justify-content-between">
     <div id="project-place-info">
-      <h3 class="mb-4"><i class="fa-solid fa-sheet-plastic"></i> Mon bien </h3>
+      <h3 class="mb-4"><i class="fa-solid fa-key me-2"></i>
+      <% if @project.property_type = "Appartement neuf" || "Appartement ancien"%>
+        Mon appartement
+      <% elsif @project.property_type = "Maison ancienne" || "Maison neuve" %>
+        Ma maison
+      <% end %>
+      </h3>
       <ul class="list-unstyled">
         <li class="mt-2"><strong>Adresse -</strong> <%= @project.address.gsub(/[^a-z0-9\s]/i, '') %></li>
         <li class="mt-2"><strong>Surface -</strong> <%= @project.surface %> m²</li>
@@ -9,7 +15,7 @@
         <li class="mt-2"><strong>Type de rénovation -</strong> <%= @project.renovation_type %></li>
       </ul>
 
-      <h3 class="my-4"><i class="fa-solid fa-helmet-safety"></i> Entreprise sélectionnée </h3>
+      <h3 class="my-4"><i class="fa-solid fa-helmet-safety me-2"></i> Entreprise sélectionnée </h3>
       <ul class="list-unstyled">
         <li><%= cl_image_tag @chosen_company.logo.key, class:"avatar"%> <strong><%= @chosen_company.name%></strong></li>
         <li><small>
@@ -20,40 +26,36 @@
 
     </div>
     <div id="project-virtual-visit">
-      <h3><i class="fa-solid fa-eye"></i> Ma visite virtuelle</h3>
+      <h3><i class="fa-solid fa-eye me-2"></i> Ma visite virtuelle</h3>
       prévue le <strong><%= @project.created_at.strftime("%d/%m/%Y")%></strong>
     </div>
   </div>
 
-  <% if Date.today < @project.created_at %>
-    <h3>Mes devis </h3>
-
-        <% if Date.today > @project.created_at %>
-          <% if @project.quotes.present? %><tr>
-          <table class="table table-sm">
-            <thead>
-              <tr>
-                <th scope="col">Entreprise</th>
-                <th scope="col">Devis</th>
-                <th scope="col">Tarif</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @project.quotes.each do |quote| %>
-                <tr>
-                  <th scope="row"> <%= quote.company.name%></th>
-                  <td><small><%= link_to "Voir le devis" %></small></td>
-                  <td><%= quote.price %>€</td>
-                </tr>
-              <% end %>
-            </tbody>
-          <% else %>
-            Vous n'avez pas encore reçu de devis ! Encore un peu d'attente <i class="fa-solid fa-clock"></i>
+  <h3 class="mt-4"><i class="fa-solid fa-file-invoice me-2"></i> Mes devis </h3>
+  <% if Date.today > @project.created_at %>
+    <% if @project.quotes.present? %><tr>
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Entreprise</th>
+            <th scope="col">Devis</th>
+            <th scope="col">Tarif</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @project.quotes.each do |quote| %>
+            <tr>
+              <th scope="row"> <%= quote.company.name%></th>
+              <td><small><%= link_to "Voir le devis" %></small></td>
+              <td><%= quote.price %>€</td>
+            </tr>
           <% end %>
-
-        <% elsif Date.today < @project.created_at %>
-
-    </table>
-
+        </tbody>
+      </table>
+    <% else %>
+      Vous n'avez pas encore reçu de devis : encore un peu d'attente <i class="fa-solid fa-clock"></i>
+    <% end %>
+  <% elsif Date.today < @project.created_at %>
+    Bientôt la visite, bientôt vos devis ! 🔏
   <% end %>
 </div>
