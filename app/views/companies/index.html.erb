@@ -1,26 +1,23 @@
-<div class="container my-4">
-  <div class="row d-flex">
+<div class="container my-5">
 
-  <% @companies.each do |company| %>
-    <div class="col-4 mb-5">
-      <%= link_to company_path(company), style:"text-decoration: none" do %>
-        <div class="card-company my-2 mx-5">
-        <% if company.project_photo %>
-          <%= image_tag company.project_photo, crop: :fill %>
-        <% else %>
-          <img src="" alt="", height=300, width=400>
-        <% end %>
-        <div class="card-company-infos">
-          <h2><%= company.name %></h2>
-          <p><%= company.description.truncate(50) %> <strong>voir plus.</strong></p>
-          <div class="d-flex justify-content-between">
-            <p><strong><%= company.average_rating %>/5</strong></p>
-            <p><span class="badge bg-secondary"><% %></span></p>
+  <div class="row d-flex mx-2">
+    <% @companies.each do |company| %>
+      <div class="col-4 mb-5">
+        <%= link_to company_path(company), style:"text-decoration: none" do %>
+          <div class="card-company my-2 mx-5">
+            <div class="card-image"><%= cl_image_tag company.project_photo.key, crop: :fill %></div>
+            <div class="card-company-infos">
+              <h2><%= cl_image_tag company.logo.key, class:"avatar" %> <%= company.name %></h2>
+              <p><%= company.description.truncate(50) %> <strong>voir plus.</strong></p>
+              <div class="d-flex justify-content-between">
+                <p><strong><%= company.average_rating %>/5</strong></p>
+                <p><span class="badge bg-secondary"><% %></span></p>
+              </div>
+            </div>
           </div>
-        </div>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
+
 </div>
