@@ -5,11 +5,16 @@
       <%= f.select :stars, (0..5) %>
       <%= f.select :photos, ["avec", "sans"] %>
       <%= f.select :existence_years, ["De 2 à 5 ans", "De 5 à 10 ans", "Plus de 10 ans"] %>
+      <%= f.select :sorting, [:stars, :existence_years] %>
       <%= button_tag(type: "submit", class: "btn btn-search") do %>
           <i class="fa-solid fa-magnifying-glass"></i>
       <% end %>
     <% end %>
   </div>
+
+<div>
+  <%= form.collection_select :city_id, City.order(:name), :id, :name %>
+</div>
 
 </div>
 
@@ -30,6 +35,9 @@
               <p><%= company.description.truncate(50) %> <strong>voir plus.</strong></p>
               <div class="d-flex justify-content-between">
                 <p><strong><%= company.average_rating %>/5</strong></p>
+                  <% review.rating.round.times do %>
+                    <i class="fa-solid fa-star" style="color: #fecc00;"></i>
+                  <% end %>
               </div>
             </div>
           </div>
