@@ -61,7 +61,7 @@ CSV.foreach(db_main_projects, headers: :first_row, col_sep: ";") do |row|
     property_type: row[0],
     address: address,
     surface: row["Surface"],
-    user: amal
+    user: users.sample
   )
 
   photo_urls = row['link_to_photos'].split(',').map { |url| url.strip }
