@@ -1,14 +1,21 @@
 <div class="bg-info px-4 py-2">
 
   <div>
-    <%= form_with url: project_companies_path, method: :get, class: "d-flex" do |f| %>
-      <%= f.select :stars, (0..5) %>
-      <%= f.select :photos, ["avec", "sans"] %>
-      <%= f.select :existence_years, ["De 2 à 5 ans", "De 5 à 10 ans", "Plus de 10 ans"] %>
-      <%= f.select :sorting, [:stars, :existence_years] %>
-      <%= button_tag(type: "submit", class: "btn btn-search") do %>
-          <i class="fa-solid fa-magnifying-glass"></i>
-      <% end %>
+    <%= simple_form_for :filters, url: project_companies_path, method: :get, class: "d-flex" do |f| %>
+      <%= f.input :star_rating,
+        collection: [["1 star", 1], ["2 stars", 2], ["3 stars", 3], ["4 stars", 4]],
+        label: false,
+        include_blank: "Avis",
+        selected: params.dig(:filters, :star_rating) %>
+      <%= f.input :photo, collection: [["avec", true], ["sans", false]] %>
+      <%#= #f.select :star_rating, (0..5) %>
+      <%#= f.select :photos, ["avec", "sans"] %>
+      <%#= f.select :existence_years, ["De 2 à 5 ans", "De 5 à 10 ans", "Plus de 10 ans"] %>
+      <%#= f.select :sorting, [:stars, :existence_years] %>
+      <%#= button_tag(type: "submit", class: "btn btn-search") do %>
+          <%# <i class="fa-solid fa-magnifying-glass"></i> %>
+      <%# end %>
+      <%= f.submit 'OK' %>
     <% end %>
   </div>
 
