@@ -1,0 +1,16 @@
+<div class="container">
+<h2>Avis</h2>
+  <% @reviews.each do |review| %>
+    <div>
+      <p><%= cl_image_tag review.project_company.project.user.photo.key, class:"avatar" %> <%= review.project_company.project.user.first_name %> <%= review.project_company.project.user.last_name.first %>.</p>
+      <p class="light-gray">
+        <% review.rating.round.times do %>
+          <i class="fa-solid fa-star" style="color: #fecc00;"></i>
+        <% end %>
+        <em><%= review.created_at.strftime('Publié le %d/%m/%Y à %Hh%M')%></em>
+      </p>
+      <p><%= review.comment %></p>
+      <hr>
+    </div>
+  <% end %>
+</div>
