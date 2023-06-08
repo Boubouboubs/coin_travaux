@@ -1,3 +1,22 @@
+<div class="bg-info p-4">
+
+  <div>
+    <%= form_with url: project_companies_path, method: :get, class: "d-flex" do |f| %>
+      <%= f.select :average_rating, (0..5) %>
+      <%= f.select :photos, ["avec", "sans"] %>
+      <%= f.select :existence_years, [">1 an"] %>
+      <%= button_tag(type: "submit", class: "btn btn-search") do %>
+          <i class="fa-solid fa-magnifying-glass"></i>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>
+
+<div class="bg-primary">
+  résultats
+</div>
+
 <div class="container my-5">
 
   <div class="row d-flex mx-2">
@@ -11,7 +30,6 @@
               <p><%= company.description.truncate(50) %> <strong>voir plus.</strong></p>
               <div class="d-flex justify-content-between">
                 <p><strong><%= company.average_rating %>/5</strong></p>
-                <p><span class="badge bg-secondary"><% %></span></p>
               </div>
             </div>
           </div>
