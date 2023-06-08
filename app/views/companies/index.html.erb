@@ -1,21 +1,31 @@
-<div class="bg-info p-4">
+<div class="bg-info px-4 py-2">
 
   <div>
-    <%= form_with url: project_companies_path, method: :get, class: "d-flex" do |f| %>
-      <%= f.select :average_rating, (0..5) %>
-      <%= f.select :photos, ["avec", "sans"] %>
-      <%= f.select :existence_years, [">1 an"] %>
-      <%= button_tag(type: "submit", class: "btn btn-search") do %>
-          <i class="fa-solid fa-magnifying-glass"></i>
-      <% end %>
+    <%= simple_form_for :filters, url: project_companies_path, method: :get, class: "nice-class" do |f| %>
+      <%= f.input :star_rating,
+        collection: [["1 star", 1], ["2 stars", 2], ["3 stars", 3], ["4 stars", 4], ["5 stars", 5]],
+        label: false,
+        include_blank: "Avis",
+        selected: params.dig(:filters, :star_rating) %>
+      <%= f.input :photo,
+        collection: [["avec", true], ["sans", false]],
+        label: false,
+        include_blank: "Photo",
+        selected: params.dig(:filters, :photo) %>
+      <%#= #f.select :star_rating, (0..5) %>
+      <%#= f.select :photos, ["avec", "sans"] %>
+      <%#= f.select :existence_years, ["De 2 à 5 ans", "De 5 à 10 ans", "Plus de 10 ans"] %>
+      <%#= f.select :sorting, [:stars, :existence_years] %>
+      <%#= button_tag(type: "submit", class: "btn btn-search") do %>
+          <%# <i class="fa-solid fa-magnifying-glass"></i> %>
+      <%# end %>
+      <%= f.submit 'OK' %>
     <% end %>
   </div>
 
 </div>
 
-<div class="bg-primary">
-  résultats
-</div>
+<div class="bg-primary px-4 py-1"><em><%= @companies.size %> résultats</em></div>
 
 <div class="container my-5">
 
@@ -27,10 +37,15 @@
             <div class="card-image"><%= cl_image_tag company.project_photo.key, crop: :fill %></div>
             <div class="card-company-infos">
               <h2><%= cl_image_tag company.logo.key, class:"avatar" %> <%= company.name %></h2>
-              <p><%= company.description.truncate(50) %> <strong>voir plus.</strong></p>
               <div class="d-flex justify-content-between">
-                <p><strong><%= company.average_rating %>/5</strong></p>
+                <p><em>
+                  <% company.average_rating.round.times do %>
+                    <i class="fa-solid fa-star" style="color: #fecc00;"></i>
+                  <% end %>
+                  <%= company.average_rating %>/5
+                </em></p>
               </div>
+              <p><%= company.description.truncate(50) %> <strong>voir plus.</strong></p>
             </div>
           </div>
         <% end %>
