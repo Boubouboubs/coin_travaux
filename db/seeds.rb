@@ -107,7 +107,8 @@ CSV.foreach(db_projects, headers: :first_row, col_sep: ";").with_index do |row, 
   Review.create!(
     project_company: projectcompany,
     rating: row["Rating"],
-    comment: row["Reviews"]
+    comment: row["Reviews"],
+    created_at: Time.now - rand(5..50).days
   )
 end
 puts "CSV parsed"
