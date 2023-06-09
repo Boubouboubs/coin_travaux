@@ -1,6 +1,7 @@
 class CompaniesController < ApplicationController
   def index
     @companies = policy_scope(Company)
+    @project_id = params[:project_id].to_i
     if params.dig(:filters, :star_rating).present?
       @companies = @companies.select { |c| c.average_rating.round == params[:filters][:star_rating].to_i }
     end
@@ -24,11 +25,12 @@ class CompaniesController < ApplicationController
         @companies = @companies.reject { |c| c.project_photo.present? }
       end
     end
-    @user_project = Project.find(params[:project_id])
+
   end
 
   def show
     @company = Company.find(params[:id])
     authorize @company
+    @project_id = params[:id].to_i
   end
 end

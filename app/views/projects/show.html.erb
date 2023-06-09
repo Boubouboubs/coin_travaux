@@ -20,7 +20,7 @@
         <li><%= cl_image_tag @chosen_company.logo.key, class:"avatar"%> <strong><%= @chosen_company.name%></strong></li>
         <li><small>
           <%= @chosen_company.description.truncate(150)%>
-          <strong><%= link_to "Voir plus", company_path(@chosen_company), class: "text-decoration-none" %></strong>
+          <strong><%= link_to "Voir plus", project_company_path(@chosen_company), class: "text-decoration-none" %></strong>
         </small></li>
       </ul>
 
