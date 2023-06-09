@@ -59,7 +59,7 @@
             <tr>
               <th scope="row"> <%= quote.company.name%></th>
               <td><small><%= link_to "Voir le devis", cl_image_path(quote.file.key)%></small></td>
-              <td><%= quote.price %>€</td>
+              <td><%= number_to_currency(quote.price) %>€</td>
             </tr>
           <% end %>
         </tbody>
