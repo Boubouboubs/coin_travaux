@@ -9,7 +9,7 @@
       <% end %>
       </h3>
       <ul class="list-unstyled">
-        <li class="mt-2"><strong>Adresse -</strong> <%= @project.address.gsub(",","") %></li>
+        <li class="mt-2"><strong>Adresse -</strong> <%= @project.address.gsub(/[^a-z0-9\s]/i, '') %></li>
         <li class="mt-2"><strong>Surface -</strong> <%= @project.surface %> m²</li>
         <li class="mt-2"><strong>Type de bien -</strong> <%= @project.property_type %></li>
         <li class="mt-2"><strong>Type de rénovation -</strong> <%= @project.renovation_type %></li>
@@ -33,7 +33,7 @@
 
   <h3 class="mt-4"><i class="fa-solid fa-file-invoice me-2"></i> Mes devis </h3>
   <% if Date.today > @project.created_at %>
-    <%# <% if @project.quotes.present?<tr> %>
+    <% if @project.quotes.present? %><tr>
       <table class="table table-sm">
         <thead>
           <tr>
@@ -43,20 +43,18 @@
           </tr>
         </thead>
         <tbody>
-          <%# <% @project.quotes.each do |quote| %>
+          <% @project.quotes.each do |quote| %>
             <tr>
-              <th scope="row"> ohoh </th>
-              <td>
-              <a href="https://res.cloudinary.com/dpezrfr4o/image/upload/v1686236171/DEVIS_Casa_Gigi-_Mme_POIROUT_ajoi6x.pdf"><small>Voir le devis</small></a>
-              </td>
-              <td>hihi€</td>
+              <th scope="row"> <%= quote.company.name%></th>
+              <td><small><%= link_to "Voir le devis" %></small></td>
+              <td><%= quote.price %>€</td>
             </tr>
-          <%# <% end %>
+          <% end %>
         </tbody>
       </table>
-    <%# <% else %>
-      <%# Vous n'avez pas encore reçu de devis : encore un peu d'attente <i class="fa-solid fa-clock"></i> %>
-    <%# <% end %>
+    <% else %>
+      Vous n'avez pas encore reçu de devis : encore un peu d'attente <i class="fa-solid fa-clock"></i>
+    <% end %>
   <% elsif Date.today < @project.created_at %>
     Bientôt la visite, bientôt vos devis ! 🔏
   <% end %>
