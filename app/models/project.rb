@@ -11,4 +11,12 @@ class Project < ApplicationRecord
   def city
     address.split(',').last.strip.capitalize
   end
+
+  def project_with_photo
+    if project.photos.empty?
+      return nil
+    else
+      return project.photos.first
+    end
+  end
 end
