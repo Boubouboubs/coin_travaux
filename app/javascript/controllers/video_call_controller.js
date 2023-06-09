@@ -1,5 +1,5 @@
-import { Controller } from 'stimulus'
-import { connect, createLocalVideoTrack } from 'twilio-video'
+import { Controller } from "@hotwired/stimulus";
+import { connect, createLocalVideoTrack } from 'twilio-video';
 
 export default class extends Controller {
   static values = {
@@ -100,7 +100,6 @@ export default class extends Controller {
   joinCall(event) {
     event.preventDefault()
     this._showLocalVideo(true)
-
     connect(this.accessTokenValue, {
       name: this.roomIdValue,
       audio: true,
