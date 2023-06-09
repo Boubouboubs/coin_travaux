@@ -7,8 +7,8 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-    @user = @project.companies.first.users.first
-    setup_video_call_token
+    @user = @project.companies.first.users.first unless @project.companies.empty?
+    setup_video_call_token if @user
 
     @chosen_company = @project.companies.order(:created_at).first
     # @second_company = @project.companies.order(:created_at).second

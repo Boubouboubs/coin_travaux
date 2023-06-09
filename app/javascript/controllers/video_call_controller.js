@@ -100,7 +100,6 @@ export default class extends Controller {
   joinCall(event) {
     event.preventDefault()
     this._showLocalVideo(true)
-
     connect(this.accessTokenValue, {
       name: this.roomIdValue,
       audio: true,

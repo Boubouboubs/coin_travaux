@@ -16,13 +16,15 @@
       </ul>
 
       <h3 class="my-4"><i class="fa-solid fa-helmet-safety me-2"></i> Entreprise sélectionnée </h3>
-      <ul class="list-unstyled">
-        <li><%= cl_image_tag @chosen_company.logo.key, class:"avatar"%> <strong><%= @chosen_company.name%></strong></li>
-        <li><small>
-          <%= @chosen_company.description.truncate(150)%>
-          <strong><%= link_to "Voir plus", company_path(@chosen_company), class: "text-decoration-none" %></strong>
-        </small></li>
-      </ul>
+      <% if @chosen_company %>
+        <ul class="list-unstyled">
+          <li><%= cl_image_tag @chosen_company.logo.key, class:"avatar"%> <strong><%= @chosen_company.name%></strong></li>
+          <li><small>
+            <%= @chosen_company.description.truncate(150)%>
+            <strong><%= link_to "Voir plus", company_path(@chosen_company), class: "text-decoration-none" %></strong>
+          </small></li>
+        </ul>
+      <% end %>
     </div>
 
     <div id="project-virtual-visit">
