@@ -29,11 +29,11 @@
         </div>
         <div class="col-6 mt-4">
         <p><strong>Site et réseaux sociaux</strong></p>
-        <p>www.<%= @company.name %>.com</p>
+        <p>www.<%= @company.name.split(' ').last.strip %>.com</p>
           <div class="row mt-4">
-            <a href="#"><i class="fab fa-instagram fa-lg"></i> <%= @company.name %></a>
-            <a href="#"><i class="fab fa-facebook fa-lg"></i> <%= @company.name %></a>
-            <a href="#"><i class="fab fa-twitter fa-lg"></i> <%= @company.name %></a>
+            <a href="#"><i class="fab fa-instagram fa-lg"></i> <%= @company.name.split(' ').last.strip.capitalize %></a>
+            <a href="#"><i class="fab fa-facebook fa-lg"></i> <%= @company.name.split(' ').last.strip.capitalize %></a>
+            <a href="#"><i class="fab fa-twitter fa-lg"></i> <%= @company.name.split(' ').last.strip.capitalize %></a>
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@
           </div>
           <div class="card-company-infos">
             <div class="row">
-              <p><strong>Ville du projet: <%= project.address %></strong></p>
+              <p><strong>Ville du projet: <%= project.city %></strong></p>
               <p><strong>Propriété: <%= project.property_type %></strong></p>
               <p><strong>Surface: <%= project.surface %> m2</strong></p>
             </div>
