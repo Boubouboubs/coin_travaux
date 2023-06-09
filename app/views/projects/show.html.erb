@@ -29,7 +29,7 @@
 
     <div id="project-virtual-visit">
       <h3><i class="fa-solid fa-eye me-2"></i> Ma visite virtuelle</h3>
-      prévue le <strong><%= @project.created_at.strftime("%d/%m/%Y")%></strong>
+      prévue le <strong><%= @project.visite_date.strftime("%d/%m/%Y")%></strong>
        <div data-controller="video-call"
           data-video-call-access-token-value="<%= @twilio_jwt %>"
           data-video-call-room-id-value="<%= @room_id %>"
@@ -44,7 +44,7 @@
   </div>
 
   <h3 class="mt-4"><i class="fa-solid fa-file-invoice me-2"></i> Mes devis </h3>
-  <% if Date.today > @project.created_at %>
+  <% if Time.now > @project.visit_date %>
     <% if @project.quotes.present? %><tr>
       <table class="table table-sm">
         <thead>
