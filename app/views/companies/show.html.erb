@@ -14,7 +14,7 @@
         <div class="col-12 mt-4">
           <div class="d-flex justify-content-between align-items-start">
             <h2><%= cl_image_tag @company.logo.key, class:"avatar" %> <%= @company.name %></h2>
-            <%= link_to "Je prends RDV !", project_path(@project_id), class:"btn btn-primary" %>
+            <%= link_to "Je prends RDV !", project_project_companies_path(@project, {project_company: {company_id: @company.id}}), data: { turbo_method: :post }, class:"btn btn-primary" %>
           </div>
           <p><%= @company.description %></p>
         </div>

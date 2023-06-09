@@ -31,6 +31,7 @@ class CompaniesController < ApplicationController
   def show
     @company = Company.find(params[:id])
     authorize @company
-    @project_id = params[:id].to_i
+    @project = Project.find(params[:project_id])
   end
+
 end
