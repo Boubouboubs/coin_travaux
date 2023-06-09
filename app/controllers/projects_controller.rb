@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:visit_date, :property_type, :address, :surface)
+    params.require(:project).permit(:visit_date, :property_type, :address, :surface, :renovation_type)
   end
 
 end
