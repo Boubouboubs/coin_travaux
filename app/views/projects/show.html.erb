@@ -27,24 +27,26 @@
       </ul>
     </div>
 
-    <div id="project-virtual-visit">
-      <h3><i class="fa-solid fa-eye me-2"></i> Ma visite virtuelle</h3>
-      prévue le <strong><%= @project.created_at.strftime("%d/%m/%Y")%></strong>
-       <div data-controller="video-call"
-          data-video-call-access-token-value="<%= @twilio_jwt %>"
-          data-video-call-room-id-value="<%= @room_id %>"
-          data-video-call-buddy-video-width-value="200">
-          <div data-video-call-target="buddyVideo"></div>
-          <div data-video-call-target="localVideo"></div>
-          <div class="btn-call-start" data-action="click->video-call#joinCall">Call</div>
-          <div class="btn-call-end" data-action="click->video-call#endCall">End call</div>
-       </div>
-    </div>
+    <% unless Date.today > @project.visit_date %>
+      <div id="project-virtual-visit">
+        <h3><i class="fa-solid fa-eye me-2"></i> Ma visite virtuelle</h3>
+        prévue le <strong><%= @project.visit_date.strftime("%d/%m/%Y")%></strong>
+        <div data-controller="video-call"
+            data-video-call-access-token-value="<%= @twilio_jwt %>"
+            data-video-call-room-id-value="<%= @room_id %>"
+            data-video-call-buddy-video-width-value="200">
+            <div data-video-call-target="buddyVideo"></div>
+            <div data-video-call-target="localVideo"></div>
+            <div class="btn-call-start" data-action="click->video-call#joinCall">Call</div>
+            <div class="btn-call-end" data-action="click->video-call#endCall">End call</div>
+        </div>
+      </div>
+    <% end %>
 
   </div>
 
   <h3 class="mt-4"><i class="fa-solid fa-file-invoice me-2"></i> Mes devis </h3>
-  <% if Date.today > @project.created_at %>
+  <% if Date.today > @project.visit_date %>
     <% if @project.quotes.present? %><tr>
       <table class="table table-sm">
         <thead>
