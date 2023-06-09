@@ -1,7 +1,7 @@
 <div class= "container-form">
   <div class="col-10 col-md-4 card shadow zoom">
       <%= simple_form_for @project do |f| %>
-        <%= f.input :property_type,
+        <%= f.input :property_type, label: 'type de propriété'
                     as: :radio_buttons,
                     collection_wrapper_tag: 'div',
                     collection_wrapper_class: 'category-wrapper',
