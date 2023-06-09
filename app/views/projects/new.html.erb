@@ -2,17 +2,18 @@
   <div class="col-10 col-md-4 card shadow zoom">
       <%= simple_form_for @project do |f| %>
         <%= f.input :property_type,
+                    label: "Type de propriété",
                     as: :radio_buttons,
                     collection_wrapper_tag: 'div',
                     collection_wrapper_class: 'category-wrapper',
                     item_wrapper_class: 'category-item me-1',
                     input_html: {class: 'category-selector'},
                     collection: Project::PROPERTY_TYPE %>
-        <%= f.input :surface %>
-        <%= f.input :renovation_type, collection: Project::RENOVATION_TYPE, as: :check_boxes %>
-        <%= f.input :visit_date %>
-        <%= f.input :address %>
-        <div class= "my-class" type="checkbox"><%= f.submit "C'est parti !", class: "btn btn-primary" %></div>
+        <%= f.input :surface, label: "Surface"%>
+        <%= f.input :renovation_type, label: "Type de rénovation", collection: Project::RENOVATION_TYPE, as: :check_boxes %>
+        <%= f.input :visit_date, label: "Jour de la visite" %>
+        <%= f.input :address, label: "Adresse du bien" %>
+        <div class= "my-class" type="checkbox"><%= f.submit "C'est parti !", class: "btn btn-primary text-white" %></div>
     <% end %>
   </div>
 </div>

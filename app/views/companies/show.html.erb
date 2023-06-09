@@ -46,10 +46,7 @@
     <% @company.projects.each do |project| %>
       <div class="col-4 mb-5">
         <div class="card-company my-2">
-          <div class="card-image">
-            <% if  %>
-            <%= cl_image_tag project.project_photo.key, crop: :fill %>
-          </div>
+          <div class="card-image"><%= cl_image_tag project.project_photo.key, crop: :fill %></div>
           <div class="card-company-infos">
             <div class="row">
               <p><strong>Ville du projet: <%= project.city %></strong></p>
