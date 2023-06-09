@@ -27,7 +27,7 @@
       </ul>
     </div>
 
-    <% unless Time.now > @project.visit_date %>
+    <% unless Date.today > @project.visit_date %>
       <div id="project-virtual-visit">
         <h3><i class="fa-solid fa-eye me-2"></i> Ma visite virtuelle</h3>
         prévue le <strong><%= @project.visit_date.strftime("%d/%m/%Y")%></strong>
@@ -47,7 +47,7 @@
   </div>
 
   <h3 class="mt-4"><i class="fa-solid fa-file-invoice me-2"></i> Mes devis </h3>
-  <% if Time.now > @project.visit_date %>
+  <% if Date.today > @project.visit_date %>
     <% if @project.quotes.present? %><tr>
       <table class="table table-sm">
         <thead>
