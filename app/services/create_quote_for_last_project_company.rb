@@ -24,3 +24,4 @@ class CreateQuoteForLastProjectCompany
 end
 
 # CreateQuoteForLastProjectCompany.new(project: Project.find(46)).call
+# CreateQuoteForLastProjectCompany.new.call
