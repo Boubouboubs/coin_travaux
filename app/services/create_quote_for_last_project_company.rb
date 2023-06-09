@@ -1,9 +1,16 @@
 require "open-uri"
 
 class CreateQuoteForLastProjectCompany
+  def initialize(project: nil)
+    @project_company = if project.present?
+                         project.project_companies.first
+                       else
+                         ProjectCompany.order(created_at: :asc).last
+                       end
+  end
+
   def call
-    pc = ProjectCompany.order(created_at: :asc).last
-    quote = Quote.create(project_company: pc, price: 115_600)
+    quote = Quote.create(project_company: @project_company, price: 115_600)
     file = URI.open(quote_url)
     quote.file.attach(io: file, filename: "quote.pdf", content_type: "pdf")
     quote.save
@@ -16,4 +23,5 @@ class CreateQuoteForLastProjectCompany
   end
 end
 
+# CreateQuoteForLastProjectCompany.new(project: Project.find(46)).call
 # CreateQuoteForLastProjectCompany.new.call
