@@ -79,6 +79,7 @@ export default class extends Controller {
   }
 
   _onBuddyConnect(buddy) {
+    console.log(buddy)
     buddy.tracks.forEach(publication => {
       if (publication.isSubscribed) {
         const track = publication.track
@@ -99,6 +100,7 @@ export default class extends Controller {
 
   joinCall(event) {
     event.preventDefault()
+    console.log("hi from joinCall")
     this._showLocalVideo(true)
     connect(this.accessTokenValue, {
       name: this.roomIdValue,
