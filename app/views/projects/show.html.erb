@@ -1,4 +1,5 @@
 <% if DeviceDetector.new(request.user_agent).device_type == "desktop" %>
+  <%=  DeviceDetector.new(request.user_agent).device_type %>
   <%= render "projects/desktop_show" %>
 <% else %>
   <%= render "projects/mobile_show" %>
