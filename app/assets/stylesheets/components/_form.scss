@@ -22,6 +22,8 @@
 .card{
  flex: 1 1 auto;
  border-radius: 5px;
+ border: 1px solid $purple;
+ background-color: white;
  transform: scale(1.1);
  padding: 3em;
  position: static;
