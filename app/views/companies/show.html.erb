@@ -1,48 +1,72 @@
 <div class="container">
-  <div class="card-banner-show my-4" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= cl_image_path @company.project_photo.key %>);"></div>
-
-  <nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">À propos de nous</button>
-      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Détails de l'entreprise</button>
-      <button class="nav-link" ><a href="#Avis" style="text-decoration: none">Avis</a></button>
-    </div>
-  </nav>
-  <div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-      <div class= "row">
-        <div class="col-12 mt-4">
-          <div class="d-flex justify-content-between align-items-start">
-            <h2><%= cl_image_tag @company.logo.key, class:"avatar" %> <%= @company.name %></h2>
-            <%= link_to "Je prends RDV !", project_project_companies_path(@project, {project_company: {company_id: @company.id}}), data: { turbo_method: :post }, class:"btn btn-primary" %>
+  <div class="d-flex mb-4" style="height: 450px;">
+    <div class="card-banner-show my-4"><%= cl_image_tag @company.project_photo.key %></div>
+    <div class="ms-4 my-4">
+      <h3><%= cl_image_tag @company.logo.key, class:"avatar" %> <%= @company.name %></h3>
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">À propos de nous</button>
+          <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Détails de l'entreprise</button>
+          <button class="nav-link" ><a href="#Avis" style="text-decoration: none">Avis</a></button>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+          <div class="mt-4">
+            <p class="tab-desc"><%= @company.description %></p>
           </div>
-          <p><%= @company.description %></p>
+          <div class="d-flex justify-content-end align-items-end">
+            <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#summaryModal">
+            Je prends RDV !
+            </button>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-      <div class= "row">
-        <div class="col-6 mt-4">
-          <h2><%= cl_image_tag @company.logo.key, class:"avatar" %> <%= @company.name %></h2>
-          <p><%= @company.name %></p>
-          <p><%= @company.address %></p>
-        </div>
-        <div class="col-6 mt-4">
-        <p><strong>Site et réseaux sociaux</strong></p>
-        <p>www.<%= @company.name.split(' ').last.strip %>.com</p>
-          <div class="row mt-4">
-            <a href="#"><i class="fab fa-instagram fa-lg"></i> <%= @company.name.split(' ').last.strip.capitalize %></a>
-            <a href="#"><i class="fab fa-facebook fa-lg"></i> <%= @company.name.split(' ').last.strip.capitalize %></a>
-            <a href="#"><i class="fab fa-twitter fa-lg"></i> <%= @company.name.split(' ').last.strip.capitalize %></a>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+          <div class="mt-4">
+            <p><strong>Adresse</strong></p>
+            <p class="tab-desc"><%= @company.address %></p>
+          </div>
+          <div class="mt-4">
+            <p><strong>Site et réseaux sociaux</strong></p>
+            <p class="tab-desc"><a href="#">www.<%= @company.name.split(' ').last.strip %>.com</p>
+            <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
+            <a href="#"><i class="fab fa-facebook fa-lg"></i></a>
+            <a href="#"><i class="fab fa-twitter fa-lg"></i></a>
+          </div>
+          <div class="d-flex justify-content-end align-items-end">
+            <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#summaryModal">
+            Je prends RDV !
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <hr class="celine">
+  <div class="modal fade" id="summaryModal" tabindex="-1" aria-labelledby="summaryModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="summaryModalLabel">Récapitulatif du projet</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Entreprise : </strong><%= @company.name %></p>
+        <p><strong>Type de propriété : </strong><%= @project.property_type %></p>
+        <p><strong>Surface : </strong><%= @project.surface %> m2</p>
+        <p><strong>Type de rénovation : </strong><%= @project.renovation_type %></p>
+        <p><strong>Adresse du projet : </strong><%= @project.address %></p>
+        <p><strong>Créneau de la visite : </strong><%= @project.visit_date %></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary">Editer</button>
+        <div><%= link_to "Continuer", project_project_companies_path(@project, {project_company: {company_id: @company.id}}), data: { turbo_method: :post }, class:"btn btn-primary text-white" %></div>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <div class="row d-flex mx-4">
+  <div class="row d-flex mx-4 my-4">
     <% @company.projects.each do |project| %>
       <div class="col-4 mb-5">
         <div class="card-company my-2">
@@ -55,9 +79,9 @@
           </div>
           <div class="card-company-infos">
             <div class="row">
-              <p><strong>Ville du projet: <%= project.city %></strong></p>
-              <p><strong>Propriété: <%= project.property_type %></strong></p>
-              <p><strong>Surface: <%= project.surface %> m2</strong></p>
+              <p><strong>Ville du projet : </strong><%= project.city %></p>
+              <p><strong>Propriété : </strong><%= project.property_type %></p>
+              <p><strong>Surface : </strong><%= project.surface %> m2</p>
             </div>
           </div>
         </div>
@@ -69,9 +93,9 @@
 
   <h4><%= @company.reviews.count %> avis de nos clients pour <%= @company.name %></h4>
   <div class="row d-flex mx-4 mb-5">
-    <h2><a id="Avis"></a></h2>
+  <a id="Avis"></a>
     <% @company.reviews.each do |review| %>
-      <div class="">
+      <div class="avis mt-2">
         <p><%= cl_image_tag review.project_company.project.user.photo.key, class:"avatar" %> <%= review.project_company.project.user.first_name %> <%= review.project_company.project.user.last_name.first %>.</p>
         <p class="light-gray">
           <% review.rating.round.times do %>
