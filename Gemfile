@@ -59,6 +59,7 @@ gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem 'twilio-ruby'
 gem "flatpickr"
+gem "geocoder"
 gem 'device_detector'
 
 group :development, :test do
