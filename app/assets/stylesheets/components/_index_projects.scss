@@ -1,13 +1,15 @@
 .content {
   display: flex;
 }
+.cards-index {
+  display: grid;
+  grid-gap: 16px;
+
+}
+
 
 .card-comp {
   margin: 10px;
-  flex-grow: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 16px;
   padding: 16px;
   overflow: hidden;
   height: 300px;
@@ -17,7 +19,6 @@
   .card-comp-infos {
     padding: 16px;
     color: black;
-    width: 100%;
   }
 }
 
