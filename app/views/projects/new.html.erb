@@ -11,7 +11,10 @@
                     collection: Project::PROPERTY_TYPE %>
         <%= f.input :surface, label: "Surface"%>
         <%= f.input :renovation_type, label: "Type de rénovation", collection: Project::RENOVATION_TYPE, as: :check_boxes %>
-        <%= f.input :visit_date, label: "Jour de la visite" %>
+        <%= f.input :visit_date,
+                    label: "Jour de la visite",
+                    as: :string,
+                    input_html: { data: { controller: "datepicker" } } %>
         <%= f.input :address, label: "Adresse du bien" %>
         <div class= "my-class" type="checkbox"><%= f.submit "C'est parti !", class: "btn btn-primary text-white" %></div>
     <% end %>
