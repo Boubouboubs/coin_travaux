@@ -12,7 +12,7 @@ class Company < ApplicationRecord
     project_with_photos = projects.find { |project| !project.photos.empty? }
     return nil unless project_with_photos
 
-    project_with_photos.photos.first
+    project_with_photos.photos
   end
 
   def average_rating
