@@ -12,14 +12,14 @@ class CreateQuoteForLastProjectCompany
   def call
     quote = Quote.create(project_company: @project_company, price: 115_600)
     file = URI.open(quote_url)
-    quote.file.attach(io: file, filename: "quote.pdf", content_type: "pdf")
+    quote.file.attach(io: file, filename: "quote.pdf", content_type: "application/pdf")
     quote.save
   end
 
   private
 
   def quote_url
-    "https://res.cloudinary.com/dpezrfr4o/image/upload/v1686236171/DEVIS_Casa_Gigi-_Mme_POIROUT_ajoi6x.pdf"
+    "https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686230104/pdf/test_v99pyl.pdf"
   end
 end
 
