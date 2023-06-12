@@ -45,11 +45,11 @@
 
 </div>
 
-<div class="container my-4">
+<div class="container my-3">
 
   <div class="row d-flex mx-2">
     <% @companies.each do |company| %>
-      <div class="col-4 mb-5">
+      <div class="col-3 mb-5">
         <%= link_to project_company_path(@project_id, company), style:"text-decoration: none" do %>
           <div class="card-company my-2 zoom">
             <div id="carouselImgControls<%= company.id %>" class="carousel slide" data-bs-ride="carousel">
@@ -87,7 +87,7 @@
                 <div id="stars"><em> <%= company.average_rating %>/5</em>
                 </div>
               </div>
-              <p><%= company.description %></p>
+              <p class="line-clamp-2"><%= company.description %></p>
             </div>
           </div>
         <% end %>
