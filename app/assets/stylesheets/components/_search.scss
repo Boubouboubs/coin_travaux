@@ -1,17 +1,17 @@
 .search-form-control {
   position: relative;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 .search-form-control .btn {
   position: absolute;
-  top: 0.5px;
+  top: -0.5px;
   bottom: 8px;
-  right: 1px;
+  right: -5px;
 }
 
 .search-form-control .form-control {
-  height: 2.5rem;
+  height: 2.45rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   border-radius: 30px;
 }
@@ -23,8 +23,8 @@
 // }
 
 .btn-search {
-  height: 2.5rem;
-  background-color: #69D6D6;
+  height: 2.55rem;
+  background-color: #28ADA8;
   color: white;
   border-radius: 50%;
 }

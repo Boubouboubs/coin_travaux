@@ -33,12 +33,14 @@
         prévue le <strong><%= @project.visit_date.strftime("%d/%m/%Y")%></strong>
         <div data-controller="video-call"
             data-video-call-access-token-value="<%= @twilio_jwt %>"
-            data-video-call-room-id-value="room-<%= @project.id %>"
+            data-video-call-room-id-value="<%= @room_id %>"
             data-video-call-buddy-video-width-value="200">
-            <div data-video-call-target="buddyVideo"></div>
-            <div data-video-call-target="localVideo"></div>
-            <div class="btn btn-primary rounded-pill text-white btn-call-start" data-action="click->video-call#joinCall">Start call</div>
-            <div class="btn btn-danger rounded-pill text-white btn-call-end" data-action="click->video-call#endCall">End call</div>
+          <div class="videos">
+            <div data-video-call-target="buddyVideo" class="<%= current_user != @project.user ? "primary" : "secondary" %>"></div>
+            <div data-video-call-target="localVideo" class="<%= current_user == @project.user ? "primary" : "secondary" %>"></div>
+          </div>
+          <div class="btn-call-start" data-action="click->video-call#joinCall">Call</div>
+          <div class="btn-call-end" data-action="click->video-call#endCall">End call</div>
         </div>
       </div>
     <% end %>
