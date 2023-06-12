@@ -14,7 +14,7 @@
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 10px;
-  .card-company-infos {
+  .card-comp-infos {
     padding: 16px;
     color: black;
     width: 100%;
@@ -29,7 +29,7 @@
 }
 
 /*Medium devices (tablets, 768px and up)*/
-@media (min-width: 1200px) {
+@media (min-width: 1000px) {
   .cards-index {
     grid-template-columns: 1fr 1fr 1fr;
   }
