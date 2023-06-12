@@ -6,12 +6,15 @@
 <div class="content">
   <div class="cards-index">
     <% @projects.each do |project| %>
-      <div class="card-comp">
+      <div class="card-comp mx-5">
         <div class="card-comp-infos">
           <div class="row">
+            <h3><i class="fa-solid fa-eye me-2"></i> Ma visite virtuelle</h3>
+        prévue le <strong><%= @project.visit_date.strftime("%d/%m/%Y")%></strong>
             <p><strong>Adresse du projet: <%= project.address %></strong></p>
             <p><strong>Propriété: <%= project.property_type %></strong></p>
             <p><strong>Surface: <%= project.surface %> m2</strong></p>
+            <p><strong>Type de rénovation: <%= %></p>
           </div>
         </div>
       </div>
