@@ -1,0 +1,21 @@
+<div class="d-flex justify-content-center mt-4">
+  <h3>Mes projets</h3>
+</div>
+
+<hr class="celine">
+<div class="content">
+  <div class="cards-index">
+    <% @projects.each do |project| %>
+      <div class="card-comp">
+        <div class="card-comp-infos">
+          <div class="row">
+            <p><strong>Adresse du projet: <%= project.address %></strong></p>
+            <p><strong>Propriété: <%= project.property_type %></strong></p>
+            <p><strong>Surface: <%= project.surface %> m2</strong></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<hr class="celine">
