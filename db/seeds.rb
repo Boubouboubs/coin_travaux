@@ -3,6 +3,7 @@ User.destroy_all
 
 require "csv"
 require "open-uri"
+require "date"
 
 filepath = Rails.root.join("db", "DB_entrepreneurs.csv")
 db_projects = Rails.root.join("db", "DB_projects.csv")
@@ -57,11 +58,14 @@ puts "CSV parsed!!!"
 puts "parsing of main projects, projects company, reviews"
 CSV.foreach(db_main_projects, headers: :first_row, col_sep: ";") do |row|
   address = "#{row["Address"]}, #{row["Postcode"]}, #{row["City"]}"
+  p row["Visit_date"]
   main_company_project = Project.create!(
     property_type: row[0],
     address: address,
     surface: row["Surface"],
-    user: users.sample
+    user: users.sample,
+    renovation_type: Project::RENOVATION_TYPE[row["Renovation_type"].to_i],
+    visit_date: Date.parse(row["Visit_date"])
   )
 
   photo_urls = row['link_to_photos'].split(',').map { |url| url.strip }
@@ -90,7 +94,9 @@ CSV.foreach(db_projects, headers: :first_row, col_sep: ";").with_index do |row, 
     property_type: row[0],
     address: address,
     surface: row["Surface"],
-    user: users.sample
+    user: users.sample,
+    renovation_type: Project::RENOVATION_TYPE[row["Renovation_type"].to_i],
+    visit_date: Date.parse(row["Visit_date"])
   )
   photo_urls = row['link_to_photos'].split(',').map { |url| url.strip }
   photo_urls.each do |url|

@@ -14,7 +14,6 @@ class CompaniesController < ApplicationController
       if params.dig(:filters, :existence_years) == "2"
         @companies = @companies.select { |c| (Time.now.to_date - c.creation_date).ceil / 365 >= params[:filters][:creation_date].to_i }
       end
-
     end
 
     unless params.dig(:filters, :photo).in? [nil, '']
@@ -25,7 +24,6 @@ class CompaniesController < ApplicationController
         @companies = @companies.reject { |c| c.project_photo.present? }
       end
     end
-
   end
 
   def show
@@ -33,5 +31,4 @@ class CompaniesController < ApplicationController
     authorize @company
     @project = Project.find(params[:project_id])
   end
-
 end
