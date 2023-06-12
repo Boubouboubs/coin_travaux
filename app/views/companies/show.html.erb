@@ -93,8 +93,9 @@
 
   <h4><%= @company.reviews.count %> avis de nos clients pour <%= @company.name %></h4>
   <div class="row d-flex mx-4 mb-5">
+  <a id="Avis"></a>
     <% @company.reviews.each do |review| %>
-      <div class="">
+      <div class="avis mt-2">
         <p><%= cl_image_tag review.project_company.project.user.photo.key, class:"avatar" %> <%= review.project_company.project.user.first_name %> <%= review.project_company.project.user.last_name.first %>.</p>
         <p class="light-gray">
           <% review.rating.round.times do %>
