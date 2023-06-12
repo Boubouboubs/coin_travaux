@@ -1,6 +1,6 @@
 class Project < ApplicationRecord
   PROPERTY_TYPE = ["Appartement neuf", "Appartement ancien", "Maison ancienne", "Maison neuve"]
-  RENOVATION_TYPE = ["Rénovation de tout l'appartement", "Rénovation d'une pièce", "Extension", "Rénovation de quelques pièces", "Réaménagement de l’espace"]
+  RENOVATION_TYPE = ["Rénovation de tout l'appartement", "Rénovation de quelques pièces", "Rénovation d'une pièce", "Extension", "Réaménagement de l’espace"]
   belongs_to :user
   has_many :project_companies
   has_many :companies, through: :project_companies
@@ -13,7 +13,7 @@ class Project < ApplicationRecord
 
   validates :renovation_type, presence: true
   validates :property_type, presence: true
-  validates :surface, presence: true
+  validates :surface, presence: true, numericality: { greater_than: 0 }
   validates :visit_date, presence: true
   validates :address, presence: true
 

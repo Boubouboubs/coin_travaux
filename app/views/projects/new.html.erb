@@ -14,7 +14,7 @@
                     collection: Project::RENOVATION_TYPE, as: :radio_buttons,
                     input_html: {class: 'category-buttons'} %>
         <div class="d-flex justify-content-between" style="gap: 40px">
-          <div class="flex-fill"><%= f.input :surface, label: "Surface", input_html: { class: "text-body-size" }%></div>
+          <div class="flex-fill"><%= f.input :surface, label: "Surface", input_html: { class: "text-body-size", min: 0 }%></div>
           <div class="flex-fill"> <%= f.input :visit_date, label: "Créneau de la visite", as: :string, input_html: { data: { controller: "datepicker" }, class: "text-body-size" } %> </div>
         </div>
         <%= f.input :address,
