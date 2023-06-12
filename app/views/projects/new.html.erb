@@ -10,12 +10,17 @@
                     input_html: {class: 'category-selector'},
                     collection: Project::PROPERTY_TYPE %>
         <%= f.input :surface, label: "Surface"%>
-        <%= f.input :renovation_type, label: "Type de rénovation", collection: Project::RENOVATION_TYPE, as: :check_boxes %>
+        <%= f.input :renovation_type,
+                    label: "Type de rénovation",
+                    collection: Project::RENOVATION_TYPE, as: :radio_buttons %>
         <%= f.input :visit_date,
-                    label: "Jour de la visite",
+                    label: "Créneau de la visite",
                     as: :string,
                     input_html: { data: { controller: "datepicker" } } %>
-        <%= f.input :address, label: "Adresse du bien" %>
+        <%= f.input :address,
+                    label: "Adresse du bien",
+                    input_html: {data: {address_autocomplete_target: "address"}, class: "d-none"},
+                    wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}} %>
         <div class= "my-class" type="checkbox"><%= f.submit "C'est parti !", class: "btn btn-primary text-white" %></div>
     <% end %>
   </div>

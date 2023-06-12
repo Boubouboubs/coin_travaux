@@ -8,6 +8,15 @@ class Project < ApplicationRecord
 
   has_many_attached :photos
 
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
+
+  validates :renovation_type, presence: true
+  validates :property_type, presence: true
+  validates :surface, presence: true
+  validates :visit_date, presence: true
+  validates :address, presence: true
+
   def city
     address.split(',').last.strip.capitalize
   end
