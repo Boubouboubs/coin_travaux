@@ -10,7 +10,7 @@
                     input_html: {class: 'category-selector'},
                     collection: Project::PROPERTY_TYPE %>
         <%= f.input :surface, label: "Surface"%>
-        <%= f.input :renovation_type, label: "Type de rénovation", collection: Project::RENOVATION_TYPE, as: :check_boxes %>
+        <%= f.input :renovation_type, label: "Type de rénovation", as: :radio_buttons, collection: Project::RENOVATION_TYPE %>
         <%= f.input :visit_date, label: "Jour de la visite" %>
         <%= f.input :address, label: "Adresse du bien" %>
         <div class= "my-class" type="checkbox"><%= f.submit "C'est parti !", class: "btn btn-primary text-white" %></div>
