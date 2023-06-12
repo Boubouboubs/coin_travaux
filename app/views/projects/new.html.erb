@@ -12,7 +12,8 @@
         <%= f.input :surface, label: "Surface"%>
         <%= f.input :renovation_type,
                     label: "Type de rénovation",
-                    collection: Project::RENOVATION_TYPE, as: :radio_buttons %>
+                    collection: Project::RENOVATION_TYPE, as: :radio_buttons,
+                    collection_wrapper_class: 'category-wrapper' %>
         <%= f.input :visit_date,
                     label: "Créneau de la visite",
                     as: :string,
