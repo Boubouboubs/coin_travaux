@@ -43,6 +43,7 @@ export default class extends Controller {
   }
 
   _showBuddyVideo(track) {
+    console.log(track);
     if (track) {
       this.buddyVideoTarget.appendChild(track.attach())
     } else {
@@ -58,12 +59,14 @@ export default class extends Controller {
 
   _onSelfConnect() {
     this.callStarted()
+    console.log(this.room.participants);
     // Someone is already in the room
     if (this.room.participants.size > 0) {
       this.buddyJoined()
     }
     // Show video for each participant in the room
     this.room.participants.forEach(participant => {
+      console.log(participant);
       participant.tracks.forEach(publication => {
         if (publication.track) {
           this._showBuddyVideo(publication.track)
@@ -73,13 +76,13 @@ export default class extends Controller {
       // If a participant starts sharing video later,
       // show their video
       participant.on('trackSubscribed', track => {
+        console.log(track);
         this._showBuddyVideo(track)
       })
     })
   }
 
   _onBuddyConnect(buddy) {
-    console.log(buddy)
     buddy.tracks.forEach(publication => {
       if (publication.isSubscribed) {
         const track = publication.track
@@ -112,7 +115,10 @@ export default class extends Controller {
         this.room = room
         this._onSelfConnect()
 
-        room.on('participantConnected', buddy => this._onBuddyConnect(buddy))
+        room.on('participantConnected', (buddy) => {
+          console.log(buddy)
+          this._onBuddyConnect(buddy)
+        })
         room.on('participantDisconnected', () => this._onBuddyDisconnect())
         room.on('disconnected', () => this.endCall())
       },

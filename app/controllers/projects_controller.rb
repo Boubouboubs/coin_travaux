@@ -1,5 +1,9 @@
 class ProjectsController < ApplicationController
 
+  def index
+    @projects = policy_scope(Project).where(user_id: current_user.id)
+  end
+
   def new
     @project = Project.new
     authorize @project
@@ -40,7 +44,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:visit_date, :property_type, :address, :surface)
+    params.require(:project).permit(:visit_date, :property_type, :address, :surface, :renovation_type)
   end
 
 end
