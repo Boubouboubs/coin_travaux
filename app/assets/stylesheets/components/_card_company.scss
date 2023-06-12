@@ -7,7 +7,10 @@
   .card-company-infos {
     padding: 16px;
     color: black;
-    width: 100%;
+    width: 100%
+  };
+  #stars {
+    font-size: 13px;
   }
 }
 
@@ -24,5 +27,21 @@
   opacity: .7;
   margin-bottom: 0;
   margin-top: 8px;
-  color: black
+  color: black;
+  .line-clamp {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+}
+
+.zoom {
+  transition: transform .2s;
+}
+
+.zoom:hover {
+  -ms-transform: scale(1.05); /* IE 9 */
+  -webkit-transform: scale(1.05); /* Safari 3-8 */
+  transform: scale(1.05);
 }

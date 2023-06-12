@@ -1,13 +1,17 @@
-<div class="d-flex bg-info px-4 pt-3">
+<div class="d-flex justify-content-between px-4 pt-3">
 
-  <div>
-    <%= simple_form_for :filters, url: project_companies_path, method: :get do |f| %>
-      <%= f.input :star_rating,
-        collection: [["1 étoile", 1], ["2 étoiles", 2], ["3 étoiles", 3], ["4 étoiles", 4], ["5 étoiles", 5]],
-        label: false,
-        include_blank: "Note",
-        selected: params.dig(:filters, :star_rating) %>
+  <div class="py-1">
+    <em><%= @companies.size %> résultats</em>
   </div>
+  <div class="d-flex">
+    <div>
+      <%= simple_form_for :filters, url: project_companies_path, method: :get do |f| %>
+        <%= f.input :star_rating,
+          collection: [["1 étoile", 1], ["2 étoiles", 2], ["3 étoiles", 3], ["4 étoiles", 4], ["5 étoiles", 5]],
+          label: false,
+          include_blank: "Note",
+          selected: params.dig(:filters, :star_rating) %>
+    </div>
     <div class="ms-3">
       <%= f.input :review_number,
         collection: [[">5", 5], [">10", 10], [">50", 50]],
@@ -37,10 +41,9 @@
 
       <div class="ms-4"><%= f.submit 'Filtrer', class:"btn btn-primary" %></div>
     <% end %>
+  </div>
 
 </div>
-
-<div class="bg-primary px-4 py-1"><em><%= @companies.size %> résultats</em></div>
 
 <div class="container my-5">
 
@@ -48,19 +51,43 @@
     <% @companies.each do |company| %>
       <div class="col-4 mb-5">
         <%= link_to project_company_path(@project_id, company), style:"text-decoration: none" do %>
-          <div class="card-company my-2 mx-5">
-            <div class="card-image"><%= cl_image_tag company.project_photo.key, crop: :fill %></div>
+          <div class="card-company my-2 zoom">
+            <div id="carouselImgControls<%= company.id %>" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="card-image">
+                    <%= cl_image_tag company.project_photo.first.key, crop: :fill %>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="card-image">
+                    <%= cl_image_tag company.project_photo.last.key, crop: :fill %>
+                  </div>
+                </div>
+              </div>
+
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselImgControls<%= company.id %>" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselImgControls<%= company.id %>" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+
             <div class="card-company-infos">
               <h2><%= cl_image_tag company.logo.key, class:"avatar" %> <%= company.name %></h2>
-              <div class="d-flex justify-content-between">
-                <p><em>
+              <div class="d-flex">
+                <div id="stars">
                   <% company.average_rating.round.times do %>
                     <i class="fa-solid fa-star" style="color: #fecc00;"></i>
                   <% end %>
-                  <%= company.average_rating %>/5
-                </em></p>
+                </div>
+                <div id="stars"><em> <%= company.average_rating %>/5</em>
+                </div>
               </div>
-              <p><%= company.description.truncate(50) %> <strong>voir plus.</strong></p>
+              <p><%= company.description %></p>
             </div>
           </div>
         <% end %>
