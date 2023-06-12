@@ -8,13 +8,6 @@ class Project < ApplicationRecord
 
   has_many_attached :photos
 
-  before_create :set_jwt_token
-
-  def set_jwt_token
-    twilio_service = TwilioService.new(self)
-    self.jwt_token = twilio_service.generate_token
-  end
-
   def city
     address.split(',').last.strip.capitalize
   end
