@@ -3,7 +3,8 @@ require 'twilio-ruby'
 class TwilioService
   attr_reader :jwt, :room_id
 
-  def initialize
+  def initialize(project)
+    @project = project
     # Required for any Twilio Access Token
     @account_sid = ENV['TWILIO_ACCOUNT_SID']
     # To create an API key & secret for your app, go to
@@ -13,12 +14,13 @@ class TwilioService
   end
 
   # Generate a token for user1 to chat to user2
-  def generate_token(user1, user2)
+  # def generate_token(user1, user2)
+  def generate_token
     # Identify user1
-    identity = "user-#{user1.id}"
+    identity = "user-#{project_owner.id}"
 
     # Identify the video room
-    @room_id = unique_room_id(user1, user2)
+    @room_id = unique_room_id #(user1, user2)
 
     # Create video grant for the token
     grant = Twilio::JWT::AccessToken::VideoGrant.new
@@ -28,12 +30,17 @@ class TwilioService
     @jwt = token.to_jwt
   end
 
-  def unique_room_id(user1, user2)
-    id = [user1, user2].map(&:id).sort.join('-')
-    "room-#{id}"
+  def unique_room_id #(user1, user2)
+    "room-#{@project.id}"
+    # id = [user1, user2].map(&:id).sort.join('-')
+    # "room-#{id}"
   end
 
   private
+
+  def project_owner
+    @project.user
+  end
 
   def build_token(grant, identity)
     # Create a Twilio access token
