@@ -15,7 +15,7 @@
       <li class="mt-2"><strong>Type de rénovation -</strong> <%= @project.renovation_type %></li>
     </ul>
 
-    <div class="card" style="width: 20rem;">
+    <div class="card" style="width: 100vw;">
         <% unless Date.today > @project.visit_date %>
           <div id="project-virtual-visit">
             <h3><i class="fa-solid fa-eye me-2"></i> Ma visite virtuelle</h3>
