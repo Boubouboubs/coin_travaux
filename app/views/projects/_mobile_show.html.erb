@@ -15,12 +15,12 @@
       <li class="mt-2"><strong>Type de rénovation -</strong> <%= @project.renovation_type %></li>
     </ul>
 
-    <div class="card d-flex flex-row" style="width: 18rem">
+    <div class="card card-mobile" style="width: 18rem">
         <% unless Date.today > @project.visit_date %>
-          <div id="project-virtual-visit">
-            <h3><i class="fa-solid fa-eye me-2"></i> Ma visite virtuelle</h3>
-             <strong><%= @project.visit_date.strftime("%^B")%></strong>
-             <strong><%= @project.visit_date.strftime("%y")%></strong>
+        <h4><i class="fa-solid fa-eye"></i> Ma visite virtuelle</h4>
+          <div class="d-flex flex-row" id="project-virtual-visit">
+             <h3><strong><%= @project.visit_date.strftime("%^B")%></strong></h3>
+             <h3><strong><%= @project.visit_date.strftime("%y")%></strong></h3>
             <div data-controller="video-call"
                 data-video-call-access-token-value="<%= @twilio_jwt %>"
                 data-video-call-room-id-value="room-<%= @project.id %>"
