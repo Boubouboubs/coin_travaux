@@ -90,6 +90,7 @@
           </div>
           <div class="card-company-infos">
             <div class="row">
+              <% if project.average_rating_project %>
                 <div class="d-flex mt-1">
                   <div id="stars">
                     <% project.average_rating_project.round.times do %>
@@ -99,6 +100,7 @@
                   <div id="stars" class="ms-1"><em> <%= project.average_rating_project %>/5</em>
                   </div>
                 </div>
+                <% end %>
               <p><strong>Ville du projet : </strong><%= project.city %></p>
               <p><strong>Propriété : </strong><%= project.property_type %></p>
               <p><strong>Surface : </strong><%= project.surface %> m2</p>
