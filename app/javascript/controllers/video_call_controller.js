@@ -11,7 +11,7 @@ export default class extends Controller {
     }
   }
 
-  static targets = ['localVideo', 'buddyVideo']
+  static targets = ['localVideo', 'buddyVideo', 'buttonStart', 'buttonEnd']
 
   connect() {
     if (!this.accessTokenValue) {
@@ -32,11 +32,13 @@ export default class extends Controller {
     if (visible) {
       createLocalVideoTrack().then(track => {
         this.localVideoTarget.appendChild(track.attach())
+        this.buttonStartTarget.classList.add("d-none")
       })
     } else {
       this.room.localParticipant.tracks.forEach(publication => {
         const attachedElements = publication.track.detach()
         attachedElements.forEach(element => element.remove())
+        this.buttonEndTarget.classList.add("d-none")
       })
       this.localVideoTarget.innerHTML = ''
     }
@@ -59,6 +61,7 @@ export default class extends Controller {
 
   _onSelfConnect() {
     this.callStarted()
+
     console.log(this.room.participants);
     // Someone is already in the room
     if (this.room.participants.size > 0) {
@@ -133,11 +136,18 @@ export default class extends Controller {
     this._showBuddyVideo(false)
     this._showLocalVideo(false)
     this.callEnded()
+
   }
 
-  callStarted() {}
+  callStarted(event) {
+    this.buttonStartTarget.classList.add("d-none")
+    this.buttonEndTarget.classList.remove("d-none")
+  }
 
-  callEnded() {}
+  callEnded(event) {
+    this.buttonEndTarget.classList.add("d-none")
+    this.buttonStartTarget.classList.remove("d-none")
+  }
 
   buddyJoined() {}
 
