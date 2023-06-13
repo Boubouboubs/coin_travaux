@@ -4,27 +4,27 @@
     <em><%= @companies.size %> résultats</em>
   </div>
   <div class="d-flex">
-    <div>
-      <%= simple_form_for :filters, url: project_companies_path, method: :get do |f| %>
+
+      <%= simple_form_for :filters, url: project_companies_path, method: :get, html:{ class:"d-flex" } do |f| %>
         <%= f.input :star_rating,
           collection: [["1 étoile", 1], ["2 étoiles", 2], ["3 étoiles", 3], ["4 étoiles", 4], ["5 étoiles", 5]],
           label: false,
           include_blank: "Note",
           selected: params.dig(:filters, :star_rating) %>
-    </div>
-    <div class="ms-3">
-      <%= f.input :review_number,
-        collection: [[">5", 5], [">10", 10], [">50", 50]],
-        label: false,
-        include_blank: "Nombre d'avis",
-        selected: params.dig(:filters, :review_number) %>
-    </div>
-    <div>
-      <%= f.input :photo,
-        collection: [true, false],
-        as: :boolean, input_html: { class: "toggle" },
-        selected: params.dig(:filters, :photo) %>
-    </div>
+
+        <%= f.input :review_number,
+          collection: [[">5", 5], [">10", 10], [">50", 50]],
+          label: false,
+          wrapper_html: { class:"ms-3" },
+          include_blank: "Nombre d'avis",
+          selected: params.dig(:filters, :review_number) %>
+
+        <%= f.input :photo,
+          collection: [true, false],
+          wrapper_html: { class:"d-flex align-items-center"},
+          as: :boolean, input_html: { class: "toggle" },
+          selected: params.dig(:filters, :photo) %>
+
     <%# <div>
       <%= f.input :existence_years,
       collection: [["2 à 5 ans", 2], ["5 à 10 ans", 5], [">10 ans", 10]],
@@ -39,7 +39,7 @@
           <%# <i class="fa-solid fa-magnifying-glass"></i> %>
       <%# end %>
 
-      <div class="ms-4"><%= f.submit 'Filtrer', class:"btn btn-primary text-white" %></div>
+        <div class="ms-4"><%= f.submit 'Filtrer', class:"btn btn-primary text-white" %></div>
     <% end %>
   </div>
 
@@ -54,18 +54,16 @@
           <div class="card-company my-2 zoom">
             <div id="carouselImgControls<%= company.id %>" class="carousel slide">
               <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <div class="card-image">
-                    <%= cl_image_tag company.project_photo.first.key, crop: :fill %>
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="card-image">
-                    <%= cl_image_tag company.project_photo.last.key, crop: :fill %>
-                  </div>
-                </div>
+                <% if company.projects_photos %>
+                  <% company.projects_photos.each_with_index do |photo, index| %>
+                    <div class="carousel-item <%= "active" if index == 0 %>">
+                      <div class="card-image">
+                        <%= cl_image_tag photo.key, crop: :fill %>
+                      </div>
+                    </div>
+                  <% end %>
+                <% end %>
               </div>
-
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselImgControls<%= company.id %>" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -77,17 +75,20 @@
             </div>
 
             <div class="card-company-infos">
-              <h2><%= cl_image_tag company.logo.key, class:"avatar-company" %> <%= company.name %></h2>
+              <div class="d-flex align-items-center">
+                <div class="me-2"><%= cl_image_tag company.logo.key, class:"avatar-company" %></div>
+                <h2 class="mb-0"><%= company.name %></h2>
+              </div>
               <div class="d-flex">
                 <div id="stars">
                   <% company.average_rating.round.times do %>
                     <i class="fa-solid fa-star" style="color: #fecc00;"></i>
                   <% end %>
                 </div>
-                <div id="stars"><em> <%= company.average_rating %>/5</em>
+                <div id="stars" class="ms-1"><em><%= company.average_rating.round(1) %>/5</em>
                 </div>
               </div>
-              <p><%= company.description %></p>
+              <p class="text-clamped"><%= company.description %></p>
             </div>
           </div>
         <% end %>
