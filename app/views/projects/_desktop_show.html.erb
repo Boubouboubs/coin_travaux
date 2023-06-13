@@ -18,11 +18,9 @@
       <h3 class="my-4"><i class="fa-solid fa-helmet-safety me-2"></i> Entreprise sélectionnée </h3>
       <ul class="list-unstyled">
         <li><%= cl_image_tag @chosen_company.logo.key, class:"avatar"%> <strong><%= @chosen_company.name%></strong></li>
-        <li><small> <%= @chosen_company.address.gsub(",","") %>
-        </small>
-        </li>
+        <li><%= @chosen_company.address.gsub(",","") %></li>
         <li><small>
-          <%= link_to "Voir la page de l'entreprise", project_company_path(@chosen_company), class: "mt-2 text-decoration-none btn btn-sm btn-outline-primary" %>
+          <%= link_to "Voir la page de l'entreprise", project_company_path(@chosen_company), class: "mt-2 text-decoration-none btn btn-sm btn-primary text-white" %>
         </small></li>
       </ul>
     </div>
