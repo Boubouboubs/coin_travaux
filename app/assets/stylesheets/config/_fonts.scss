@@ -1,12 +1,11 @@
 // Import Google fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
+// @import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
 
 // Define fonts for body and headers
 // $body-font: "Work Sans", "Helvetica", "sans-serif";
 // $headers-font: "Nunito", "Helvetica", "sans-serif";
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&family=Pangolin&display=swap');
-// To use a font file (.woff) uncomment following lines
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&family=Merriweather:wght@300;400;700&display=swap');// To use a font file (.woff) uncomment following lines
 // @font-face {
 //   font-family: "Font Name";
 //   src: font-url('FontFile.eot');
@@ -17,4 +16,4 @@
 // $my-font: "Font Name";
 
 $body-font: "Inter";
-$headers-font: "Pangolin"
+$headers-font: "Merriweather"
