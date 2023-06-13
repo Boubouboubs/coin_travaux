@@ -1,0 +1,26 @@
+.content-banner {
+  border: 2px solid rgba(40,173,168, 0.3);
+  width: 90%;
+  background-color: white;
+  padding: 3em 3em;
+  border-radius: 20px;
+  margin: 0 auto;
+  margin-top: 30px;
+
+  .content-category {
+    text-align: center;
+    padding: 0 1em;
+  }
+
+  h2 {
+    color: $turquoise;
+  }
+
+  h5 {
+    color: $purple;
+  }
+
+  .border-right {
+    border-right: 1px solid rgba(40,173,168, 0.3);
+  }
+}
