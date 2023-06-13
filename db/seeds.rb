@@ -55,6 +55,7 @@ CSV.foreach(filepath, headers: :first_row, col_sep: ";") do |row|
 end
 puts "CSV parsed!!!"
 
+
 # Main company 2 projects
 puts "parsing of main projects, projects company, reviews"
 CSV.foreach(db_main_projects, headers: :first_row, col_sep: ";") do |row|
