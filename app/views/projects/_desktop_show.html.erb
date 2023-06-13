@@ -1,7 +1,13 @@
 <div class="container mt-5">
-  <div class="d-flex justify-content-between">
-    <div id="project-place-info">
-      <h3 class="mb-4"><i class="fa-solid fa-key me-2"></i>
+  <div class="grid-simple">
+    <div style="width: 100%; height: 300px;"
+      class="map"
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+    </div>
+    <div>
+      <h3>
       <% if @project.property_type = "Appartement neuf" || "Appartement ancien"%>
         Mon appartement
       <% elsif @project.property_type = "Maison ancienne" || "Maison neuve" %>
@@ -9,69 +15,104 @@
       <% end %>
       </h3>
       <ul class="list-unstyled">
-        <li class="mt-2"><strong>Adresse -</strong> <%= @project.address.gsub(",","") %></li>
-        <li class="mt-2"><strong>Surface -</strong> <%= @project.surface %> m²</li>
-        <li class="mt-2"><strong>Type de bien -</strong> <%= @project.property_type %></li>
-        <li class="mt-2"><strong>Type de rénovation -</strong> <%= @project.renovation_type %></li>
-      </ul>
-
-      <h3 class="my-4"><i class="fa-solid fa-helmet-safety me-2"></i> Entreprise sélectionnée </h3>
-      <ul class="list-unstyled">
-        <li><%= cl_image_tag @chosen_company.logo.key, class:"avatar"%> <strong><%= @chosen_company.name%></strong></li>
-        <li><small> <%= @chosen_company.address.gsub(",","") %>
-        </small>
-        </li>
-        <li><small>
-          <%= link_to "Voir la page de l'entreprise", project_company_path(@chosen_company), class: "mt-2 text-decoration-none btn btn-sm btn-outline-primary" %>
-        </small></li>
+        <li class="mt-3"><i class="fa-solid fa-location-dot me-1"></i> <%= @project.address.gsub(",","") %></li>
+        <li class="mt-3"><i class="fa-solid fa-ruler-horizontal me-1"></i> <%= @project.surface %> m²</li>
+        <li class="mt-3"><i class="fa-solid fa-house me-1"></i> <%= @project.property_type %></li>
+        <li class="mt-3"><i class="fa-solid fa-screwdriver-wrench me-1"></i> <%= @project.renovation_type %></li>
       </ul>
     </div>
-
-    <% unless Date.today > @project.visit_date %>
-      <div id="project-virtual-visit">
-        <h3><i class="fa-solid fa-eye me-2"></i> Ma visite virtuelle</h3>
-        prévue le <strong><%= @project.visit_date.strftime("%d/%m/%Y")%></strong>
-        <div data-controller="video-call"
-            data-video-call-access-token-value="<%= @twilio_jwt %>"
-            data-video-call-room-id-value="<%= @room_id %>"
-            data-video-call-buddy-video-width-value="200">
-          <div class="videos">
-            <div data-video-call-target="buddyVideo" class="<%= current_user != @project.user ? "primary" : "secondary" %>"></div>
-            <div data-video-call-target="localVideo" class="<%= current_user == @project.user ? "primary" : "secondary" %>"></div>
-          </div>
-          <div class="btn btn-primary rounded-pill text-white btn-call-start" data-action="click->video-call#joinCall">Start call</div>
-          <div class="btn btn-danger rounded-pill text-white btn-call-end" data-action="click->video-call#endCall">End call</div>
-        </div>
-      </div>
-    <% end %>
-
   </div>
 
-  <h3 class="mt-4"><i class="fa-solid fa-file-invoice me-2"></i> Mes devis </h3>
-  <% if Date.today > @project.visit_date %>
-    <% if @project.quotes.present? %><tr>
-      <table class="table table-sm">
-        <thead>
-          <tr>
-            <th scope="col">Entreprise</th>
-            <th scope="col">Devis</th>
-            <th scope="col">Tarif</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @project.quotes.each do |quote| %>
-            <tr>
-              <th scope="row"> <%= quote.company.name%></th>
-              <td><small><%= link_to "Voir le devis", cl_image_path(quote.file.key), target: "_blank" %></small></td>
-              <td><%= quote.price %>€</td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      Vous n'avez pas encore reçu de devis : encore un peu d'attente <i class="fa-solid fa-clock"></i>
-    <% end %>
-  <% elsif Date.today < @project.created_at %>
-    Bientôt la visite, bientôt vos devis ! 🔏
-  <% end %>
+  <div class="card-show">
+    <div class="grid-inside">
+      <div id="project-virtual-visit">
+        <% if Date.today < @project.visit_date %>
+          <h3> Ma prochaine visite </h3>
+          prévue le <strong><%= @project.visit_date.strftime("%d/%m/%Y à %H:%M")%></strong>
+        <% elsif %>
+          <h3> Ma visite </h3>
+          effectuée le <strong><%= @project.visit_date.strftime("%d/%m/%Y à %H:%M")%></strong>
+        <% end %>
+
+        <div class="video-call"
+          data-controller="video-call"
+          data-video-call-access-token-value="<%= @twilio_jwt %>"
+          data-video-call-room-id-value="<%= @room_id %>"
+          data-video-call-buddy-video-width-value="200"
+          >
+          <div class="call-video-views">
+            <div id="remote-video" data-video-call-target="buddyVideo">
+              <div class="no-call" data-video-call-target="noCall">
+                No call in progress. Click 'Call' to connect!
+              </div>
+              <div class="waiting-for-buddy d-none"
+                  data-video-call-target="awaitingBuddy">
+                Waiting for <%= @user.first_name %> to join...
+              </div>
+            </div>
+            <div id="local-video" data-video-call-target="localVideo"></div>
+          </div>
+          <div class="call-buttons">
+            <%= link_to '#',
+                        class: 'call-button btn-start-call',
+                        data: {
+                          action: 'click->video-call#joinCall',
+                          video_call_target: 'joinCallButton'
+                        } do %>
+              <i class="fas fa-phone"></i> Call
+            <% end %>
+            <%= link_to '#',
+                        class: 'call-button btn-end-call d-none',
+                        data: {
+                          action: 'click->video-call#endCall',
+                          video_call_target: 'endCallButton'
+                        } do %>
+              <i class="fas fa-phone-slash"></i> End
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div>
+        <ul class="list-unstyled">
+          <li><%= cl_image_tag @chosen_company.logo.key, class:"avatar"%> <strong><%= @chosen_company.name%></strong></li>
+          <li><%= @chosen_company.address.gsub(",","") %></li>
+          <li><small>
+            <%= link_to "Voir la page de l'entreprise", project_company_path(@chosen_company), class: "text-decoration-none btn btn-success text-white mt-3" %>
+          </small></li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="show">
+
+    <div>
+      <h3> Mes devis </h3>
+      <% if Date.today > @project.visit_date %>
+        <% if @project.quotes.present? %><tr>
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Entreprise</th>
+                <th scope="col">Devis</th>
+                <th scope="col">Tarif</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @project.quotes.each do |quote| %>
+                <tr>
+                  <th scope="row"> <%= quote.company.name%></th>
+                  <td><small><%= link_to "Voir le devis", cl_image_path(quote.file.key), target: "_blank" %></small></td>
+                  <td><%= quote.price %>€</td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          Vous n'avez pas encore reçu de devis : encore un peu d'attente ⏱️
+        <% end %>
+      <% elsif Date.today < @project.created_at %>
+        Bientôt la visite, bientôt vos devis ! 🔏
+      <% end %>
+    </div>
+  </div>
 </div>
