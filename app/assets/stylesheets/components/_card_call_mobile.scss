@@ -30,11 +30,13 @@
   margin-top: -10px;
 }
 
-video {
-  position: fixed;
-  left: 0;
-  bottom: 40px;
-  width: 100vw;
+.buddy{
+  video {
+    position: fixed;
+    left: 0;
+    bottom: 40px;
+    width: 100vw;
+  }
 }
 
 .btn-danger {
