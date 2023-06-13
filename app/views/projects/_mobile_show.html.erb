@@ -21,6 +21,7 @@
           <div id="project-virtual-visit">
             <h3 id="day"><strong><%= @project.visit_date.strftime("%d")%></strong></h3>
             <h3 id="month"><strong><%= l(@project.visit_date, locale: :fr, format: "%^B") %></strong></h3>
+            <h3 id="hour"><strong><%= @project.visit_date.strftime("%Hh%M")%></strong></h3>
           </div>
           <p class="sm-9">Ma visite avec <strong><%= @chosen_company.name%></strong></p>
           <div class="btn btn-primary rounded-pill text-white btn-call-start"
