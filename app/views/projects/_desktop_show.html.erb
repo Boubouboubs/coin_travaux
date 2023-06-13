@@ -27,15 +27,17 @@
     </div>
   </div>
 
+
+
   <% unless Date.today > @project.visit_date %>
-    <div id="project-virtual-visit">
+    <div id="project-virtual-visit" class="card-show">
       <h3> Ma visite virtuelle</h3>
-      prévue le <strong><%= @project.visit_date.strftime("%d/%m/%Y")%></strong>
+      prévue le <strong><%= @project.visit_date.strftime("%d/%m/%Y à %H:%M")%></strong>
       <div data-controller="video-call"
           data-video-call-access-token-value="<%= @twilio_jwt %>"
           data-video-call-room-id-value="<%= @room_id %>"
           data-video-call-buddy-video-width-value="200">
-        <div class="videos">
+        <div class="videos mt-3">
           <div data-video-call-target="buddyVideo" class="<%= current_user != @project.user ? "primary" : "secondary" %>"></div>
           <div data-video-call-target="localVideo" class="<%= current_user == @project.user ? "primary" : "secondary" %>"></div>
         </div>
@@ -45,32 +47,33 @@
     </div>
   <% end %>
 
-
-  <h3 class="mt-4"> Mes devis </h3>
-  <% if Date.today > @project.visit_date %>
-    <% if @project.quotes.present? %><tr>
-      <table class="table table-sm">
-        <thead>
-          <tr>
-            <th scope="col">Entreprise</th>
-            <th scope="col">Devis</th>
-            <th scope="col">Tarif</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @project.quotes.each do |quote| %>
+  <div class="card-show">
+    <h3> Mes devis </h3>
+    <% if Date.today > @project.visit_date %>
+      <% if @project.quotes.present? %><tr>
+        <table class="table table-sm">
+          <thead>
             <tr>
-              <th scope="row"> <%= quote.company.name%></th>
-              <td><small><%= link_to "Voir le devis", cl_image_path(quote.file.key), target: "_blank" %></small></td>
-              <td><%= quote.price %>€</td>
+              <th scope="col">Entreprise</th>
+              <th scope="col">Devis</th>
+              <th scope="col">Tarif</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      Vous n'avez pas encore reçu de devis : encore un peu d'attente <i class="fa-solid fa-clock"></i>
+          </thead>
+          <tbody>
+            <% @project.quotes.each do |quote| %>
+              <tr>
+                <th scope="row"> <%= quote.company.name%></th>
+                <td><small><%= link_to "Voir le devis", cl_image_path(quote.file.key), target: "_blank" %></small></td>
+                <td><%= quote.price %>€</td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        Vous n'avez pas encore reçu de devis : encore un peu d'attente <i class="fa-solid fa-clock"></i>
+      <% end %>
+    <% elsif Date.today < @project.created_at %>
+      Bientôt la visite, bientôt vos devis ! 🔏
     <% end %>
-  <% elsif Date.today < @project.created_at %>
-    Bientôt la visite, bientôt vos devis ! 🔏
-  <% end %>
+  </div>
 </div>
