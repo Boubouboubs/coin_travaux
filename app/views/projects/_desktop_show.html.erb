@@ -27,9 +27,10 @@
     </div>
   </div>
 
-
-
   <% unless Date.today > @project.visit_date %>
+
+    <hr class="celine">
+
     <div id="project-virtual-visit" class="card-show">
       <h3> Ma visite virtuelle</h3>
       prévue le <strong><%= @project.visit_date.strftime("%d/%m/%Y à %H:%M")%></strong>
@@ -46,6 +47,8 @@
       </div>
     </div>
   <% end %>
+
+  <hr class="celine">
 
   <div class="card-show">
     <h3> Mes devis </h3>
