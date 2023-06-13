@@ -14,9 +14,13 @@ class ProjectsController < ApplicationController
     @user = @project.companies.first.users.first unless @project.companies.empty?
     setup_video_call_token if @user
 
+    # @projects = policy_scope(Project).where(user_id: current_user.id)
+    @markers = [{
+      lat: @project.latitude,
+      lng: @project.longitude
+    }]
+
     @chosen_company = @project.companies.order(:created_at).first
-    # @second_company = @project.companies.order(:created_at).second
-    # @third_company = @project.companies.order(:created_at).third
     authorize @project
   end
 

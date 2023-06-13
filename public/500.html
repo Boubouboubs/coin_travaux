@@ -18,23 +18,29 @@
 
     .boxes {
       display: grid;
-      grid-template-columns: 1.7fr 1fr;
-      grid-gap: 0em;
+      grid-template-columns: 1fr 1fr;
     }
 
     .box-img {
-      width: 100%;
-      /* position: relative; */
+      width: 120%;
     }
 
     .content-infos {
       text-align: right;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .content-infos {
+      display: grid;
+
     }
 
     .white-button {
       background-color: white;
       color: #6E55E0;
-      padding: 10px 30px;
+      padding: 10px 20px;
       border-radius: 30px;
       text-decoration: none;
       font-weight: 500;
@@ -50,10 +56,21 @@
     <div class="container boxes">
       <img src="/visuel-errors.png" alt="" class="box-img">
       <div class="content-infos">
-        <h1>Oups, apparemment le site a aussi besoin de travaux !</h1>
+<<<<<<< HEAD
+        <h1>Oups,</h1>
+        <h2>apparemment le site a aussi besoin de travaux !</h2>
+        <br>
         <br>
         <br>
         <a href="/" class="white-button">Revenir sur le site</a>
+=======
+          <div class ="block">
+            <h1>Oups, apparemment le site a aussi besoin de travaux !</h1>
+            <br>
+            <br>
+            <a href="/" class="white-button">Revenir sur le site</a>
+          </div>
+>>>>>>> master
       </div>
     </div>
   </div>
