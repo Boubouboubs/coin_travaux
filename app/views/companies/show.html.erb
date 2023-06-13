@@ -1,70 +1,59 @@
 <div class="container">
-  <div class="d-flex mb-4">
-    <div class="card-banner-show my-4"><%= cl_image_tag @company.project_photo.first.key %></div>
-    <div class="ms-4 my-4">
+  <div class="d-flex">
+    <div class="card-banner-show my-4"><%= cl_image_tag @company.project_photo.first.key, class:"card-banner-show", style:"height:100%" %></div>
+    <div class="d-flex flex-column flex-grow-1 ms-4 my-4">
       <h3><%= cl_image_tag @company.logo.key, class:"avatar" %> <%= @company.name %></h3>
       <nav>
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-          <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">À propos de nous</button>
-          <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Détails de l'entreprise</button>
-          <button class="nav-link" ><a href="#Avis" style="text-decoration: none">Avis</a></button>
+        <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
+          <button class="nav-link active border-0 border-bottom border-primary" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">À propos de nous</button>
+          <button class="nav-link border-0" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Détails de l'entreprise</button>
+          <button class="nav-link border-0" ><a href="#Avis" style="text-decoration: none">Avis</a></button>
         </div>
       </nav>
-      <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-          <div class="mt-4">
-            <p class="tab-desc"><%= @company.description %></p>
-          </div>
-          <div class="d-flex justify-content-end align-items-end">
-            <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#summaryModal">
-            Je prends RDV !
-            </button>
-          </div>
+      <div class="flex-grow-1 tab-content m-2" id="nav-tabContent">
+        <div class="tab-pane fade show active tab-desc mt-2" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+          <p><%= @company.description %></p>
         </div>
-        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-          <div class="mt-4">
-            <p><strong>Adresse</strong></p>
-            <p class="tab-desc"><%= @company.address %></p>
-          </div>
-          <div class="mt-4">
-            <p><strong>Site et réseaux sociaux</strong></p>
-            <p class="tab-desc"><a href="#">www.<%= @company.name.split(' ').last.strip %>.com</p>
-            <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
-            <a href="#"><i class="fab fa-facebook fa-lg"></i></a>
-            <a href="#"><i class="fab fa-twitter fa-lg"></i></a>
-          </div>
-          <div class="d-flex justify-content-end align-items-end">
-            <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#summaryModal">
-            Je prends RDV !
-            </button>
-          </div>
+        <div class="tab-pane fade tab-desc mt-2" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+          <p><strong>Adresse</strong></p>
+          <p><%= @company.address %></p>
+          <p><strong>Site et réseaux sociaux</strong></p>
+          <p><a href="#">www.<%= @company.name.split(' ').last.strip %>.com</p>
+          <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
+          <a href="#"><i class="fab fa-facebook fa-lg"></i></a>
+          <a href="#"><i class="fab fa-twitter fa-lg"></i></a>
         </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#summaryModal">
+        Je prends RDV !
+        </button>
       </div>
     </div>
   </div>
 
   <div class="modal fade" id="summaryModal" tabindex="-1" aria-labelledby="summaryModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="summaryModalLabel">Récapitulatif du projet</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p><strong>Entreprise : </strong><%= @company.name %></p>
-        <p><strong>Type de propriété : </strong><%= @project.property_type %></p>
-        <p><strong>Surface : </strong><%= @project.surface %> m2</p>
-        <p><strong>Type de rénovation : </strong><%= @project.renovation_type %></p>
-        <p><strong>Adresse du projet : </strong><%= @project.address %></p>
-        <p><strong>Créneau de la visite : </strong><%= @project.visit_date.strftime("%d/%m/%Y à %H:%M") %></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary">Editer</button>
-        <div><%= link_to "Continuer", project_project_companies_path(@project, {project_company: {company_id: @company.id}}), data: { turbo_method: :post }, class:"btn btn-primary text-white" %></div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="text-center w-100"><h1 class="modal-title fs-5" id="summaryModalLabel">Votre RDV</h1></div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><%= cl_image_tag @company.logo.key, class:"avatar" %> <strong><%= @company.name %></strong></p>
+          <p>Le <%= @project.visit_date.strftime("%d/%m/%Y à %H:%M") %></p>
+          <p><strong>Adresse du projet : </strong><%= @project.address %></p>
+          <p><strong>Surface : </strong><%= @project.surface %> m2</p>
+          <p><strong>Type de propriété : </strong><%= @project.property_type %></p>
+          <p><strong>Type de rénovation : </strong><%= @project.renovation_type %></p>
+        </div>
+        <div class="modal-footer">
+          <i class="fa-solid fa-pen-to-square" style="color: #787878;"></i>
+          <div><%= link_to "Continuer", project_project_companies_path(@project, {project_company: {company_id: @company.id}}), data: { turbo_method: :post }, class:"btn btn-primary text-white" %></div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <div class="row d-flex mx-2 my-4">
     <% @company.projects.each do |project| %>
@@ -92,21 +81,28 @@
   <hr class="celine">
 
   <h4><%= @company.reviews.count %> avis de nos clients pour <%= @company.name %></h4>
-  <div class="row d-flex mx-4 mb-5">
-  <a id="Avis"></a>
-    <% @company.reviews.each do |review| %>
-      <div class="avis mt-2">
-        <p><%= cl_image_tag review.project_company.project.user.photo.key, class:"avatar" %> <%= review.project_company.project.user.first_name %> <%= review.project_company.project.user.last_name.first %>.</p>
-        <p class="light-gray">
-          <% review.rating.round.times do %>
-            <i class="fa-solid fa-star" style="color: #fecc00;"></i>
-          <% end %>
-          <em><%= review.created_at.strftime('Publié le %d/%m/%Y à %Hh%M')%></em>
-        </p>
+  <div class="row d-flex">
+    <a id="Avis"></a>
+      <% @company.reviews.each do |review| %>
+      <div class="d-flex justify-content-between avis mt-2">
+        <div>
+          <p><strong>
+            <%= cl_image_tag review.project_company.project.user.photo.key, class:"avatar" %> <%= review.project_company.project.user.first_name %> <%= review.project_company.project.user.last_name.first %>.
+          </strong></p>
+         </div>
+        <div>
+          <p class="light-gray">
+            <% review.rating.round.times do %>
+              <i class="fa-solid fa-star" style="color: #fecc00;"></i>
+            <% end %>
+            <em><%= review.created_at.strftime('Publié le %d/%m/%Y à %Hh%M')%></em>
+          </p>
+        </div>
+
+      </div>
         <p><%= review.comment %></p>
         <hr>
-      </div>
-    <% end %>
+      <% end %>
   </div>
 
 </div>

@@ -39,20 +39,20 @@
           <%# <i class="fa-solid fa-magnifying-glass"></i> %>
       <%# end %>
 
-      <div class="ms-4"><%= f.submit 'Filtrer', class:"btn btn-primary" %></div>
+      <div class="ms-4"><%= f.submit 'Filtrer', class:"btn btn-primary text-white" %></div>
     <% end %>
   </div>
 
 </div>
 
-<div class="container my-5">
+<div class="container my-3">
 
   <div class="row d-flex mx-2">
     <% @companies.each do |company| %>
-      <div class="col-4 mb-5">
+      <div class="col-3 mb-5">
         <%= link_to project_company_path(@project_id, company), style:"text-decoration: none" do %>
           <div class="card-company my-2 zoom">
-            <div id="carouselImgControls<%= company.id %>" class="carousel slide" data-bs-ride="carousel">
+            <div id="carouselImgControls<%= company.id %>" class="carousel slide">
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <div class="card-image">
@@ -77,7 +77,7 @@
             </div>
 
             <div class="card-company-infos">
-              <h2><%= cl_image_tag company.logo.key, class:"avatar" %> <%= company.name %></h2>
+              <h2><%= cl_image_tag company.logo.key, class:"avatar-company" %> <%= company.name %></h2>
               <div class="d-flex">
                 <div id="stars">
                   <% company.average_rating.round.times do %>
