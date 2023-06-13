@@ -6,13 +6,13 @@ class Company < ApplicationRecord
 
   has_one_attached :logo
 
-  def project_photo
+  def projects_photos
     return nil unless projects.present?
 
-    project_with_photos = projects.find { |project| !project.photos.empty? }
-    return nil unless project_with_photos
+    projects_with_photos = projects.select { |project| !project.photos.empty? }
+    return nil unless projects_with_photos
 
-    project_with_photos.photos
+    projects_with_photos.flat_map(&:photos)
   end
 
   def average_rating
