@@ -1,0 +1,44 @@
+.card-call-mobile {
+  padding: 1em;
+  box-shadow: 0 16px 30px rgba(110, 85, 224, 0.3);
+  background-color: white;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.justify-content-between{
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sm-9{
+  margin: 0;
+  // padding-left: 1em;
+}
+
+.fa-solid{
+  position: relative;
+  top: 2px;
+}
+
+#day{
+  font-size: 46px;
+  margin: 0px;
+}
+
+#month{
+  margin-top: -10px;
+}
+
+video {
+  position: fixed;
+  left: 0;
+  bottom: 40px;
+  width: 100vw;
+}
+
+.btn-danger {
+  position: fixed;
+  bottom: 67px;
+  margin-left: -28px;
+}
