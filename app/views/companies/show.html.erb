@@ -4,10 +4,10 @@
     <div class="d-flex flex-column flex-grow-1 ms-4 my-4">
       <h3><%= cl_image_tag @company.logo.key, class:"avatar" %> <%= @company.name %></h3>
       <nav>
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-          <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">À propos de nous</button>
-          <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Détails de l'entreprise</button>
-          <button class="nav-link" ><a href="#Avis" style="text-decoration: none">Avis</a></button>
+        <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
+          <button class="nav-link active border-0 border-bottom border-primary" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">À propos de nous</button>
+          <button class="nav-link border-0" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Détails de l'entreprise</button>
+          <button class="nav-link border-0" ><a href="#Avis" style="text-decoration: none">Avis</a></button>
         </div>
       </nav>
       <div class="flex-grow-1 tab-content m-2" id="nav-tabContent">
@@ -36,19 +36,19 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="summaryModalLabel">Récapitulatif du projet</h1>
+          <div class="text-center w-100"><h1 class="modal-title fs-5" id="summaryModalLabel">Votre RDV</h1></div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p><strong>Entreprise : </strong><%= @company.name %></p>
-          <p><strong>Type de propriété : </strong><%= @project.property_type %></p>
-          <p><strong>Surface : </strong><%= @project.surface %> m2</p>
-          <p><strong>Type de rénovation : </strong><%= @project.renovation_type %></p>
+          <p><%= cl_image_tag @company.logo.key, class:"avatar" %> <strong><%= @company.name %></strong></p>
+          <p>Le <%= @project.visit_date.strftime("%d/%m/%Y à %H:%M") %></p>
           <p><strong>Adresse du projet : </strong><%= @project.address %></p>
-          <p><strong>Créneau de la visite : </strong><%= @project.visit_date.strftime("%d/%m/%Y à %H:%M") %></p>
+          <p><strong>Surface : </strong><%= @project.surface %> m2</p>
+          <p><strong>Type de propriété : </strong><%= @project.property_type %></p>
+          <p><strong>Type de rénovation : </strong><%= @project.renovation_type %></p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary">Editer</button>
+          <i class="fa-solid fa-pen-to-square" style="color: #787878;"></i>
           <div><%= link_to "Continuer", project_project_companies_path(@project, {project_company: {company_id: @company.id}}), data: { turbo_method: :post }, class:"btn btn-primary text-white" %></div>
         </div>
       </div>

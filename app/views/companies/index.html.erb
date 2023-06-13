@@ -52,7 +52,7 @@
       <div class="col-3 mb-5">
         <%= link_to project_company_path(@project_id, company), style:"text-decoration: none" do %>
           <div class="card-company my-2 zoom">
-            <div id="carouselImgControls<%= company.id %>" class="carousel slide" data-bs-ride="carousel">
+            <div id="carouselImgControls<%= company.id %>" class="carousel slide">
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <div class="card-image">
@@ -87,7 +87,7 @@
                 <div id="stars"><em> <%= company.average_rating %>/5</em>
                 </div>
               </div>
-              <p class="line-clamp-2"><%= company.description %></p>
+              <p><%= company.description %></p>
             </div>
           </div>
         <% end %>
