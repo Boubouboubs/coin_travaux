@@ -18,10 +18,10 @@ class CompaniesController < ApplicationController
 
     unless params.dig(:filters, :photo).in? [nil, '']
       if params.dig(:filters, :photo) == "1"
-        @companies = @companies.select { |c| c.project_photo.present? }
+        @companies = @companies.select { |c| c.projects_photos.present? }
       end
       if params.dig(:filters, :photo) == "0"
-        @companies = @companies.reject { |c| c.project_photo.present? }
+        @companies = @companies.reject { |c| c.projects_photos.present? }
       end
     end
   end

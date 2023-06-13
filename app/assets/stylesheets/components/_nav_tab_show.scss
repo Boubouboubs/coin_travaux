@@ -6,7 +6,10 @@
   }
 }
 
-.nav-link:hover {
+nav a {
+  text-decoration: none;
+}
 
-  border-bottom: 2px solid $turquoise;
+nav a:hover {
+  border-bottom: 4px solid $turquoise;
 }
