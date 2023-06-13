@@ -1,4 +1,6 @@
 <div class="container">
+    <i class="fa-solid fa-arrow-left" style="color: #6e55e0;"></i>
+    <%= link_to "Retour aux résultats", project_companies_path(@project), style:"text-decoration: none" %>
   <div class="d-flex my-4">
     <div class="card-banner-show my-4">
       <% if @company.projects_photos.second %>
@@ -13,10 +15,10 @@
         <h3><%= @company.name %></h3>
       </div>
       <nav>
-        <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
-          <button class="nav-link active border-0" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">À propos de nous</button>
-          <button class="nav-link border-0" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Détails de l'entreprise</button>
-        <button class="nav-link border-0" ><a href="#Avis" style="text-decoration: none">Avis</a></button>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">À propos de nous</button>
+          <button class="nav-link " id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Détails de l'entreprise</button>
+          <button class="nav-link" ><a href="#Avis" style="text-decoration: none">Avis</a></button>
         </div>
       </nav>
       <div class="flex-grow-1 tab-content m-2" id="nav-tabContent">
@@ -49,12 +51,12 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body mx-4">
-          <p><%= cl_image_tag @company.logo.key, class:"avatar" %> <strong><%= @company.name %></strong></p>
-          <p><i class="fa-solid fa-calendar-days" style="color: #1f2c93;"></i>  <%= @project.visit_date.strftime("%d/%m/%Y à %H:%M") %></p>
-          <p><i class="fa-solid fa-location-dot" style="color: #1f2c93;"></i>  <%= @project.address %></p>
-          <p><i class="fa-solid fa-ruler-horizontal" style="color: #1f2c93;"></i>  <%= @project.surface %> m2</p>
-          <p><i class="fa-solid fa-house" style="color: #1f2c93;"></i>  <%= @project.property_type %></p>
-          <p><i class="fa-solid fa-screwdriver-wrench" style="color: #1f2c93;"></i>  <%= @project.renovation_type %></p>
+          <p><%= cl_image_tag @company.logo.key, class:"avatar me-2" %> <strong><%= @company.name %></strong></p>
+          <p><i class="fa-solid fa-calendar-days me-2" style="color: #383839;"></i><%= @project.visit_date.strftime("%d/%m/%Y à %H:%M") %></p>
+          <p><i class="fa-solid fa-location-dot me-2" style="color: #383839;"></i><%= @project.address %></p>
+          <p><i class="fa-solid fa-ruler-horizontal me-2" style="color: #383839;"></i><%= @project.surface %> m2</p>
+          <p><i class="fa-solid fa-house me-2" style="color: #383839;"></i><%= @project.property_type %></p>
+          <p><i class="fa-solid fa-screwdriver-wrench me-2" style="color: #383839;"></i><%= @project.renovation_type %></p>
         </div>
         <div class="modal-footer d-flex justify-content-between align-items-center mx-4">
           <a href="#"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #787878;"></i></a>
@@ -105,10 +107,10 @@
                   </div>
                 </div>
                 <% end %>
-              <p><i class="fa-solid fa-ruler-horizontal" style="color: #383839;"></i>  <%= project.surface %> m2</p>
-              <p><i class="fa-solid fa-location-dot" style="color: #383839;"></i>  <%= project.city %></p>
-              <p><i class="fa-solid fa-house" style="color: #383839;"></i>  <%= project.property_type %></p>
-              <p><i class="fa-solid fa-screwdriver-wrench" style="color: #383839;"></i>  <%= @project.renovation_type %></p>
+              <p><i class="fa-solid fa-ruler-horizontal me-2" style="color: #383839;"></i>  <%= project.surface %> m2</p>
+              <p><i class="fa-solid fa-location-dot me-2" style="color: #383839;"></i>  <%= project.city %></p>
+              <p><i class="fa-solid fa-house me-2" style="color: #383839;"></i>  <%= project.property_type %></p>
+              <p><i class="fa-solid fa-screwdriver-wrench me-2" style="color: #383839;"></i>  <%= @project.renovation_type %></p>
 
           </div>
         </div>
