@@ -8,7 +8,10 @@
       <% end %>
     </div>
     <div class="d-flex flex-column flex-grow-1 ms-4 my-4">
-      <h3><%= cl_image_tag @company.logo.key, class:"avatar" %> <%= @company.name %></h3>
+      <div class="d-flex align-items-center">
+        <div class="me-2"><%= cl_image_tag @company.logo.key, class:"avatar-large" %></div>
+        <h3><%= @company.name %></h3>
+      </div>
       <nav>
         <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
           <button class="nav-link active border-0" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">À propos de nous</button>
@@ -48,22 +51,24 @@
         <div class="modal-body mx-4">
           <p><%= cl_image_tag @company.logo.key, class:"avatar" %> <strong><%= @company.name %></strong></p>
           <p><i class="fa-solid fa-calendar-days" style="color: #1f2c93;"></i>  <%= @project.visit_date.strftime("%d/%m/%Y à %H:%M") %></p>
-          <p><strong>Adresse du projet : </strong><%= @project.address %></p>
-          <p><strong>Surface : </strong><%= @project.surface %> m2</p>
-          <p><strong>Type de propriété : </strong><%= @project.property_type %></p>
-          <p><strong>Type de rénovation : </strong><%= @project.renovation_type %></p>
+          <p><i class="fa-solid fa-location-dot" style="color: #1f2c93;"></i>  <%= @project.address %></p>
+          <p><i class="fa-solid fa-ruler-horizontal" style="color: #1f2c93;"></i>  <%= @project.surface %> m2</p>
+          <p><i class="fa-solid fa-house" style="color: #1f2c93;"></i>  <%= @project.property_type %></p>
+          <p><i class="fa-solid fa-screwdriver-wrench" style="color: #1f2c93;"></i>  <%= @project.renovation_type %></p>
         </div>
-        <div class="modal-footer d-flex justify-content-between mx-4">
-          <i class="fa-solid fa-pen-to-square fa-lg" style="color: #787878;"></i>
+        <div class="modal-footer d-flex justify-content-between align-items-center mx-4">
+          <a href="#"><i class="fa-solid fa-pen-to-square fa-lg" style="color: #787878;"></i></a>
           <div><%= link_to "Continuer", project_project_companies_path(@project, {project_company: {company_id: @company.id}}), data: { turbo_method: :post }, class:"btn btn-primary text-white" %></div>
         </div>
       </div>
     </div>
   </div>
 
+   <hr class="celine">
+
   <div class="row d-flex mx-2">
     <% @company.projects.each do |project| %>
-      <div class="col-4 mb-5">
+      <div class="col-3 mb-5">
         <div class="card-company my-2 mx-2 zoom">
           <div class="card-image">
             <div id="carouselImgControls<%= project.id %>" class="carousel slide">
@@ -88,10 +93,9 @@
               </button>
             </div>
           </div>
-          <div class="card-company-infos">
-            <div class="row">
+          <div class="card-company-infos mb-2">
               <% if project.average_rating_project %>
-                <div class="d-flex mt-1">
+                <div class="d-flex">
                   <div id="stars">
                     <% project.average_rating_project.round.times do %>
                       <i class="fa-solid fa-star" style="color: #fecc00;"></i>
@@ -101,10 +105,11 @@
                   </div>
                 </div>
                 <% end %>
-              <p><strong>Ville du projet : </strong><%= project.city %></p>
-              <p><strong>Propriété : </strong><%= project.property_type %></p>
-              <p><strong>Surface : </strong><%= project.surface %> m2</p>
-            </div>
+              <p><i class="fa-solid fa-ruler-horizontal" style="color: #383839;"></i>  <%= project.surface %> m2</p>
+              <p><i class="fa-solid fa-location-dot" style="color: #383839;"></i>  <%= project.city %></p>
+              <p><i class="fa-solid fa-house" style="color: #383839;"></i>  <%= project.property_type %></p>
+              <p><i class="fa-solid fa-screwdriver-wrench" style="color: #383839;"></i>  <%= @project.renovation_type %></p>
+
           </div>
         </div>
       </div>
