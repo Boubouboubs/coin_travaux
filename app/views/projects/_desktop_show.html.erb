@@ -1,5 +1,6 @@
 <div class="container mt-5">
   <div class="grid-show">
+    div map
     <div>
       <h3>
       <% if @project.property_type = "Appartement neuf" || "Appartement ancien"%>
@@ -15,6 +16,13 @@
         <li class="mt-2"><i class="fa-solid fa-screwdriver-wrench me-1" style="color: #1f2c93;"></i> <%= @project.renovation_type %></li>
       </ul>
     </div>
+
+  </div>
+  <div class="card-show">
+
+  </div>
+
+  <div class="grid-show">
     <div>
       <h3> Entreprise sélectionnée </h3>
       <ul class="list-unstyled">
@@ -25,15 +33,13 @@
         </small></li>
       </ul>
     </div>
-  </div>
-
-  <% unless Date.today > @project.visit_date %>
-
-    <hr class="celine">
-
-    <div id="project-virtual-visit" class="card-show">
-      <h3> Ma visite virtuelle</h3>
-      prévue le <strong><%= @project.visit_date.strftime("%d/%m/%Y à %H:%M")%></strong>
+    <div id="project-virtual-visit">
+      <h3> Ma prochaine visite </h3>
+      <% if Date.now > @project.visit_date %>
+        prévue le <strong><%= @project.visit_date.strftime("%d/%m/%Y à %H:%M")%></strong>
+      <% elsif %>
+        effectuée le <strong><%= @project.visit_date.strftime("%d/%m/%Y à %H:%M")%></strong>
+      <% end %>
       <div data-controller="video-call"
           data-video-call-access-token-value="<%= @twilio_jwt %>"
           data-video-call-room-id-value="<%= @room_id %>"
@@ -46,7 +52,7 @@
         <div class="btn btn-danger rounded-pill text-white btn-call-end d-none" data-action="click->video-call#endCall">End call</div>
       </div>
     </div>
-  <% end %>
+  </div>
 
   <hr class="celine">
 
