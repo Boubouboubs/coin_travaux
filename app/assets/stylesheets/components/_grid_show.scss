@@ -1,4 +1,4 @@
-.grid-show {
+.grid-simple {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   grid-gap: 6em;
@@ -11,6 +11,13 @@
   h3 {
     margin-bottom: 12px;
   }
+}
+
+.grid-inside {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-gap: 6em;
+  background-color: white;
 }
 
 .card-show {
