@@ -27,7 +27,7 @@
             data-video-call-access-token-value="<%= @twilio_jwt %>"
             data-video-call-room-id-value="room-<%= @project.id %>"
             data-video-call-buddy-video-width-value="200">
-          <div data-video-call-target="buddyVideo"></div>
+          <div data-video-call-target="buddyVideo" class="buddy"></div>
           <div data-video-call-target="localVideo"></div>
           <div class="btn btn-primary rounded-pill text-white btn-call-start" data-video-call-target="buttonStart" data-action="click->video-call#joinCall"><i class="fa-solid fa-phone" style="color: #ffffff;"></i></div>
           <div class="btn btn-danger rounded-pill text-white btn-call-end d-none" data-video-call-target="buttonEnd" data-action="click->video-call#endCall"><i class="fa-solid fa-phone-slash" style="color: #ffffff;"></i></div>
