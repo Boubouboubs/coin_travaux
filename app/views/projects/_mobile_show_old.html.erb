@@ -1,0 +1,36 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between">
+    <div id="project-place-info">
+      <h3 class="mb-4">
+      <% if @project.property_type = "Appartement neuf" || "Appartement ancien"%>
+        Mon appartement
+      <% elsif @project.property_type = "Maison ancienne" || "Maison neuve" %>
+        Ma maison
+      <% end %>
+      </h3>
+      <ul class="list-unstyled">
+      <li class="mt-2"><i class="fa-solid fa-location-dot fa-lg" style="color: #1f2c93;"></i> <%= @project.address.gsub(",","") %></li>
+      <li class="mt-2"><i class="fa-solid fa-ruler-horizontal fa-lg" style="color: #1f2c93;"></i> <%= @project.surface %> m²</li>
+      <li class="mt-2"><i class="fa-solid fa-house fa-lg" style="color: #1f2c93;"></i> <%= @project.property_type %></li>
+      <li class="mt-2"><i class="fa-solid fa-screwdriver-wrench fa-lg" style="color: #1f2c93;"></i> <%= @project.renovation_type %></li>
+    </ul>
+
+    <div class="card-call-mobile d-flex justify-content-between mt-4">
+      <% unless Date.today > @project.visit_date %>
+        <div id="project-virtual-visit">
+          <h3 id="day"><strong><%= @project.visit_date.strftime("%d")%></strong></h3>
+          <h3 id="month"><strong><%= l(@project.visit_date, locale: :fr, format: "%^B") %></strong></h3>
+        </div>
+        <p class="sm-9">Ma visite avec <strong><%= @chosen_company.name%></strong></p>
+        <div class="d-flex" data-controller="video-call"
+            data-video-call-access-token-value="<%= @twilio_jwt %>"
+            data-video-call-room-id-value="room-<%= @project.id %>"
+            data-video-call-buddy-video-width-value="200">
+          <div data-video-call-target="buddyVideo" class="buddy"></div>
+          <div data-video-call-target="localVideo"></div>
+          <div class="btn btn-primary rounded-pill text-white btn-call-start" data-video-call-target="buttonStart" data-action="click->video-call#joinCall"><i class="fa-solid fa-phone" style="color: #ffffff;"></i></div>
+          <div class="btn btn-danger rounded-pill text-white btn-call-end d-none" data-video-call-target="buttonEnd" data-action="click->video-call#endCall"><i class="fa-solid fa-phone-slash" style="color: #ffffff;"></i></div>
+        </div>
+      <% end %>
+    </div>
+</div>
