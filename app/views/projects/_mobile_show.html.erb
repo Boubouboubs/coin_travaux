@@ -1,8 +1,7 @@
-<h1>Mobile</h1>
 <div class="container mt-5">
   <div class="d-flex justify-content-between">
     <div id="project-place-info">
-      <h3 class="mb-4"><i class="fa-solid fa-key me-2"></i>
+      <h3 class="mb-4">
       <% if @project.property_type = "Appartement neuf" || "Appartement ancien"%>
         Mon appartement
       <% elsif @project.property_type = "Maison ancienne" || "Maison neuve" %>
@@ -10,10 +9,10 @@
       <% end %>
       </h3>
       <ul class="list-unstyled">
-      <li class="mt-2"><i class="fa-regular fa-location-dot"></i><strong>Adresse -</strong> <%= @project.address.gsub(",","") %></li>
-      <li class="mt-2"><i class="fa-solid fa-ruler-horizontal"></i><strong>Surface -</strong> <%= @project.surface %> m²</li>
-      <li class="mt-2"><strong>Type de bien -</strong> <%= @project.property_type %></li>
-      <li class="mt-2"><strong>Type de rénovation -</strong> <%= @project.renovation_type %></li>
+      <li class="mt-2"><i class="fa-solid fa-location-dot fa-lg" style="color: #1f2c93;"></i> <%= @project.address.gsub(",","") %></li>
+      <li class="mt-2"><i class="fa-solid fa-ruler-horizontal fa-lg" style="color: #1f2c93;"></i> <%= @project.surface %> m²</li>
+      <li class="mt-2"><i class="fa-solid fa-house fa-lg" style="color: #1f2c93;"></i> <%= @project.property_type %></li>
+      <li class="mt-2"><i class="fa-solid fa-screwdriver-wrench fa-lg" style="color: #1f2c93;"></i> <%= @project.renovation_type %></li>
     </ul>
 
     <div class="card-call-mobile d-flex justify-content-between mt-4">
