@@ -22,7 +22,7 @@
 .card {
  flex: 1 1 auto;
  border-radius: 5px;
- border: 1px solid $purple;
+ border: 1px solid #5C3C9F;
  background-color: white;
  transform: scale(1.1);
  padding: 3em;
@@ -69,17 +69,17 @@
 
 .category-selector:checked + label {
   color: white!important;
-  background-color: #28ADA8!important;
+  background-color: $purple!important;
 }
 
 
 #form-check-label + label {
-  background-color: #28ADA8;
+  background-color: $purple;
 }
 
 #project_property_type:checked + label {
-  background-color: #28ADA8;
-  border-color: #28ADA8;
+  background-color: $purple;
+  border-color: $purple;
 }
 
 .my-class + submit {

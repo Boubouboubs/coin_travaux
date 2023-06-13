@@ -1,17 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>We're sorry, but something went wrong (500)</title>
+  <title>Une erreur est survenue (500)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    .bg-page {
+      background-color: #6E55E0;
+      color: white;
+      height: 100vh;
+      font-family: arial, sans-serif;
+      margin: 0 auto;
+    }
+
+    .container {
+      width: 90%;
+    }
+
+    .boxes {
+      display: grid;
+      grid-template-columns: 1.7fr 1fr;
+      grid-gap: 0em;
+    }
+
+    .box-img {
+      width: 100%;
+      /* position: relative; */
+    }
+
+    .content-infos {
+      text-align: right;
+    }
+
+    .white-button {
+      background-color: white;
+      color: #6E55E0;
+      padding: 10px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 18px;
+    }
+
+    </style>
 </head>
 
 <body>
   <!-- This file lives in public/500.html -->
-  <div class="dialog bg-success">
-    <div class="container">
-      <img src="/visuel-errors.png" alt="">
-      <h1 class="text-white">Oups, apparemment le site a également besoin de travaux 🤓</h1>
-      <a href="/" class="btn btn-white text-decoration-none text-purple">Revenir sur le site</a>
+  <div class="bg-page">
+    <div class="container boxes">
+      <img src="/visuel-errors.png" alt="" class="box-img">
+      <div class="content-infos">
+        <h1>Oups, apparemment le site a aussi besoin de travaux !</h1>
+        <br>
+        <br>
+        <a href="/" class="white-button">Revenir sur le site</a>
+      </div>
     </div>
   </div>
 </body>
