@@ -5,7 +5,7 @@
   .btn-big-white {
     background-color: white;
     color: $dark-blue;
-    font-family: "Pangolin";
+    font-family: $headers-font;
     font-size: 20px;
     padding: 15px 55px;
     border-radius: 10px;
@@ -33,7 +33,7 @@
 }
 
 .banner h1 {
-  font-family: "Pangolin";
+  font-family: $headers-font;
   font-size: 60px;
   color: white;
   margin-right: 30%;
