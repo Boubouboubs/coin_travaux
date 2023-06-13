@@ -10,13 +10,13 @@
       <% end %>
       </h3>
       <ul class="list-unstyled">
-      <li class="mt-2"><strong>Adresse -</strong> <%= @project.address.gsub(",","") %></li>
-      <li class="mt-2"><strong>Surface -</strong> <%= @project.surface %> m²</li>
+      <li class="mt-2"><i class="fa-regular fa-location-dot"></i><strong>Adresse -</strong> <%= @project.address.gsub(",","") %></li>
+      <li class="mt-2"><i class="fa-solid fa-ruler-horizontal"></i><strong>Surface -</strong> <%= @project.surface %> m²</li>
       <li class="mt-2"><strong>Type de bien -</strong> <%= @project.property_type %></li>
       <li class="mt-2"><strong>Type de rénovation -</strong> <%= @project.renovation_type %></li>
     </ul>
 
-    <div class="card-call-mobile d-flex justify-content-between">
+    <div class="card-call-mobile d-flex justify-content-between mt-4">
       <% unless Date.today > @project.visit_date %>
         <div id="project-virtual-visit">
           <h3 id="day"><strong><%= @project.visit_date.strftime("%d")%></strong></h3>
