@@ -38,23 +38,23 @@
     </div>
   </div>
 
-  <div class="modal fade" id="summaryModal" tabindex="-1" aria-labelledby="summaryModalLabel" aria-hidden="true">
+  <div class="modal fade mt-5" id="summaryModal" tabindex="-1" aria-labelledby="summaryModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <div class="text-center w-100"><h1 class="modal-title fs-5" id="summaryModalLabel">Votre RDV</h1></div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body mx-4">
           <p><%= cl_image_tag @company.logo.key, class:"avatar" %> <strong><%= @company.name %></strong></p>
-          <p>Le <%= @project.visit_date.strftime("%d/%m/%Y à %H:%M") %></p>
+          <p><i class="fa-solid fa-calendar-days" style="color: #1f2c93;"></i>  <%= @project.visit_date.strftime("%d/%m/%Y à %H:%M") %></p>
           <p><strong>Adresse du projet : </strong><%= @project.address %></p>
           <p><strong>Surface : </strong><%= @project.surface %> m2</p>
           <p><strong>Type de propriété : </strong><%= @project.property_type %></p>
           <p><strong>Type de rénovation : </strong><%= @project.renovation_type %></p>
         </div>
-        <div class="modal-footer">
-          <i class="fa-solid fa-pen-to-square" style="color: #787878;"></i>
+        <div class="modal-footer d-flex justify-content-between mx-4">
+          <i class="fa-solid fa-pen-to-square fa-lg" style="color: #787878;"></i>
           <div><%= link_to "Continuer", project_project_companies_path(@project, {project_company: {company_id: @company.id}}), data: { turbo_method: :post }, class:"btn btn-primary text-white" %></div>
         </div>
       </div>
