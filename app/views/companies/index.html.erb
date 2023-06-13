@@ -85,7 +85,7 @@
                     <i class="fa-solid fa-star" style="color: #fecc00;"></i>
                   <% end %>
                 </div>
-                <div id="stars" class="ms-1"><em><%= company.average_rating %>/5</em>
+                <div id="stars" class="ms-1"><em><%= company.average_rating.round(1) %>/5</em>
                 </div>
               </div>
               <p class="text-clamped"><%= company.description %></p>

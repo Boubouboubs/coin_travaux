@@ -6,10 +6,10 @@
   }
 }
 
-nav a {
-  text-decoration: none;
-}
+// nav button {
+//   text-decoration: none!important;
+// }
 
-nav a:hover {
-  border-bottom: 4px solid $turquoise;
+nav button:hover {
+  border-bottom: 4px solid $turquoise!important;
 }
