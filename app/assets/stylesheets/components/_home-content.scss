@@ -1,5 +1,5 @@
 .content-banner {
-  border: 2px solid rgba(40,173,168, 0.3);
+  border: 2px solid $turquoise;
   width: 90%;
   background-color: white;
   padding: 3em 3em;
@@ -20,6 +20,6 @@
   }
 
   .border-right {
-    border-right: 1px solid rgba(40,173,168, 0.3);
+    border-right: 1px solid $turquoise;
   }
 }
