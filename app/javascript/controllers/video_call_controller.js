@@ -11,7 +11,7 @@ export default class extends Controller {
     }
   }
 
-  static targets = ['localVideo', 'buddyVideo', 'buttonStart', 'buttonEnd']
+  static targets = ['localVideo', 'buddyVideo', 'noCall', 'awaitingBuddy', 'joinCallButton', 'endCallButton']
 
   connect() {
     if (!this.accessTokenValue) {
@@ -32,20 +32,19 @@ export default class extends Controller {
     if (visible) {
       createLocalVideoTrack().then(track => {
         this.localVideoTarget.appendChild(track.attach())
-        this.buttonStartTarget.classList.add("d-none")
+        // this.buttonStartTarget.classList.add("d-none")
       })
     } else {
       this.room.localParticipant.tracks.forEach(publication => {
         const attachedElements = publication.track.detach()
         attachedElements.forEach(element => element.remove())
-        this.buttonEndTarget.classList.add("d-none")
+        // this.buttonEndTarget.classList.add("d-none")
       })
       this.localVideoTarget.innerHTML = ''
     }
   }
 
   _showBuddyVideo(track) {
-    console.log(track);
     if (track) {
       this.buddyVideoTarget.appendChild(track.attach())
     } else {
@@ -62,14 +61,12 @@ export default class extends Controller {
   _onSelfConnect() {
     this.callStarted()
 
-    console.log(this.room.participants);
     // Someone is already in the room
     if (this.room.participants.size > 0) {
       this.buddyJoined()
     }
     // Show video for each participant in the room
     this.room.participants.forEach(participant => {
-      console.log(participant);
       participant.tracks.forEach(publication => {
         if (publication.track) {
           this._showBuddyVideo(publication.track)
@@ -79,7 +76,6 @@ export default class extends Controller {
       // If a participant starts sharing video later,
       // show their video
       participant.on('trackSubscribed', track => {
-        console.log(track);
         this._showBuddyVideo(track)
       })
     })
@@ -106,7 +102,6 @@ export default class extends Controller {
 
   joinCall(event) {
     event.preventDefault()
-    console.log("hi from joinCall")
     this._showLocalVideo(true)
     connect(this.accessTokenValue, {
       name: this.roomIdValue,
@@ -114,12 +109,10 @@ export default class extends Controller {
       video: { width: this.buddyVideoWidthValue }
     }).then(
       room => {
-        console.log(`Successfully joined a room: ${room}`)
         this.room = room
         this._onSelfConnect()
 
         room.on('participantConnected', (buddy) => {
-          console.log(buddy)
           this._onBuddyConnect(buddy)
         })
         room.on('participantDisconnected', () => this._onBuddyDisconnect())
@@ -139,17 +132,38 @@ export default class extends Controller {
 
   }
 
-  callStarted(event) {
-    this.buttonStartTarget.classList.add("d-none")
-    this.buttonEndTarget.classList.remove("d-none")
+  callStarted() {
+    this.noCallTarget.classList.add('d-none')
+    this.awaitingBuddyTarget.classList.remove('d-none')
+    // this.joinCallButtonTarget.classList.add('d-none')
+    // this.endCallButtonTarget.classList.remove('d-none')
   }
 
-  callEnded(event) {
-    this.buttonEndTarget.classList.add("d-none")
-    this.buttonStartTarget.classList.remove("d-none")
+  callEnded() {
+    this.noCallTarget.classList.remove('d-none')
+    this.awaitingBuddyTarget.classList.add('d-none')
+    // this.joinCallButtonTarget.classList.remove('d-none')
+    // this.endCallButtonTarget.classList.add('d-none')
   }
 
-  buddyJoined() {}
+  buddyJoined() {
+    this.awaitingBuddyTarget.classList.add('d-none')
+  }
 
-  buddyLeft() {}
+  buddyLeft() {
+  }
+
+  // callStarted(event) {
+  //   this.buttonStartTarget.classList.add("d-none")
+  //   this.buttonEndTarget.classList.remove("d-none")
+  // }
+
+  // callEnded(event) {
+  //   this.buttonEndTarget.classList.add("d-none")
+  //   this.buttonStartTarget.classList.remove("d-none")
+  // }
+
+  // buddyJoined() {}
+
+  // buddyLeft() {}
 }
