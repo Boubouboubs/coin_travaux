@@ -6,7 +6,7 @@
   <div class="d-flex mb-4">
     <div class="card-banner-show my-4">
       <% if @company.projects_photos.fifth %>
-        <%= cl_image_tag @company.projects_photos.fifth.key, class:"card-banner-show", style:"height:100%" %>
+        <%= cl_image_tag @company.projects_photos.second.key, class:"card-banner-show", style:"height:100%" %>
       <% else %>
         <%= cl_image_tag @company.projects_photos.first.key, class:"card-banner-show", style:"height:100%" %>
       <% end %>
