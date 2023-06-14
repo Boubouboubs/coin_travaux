@@ -2,7 +2,7 @@
     <h5> Nous avons trouvé ces entreprises pour vous (<%= @companies.size %>)</h5>
 </div>
 
-  <div class="d-flex justify-content-center px-4" data-controller="autosubmit" data-action="submit">
+  <div class="d-flex justify-content-center px-4" data-controller="autosubmit" data-action="input->autosubmit#submit">
     <%= simple_form_for :filters, url: project_companies_path, method: :get, html:{ class:"d-flex" } do |f| %>
       <%= f.input :star_rating,
         collection: [["1 étoile", 1], ["2 étoiles", 2], ["3 étoiles", 3], ["4 étoiles", 4], ["5 étoiles", 5]],
