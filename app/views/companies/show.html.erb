@@ -1,6 +1,6 @@
 <div class="container">
   <p id="return-arrow">
-    <i class="fa-solid fa-arrow-left fa-lg" style="color: #28ada8;"></i>
+    <i class="fa-solid fa-arrow-left fa-lg"></i>
     <em><%= link_to "Retour aux résultats", project_companies_path(@project), style:"text-decoration:none" %></em>
   </p>
   <div class="d-flex mb-4">
@@ -54,10 +54,10 @@
   </div>
 
   <div class="modal fade mt-5" id="summaryModal" tabindex="-1" aria-labelledby="summaryModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-show">
-      <div class="modal-content">
+    <div class="modal-dialog">
+      <div class="modal-content shadow" id="modal-show">
         <div class="modal-header">
-          <div class="text-center w-100"><h1 class="modal-title fs-5" id="summaryModalLabel">Votre RDV</h1></div>
+          <div class="text-center w-100 text-warning"><h1 class="modal-title fs-5" id="summaryModalLabel">Votre RDV</h1></div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body mx-4">
