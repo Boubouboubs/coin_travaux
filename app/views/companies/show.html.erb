@@ -1,10 +1,12 @@
 <div class="container">
-    <i class="fa-solid fa-arrow-left" style="color: #6e55e0;"></i>
-    <%= link_to "Retour aux résultats", project_companies_path(@project), style:"text-decoration: none" %>
-  <div class="d-flex my-4">
+  <p id="return-arrow">
+    <i class="fa-solid fa-arrow-left fa-lg" style="color: #28ada8;"></i>
+    <em><%= link_to "Retour aux résultats", project_companies_path(@project), style:"text-decoration:none" %></em>
+  </p>
+  <div class="d-flex mb-4">
     <div class="card-banner-show my-4">
-      <% if @company.projects_photos.second %>
-        <%= cl_image_tag @company.projects_photos.second.key, class:"card-banner-show", style:"height:100%" %>
+      <% if @company.projects_photos.fifth %>
+        <%= cl_image_tag @company.projects_photos.fifth.key, class:"card-banner-show", style:"height:100%" %>
       <% else %>
         <%= cl_image_tag @company.projects_photos.first.key, class:"card-banner-show", style:"height:100%" %>
       <% end %>
@@ -52,6 +54,7 @@
         </div>
         <div class="modal-body mx-4">
           <p><%= cl_image_tag @company.logo.key, class:"avatar me-2" %> <strong><%= @company.name %></strong></p>
+          <hr>
           <p><i class="fa-solid fa-calendar-days me-2" style="color: #383839;"></i><%= @project.visit_date.strftime("%d/%m/%Y à %H:%M") %></p>
           <p><i class="fa-solid fa-location-dot me-2" style="color: #383839;"></i><%= @project.address %></p>
           <p><i class="fa-solid fa-ruler-horizontal me-2" style="color: #383839;"></i><%= @project.surface %> m2</p>
@@ -71,7 +74,7 @@
   <div class="row d-flex">
     <% @company.projects.each do |project| %>
       <div class="col-3 my-3">
-        <div class="card-company my-2 mx-2 zoom">
+        <div class="card-company my-2 zoom">
           <div class="card-image">
             <div id="carouselImgControls<%= project.id %>" class="carousel slide">
               <div class="carousel-inner">
@@ -98,20 +101,19 @@
           <div class="card-company-infos mb-2">
               <% if project.average_rating_project %>
                 <div class="d-flex">
-                  <div id="stars">
+                  <div id="stars-show">
                     <% project.average_rating_project.round.times do %>
                       <i class="fa-solid fa-star" style="color: #fecc00;"></i>
                     <% end %>
                   </div>
-                  <div id="stars" class="ms-1"><em> <%= project.average_rating_project %>/5</em>
+                  <div id="stars-show" class="ms-1"><em> <%= project.average_rating_project %>/5</em>
                   </div>
                 </div>
                 <% end %>
-              <p><i class="fa-solid fa-ruler-horizontal me-2" style="color: #383839;"></i>  <%= project.surface %> m2</p>
-              <p><i class="fa-solid fa-location-dot me-2" style="color: #383839;"></i>  <%= project.city %></p>
-              <p><i class="fa-solid fa-house me-2" style="color: #383839;"></i>  <%= project.property_type %></p>
-              <p><i class="fa-solid fa-screwdriver-wrench me-2" style="color: #383839;"></i>  <%= @project.renovation_type %></p>
-
+              <p><i class="fa-solid fa-ruler-horizontal me-2" style="color: #383839;"></i><%= project.surface %> m2</p>
+              <p><i class="fa-solid fa-location-dot me-2" style="color: #383839;"></i><%= project.city %></p>
+              <p><i class="fa-solid fa-house me-2" style="color: #383839;"></i><%= project.property_type %></p>
+              <p><i class="fa-solid fa-screwdriver-wrench me-2" style="color: #383839;"></i><%= @project.renovation_type %></p>
           </div>
         </div>
       </div>

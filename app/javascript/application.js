@@ -3,3 +3,6 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "@popperjs/core"
 import "bootstrap"
+import AutosubmitController from ".app/javascript/controllers/autosubmit_controller.js"
+Stimulus.register("autosubmit", AutosubmitController)
+

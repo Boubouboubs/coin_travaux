@@ -14,11 +14,11 @@ nav button {
   border: 4px solid transparent!important;
 }
 
+// .nav-link:active {
+//   border-bottom: 4px solid $turquoise!important;
+//   color: solid $turquoise!important;
+// }
+
 nav button:hover {
   border-bottom: 4px solid $turquoise!important;
-}
-
-nav button:active {
-  border-bottom: 4px solid $turquoise!important;
-  color: solid $turquoise!important;
 }
