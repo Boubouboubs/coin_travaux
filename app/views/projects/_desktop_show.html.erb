@@ -35,19 +35,19 @@
         <% end %>
         <br>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary mt-3 text-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-          Accéder à la visite virtuelle
-        </button>
+        <% unless Date.today > @project.visit_date %>
+          <button type="button" class="btn btn-primary mt-3 text-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Accéder à la visite virtuelle
+          </button>
 
-        <!-- Modal -->
-        <div class="modal fade mt-5" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <% unless Date.today > @project.visit_date %>
+          <!-- Modal -->
+          <div class="modal fade mt-5" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
                   <div data-controller="card-twilio-mobile" data-card-twilio-mobile-devise-type-value="desktop" class="twilio-desktop-container">
                     <div class="twilio-buttons">
                       <div class="btn btn-primary rounded-pill text-white btn-call-start"
@@ -102,11 +102,11 @@
                       </div>
                     </div>
                   </div>
-                <% end %>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        <% end %>
 
       </div>
       <div>
