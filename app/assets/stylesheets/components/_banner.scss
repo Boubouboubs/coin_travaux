@@ -15,8 +15,17 @@
     transition: 0.3s ease;
   }
   .btn-big-white:hover {
-    color: $turquoise;
+    color: $white;
+    transform: translate(-0.25rem,-0.25rem);
+    background: $turquoise;
+    box-shadow: 0.25rem 0.25rem white;
   }
+
+  .button:active {
+    transform: translate(0);
+    box-shadow: none;
+  }
+
 }
 
 .banner-container {
