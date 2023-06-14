@@ -13,10 +13,16 @@ db_main_projects = Rails.root.join("db", "DB_main_projects.csv")
 puts "Creation of users..."
 users = []
 camille = User.create(email: "camille.dion@gmail.com", password: "123456", first_name: "Camille", last_name: "Dion", phone_number: "0611223344")
-users << david = User.create!(email: "serrano.david.liaca@gmail.com", password: "123456", first_name: "David", last_name: "Serrano", phone_number: "0611223366")
+users << david = User.create!(email: "serrano.david@gmail.com", password: "123456", first_name: "David", last_name: "Serrano", phone_number: "0611223366")
 users << amal = User.create!(email: "amal.rabbani@gmail.com", password: "123456", first_name: "Amal", last_name: "Rabbani", phone_number: "0611223377")
 users << boubou = User.create!(email: "boubouboubs@gmail.com", password: "123456", first_name: "Stéphanie", last_name: "Boubou", phone_number: "0611223388")
 users << celine = User.create!(email: "celine.chader@gmail.com", password: "123456", first_name: "Céline", last_name: "Chader", phone_number: "0611223399")
+users << javier = User.create!(email: "javier@gmail.com", password: "123456", first_name: "Javier", last_name: "Alvarez", phone_number: "0611223399")
+users << youval = User.create!(email: "youval@gmail.com", password: "123456", first_name: "Youval", last_name: "Akouka", phone_number: "0611223399")
+users << helene = User.create!(email: "helene@gmail.com", password: "123456", first_name: "Hélène", last_name: "Becquembois", phone_number: "0611223399")
+
+
+
 puts "#{users.size} users created, seedons mes braves!"
 
 camille.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686144516/users/amal_jiocgl.jpg'), filename: "#{camille.first_name}.jpg")
