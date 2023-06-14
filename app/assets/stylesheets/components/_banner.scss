@@ -12,6 +12,10 @@
     border-radius: 10px;
     margin-top: 4rem;
     display: inline-block;
+    transition: 0.3s ease;
+  }
+  .btn-big-white:hover {
+    color: $turquoise;
   }
 }
 
@@ -29,7 +33,7 @@
 .banner-img {
   width: 100%;
   position: relative;
-  bottom: -3em;
+  bottom: -2em;
   left: -2em;
 }
 
