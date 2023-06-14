@@ -4,6 +4,13 @@
   position: sticky;
   z-index: 10000;
   top: 0;
+
+}
+
+@media (max-width: 540px) {
+  .navbar-lewagon {
+    background-color: $purple !important;
+  }
 }
 
 .navbar-lewagon .navbar-collapse {
