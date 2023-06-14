@@ -11,8 +11,22 @@ class CompaniesController < ApplicationController
     end
 
     if params.dig(:filters, :existence_years).present?
-      if params.dig(:filters, :existence_years) == "2"
-        @companies = @companies.select { |c| (Time.now.to_date - c.creation_date).ceil / 365 >= params[:filters][:creation_date].to_i }
+      if params.dig(:filters, :existence_years) == "10"
+        @companies = @companies.select { |c| (Time.now.to_date - c.creation_date).ceil / 365 < 10 }
+      elsif params.dig(:filters, :existence_years) == "29"
+        @companies = @companies.select { |c| (Time.now.to_date - c.creation_date).ceil / 365 <= 29 && (Time.now.to_date - c.creation_date).ceil / 365 >= 10 }
+      elsif params.dig(:filters, :existence_years) == "30"
+        @companies = @companies.select { |c| (Time.now.to_date - c.creation_date).ceil / 365 > 30 }
+      end
+    end
+
+    if params.dig(:filters, :sorting).present?
+      if params.dig(:filters, :sorting) == "Note décroissante"
+        @companies = @companies.sort_by { |c| -c.average_rating }
+      elsif params.dig(:filters, :sorting) == "Nombre d'avis décroissant"
+        @companies = @companies.sort_by { |c| -c.reviews.size }
+      elsif params.dig(:filters, :sorting) == "Le + ancien"
+        @companies = @companies.sort_by { |c| c.creation_date }
       end
     end
 
