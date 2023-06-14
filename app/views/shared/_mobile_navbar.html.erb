@@ -1,0 +1,43 @@
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="container-fluid">
+    <div class="d-flex align-items-end">
+      <%= link_to "/", class: "navbar-brand" do %>
+        <%= image_tag "logo-coin-travaux.gif" %>
+      <% end %>
+  
+    </div>
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+  <form novalidate="novalidate" class="simple_form search d-none d-md-block" action="/" accept-charset="UTF-8" method="get">
+    <div class="search-form-control form-group">
+      <input class="form-control string required" type="text" name="search[query]" id="search_query" placeholder="Rénovation Paris..." />
+      <%= button_tag(type: "submit", class: "btn btn-search") do %>
+           <i class="fa-solid fa-magnifying-glass"></i>
+        <% end %>
+    </div>
+  </form>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= cl_image_tag current_user.photo.key, class: "avatar", alt: "dropdown menu" if current_user.photo.attached? %>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <%= link_to "Mon projet", project_path(current_user.projects.last), class: "dropdown-item" if current_user.projects.present? %>
+            <%= link_to "Déconnexion", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+          </div>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
