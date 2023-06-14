@@ -4,7 +4,9 @@
       <%= link_to "/", class: "navbar-brand" do %>
         <%= image_tag "logo-coin-travaux.gif" %>
       <% end %>
-  
+      <% unless current_page?("/") %>
+        <h1>COIN TRAVAUX</h1>
+      <% end %>
     </div>
 
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
