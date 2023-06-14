@@ -1,6 +1,6 @@
 <div class="container">
   <p id="return-arrow">
-    <i class="fa-solid fa-arrow-left fa-lg" style="color: #28ada8;"></i>
+    <i class="fa-solid fa-arrow-left fa-lg"></i>
     <em><%= link_to "Retour aux résultats", project_companies_path(@project), style:"text-decoration:none" %></em>
   </p>
   <div class="d-flex mb-4">
@@ -28,9 +28,17 @@
           <p><%= @company.description %></p>
         </div>
         <div class="tab-pane fade tab-desc mt-2" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-          <p><strong>Adresse</strong></p>
-          <p><%= @company.address %></p>
-          <p><strong>Site et réseaux sociaux</strong></p>
+          <div class="d-flex justify-content-between">
+            <div>
+              <p class="mb-1"><strong>Date de création</strong></p>
+              <p><%= @company.creation_date %></p>
+            </div>
+            <div>
+              <p class="mb-1"><strong>Adresse</strong></p>
+              <p><%= @company.address %></p>
+            </div>
+          </div>
+          <p class="mb-1"><strong>Site et réseaux sociaux</strong></p>
           <p><a href="#">www.<%= @company.name.split(' ').last.strip %>.com</p>
           <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
           <a href="#"><i class="fab fa-facebook fa-lg"></i></a>
@@ -47,9 +55,9 @@
 
   <div class="modal fade mt-5" id="summaryModal" tabindex="-1" aria-labelledby="summaryModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content shadow" id="modal-show">
         <div class="modal-header">
-          <div class="text-center w-100"><h1 class="modal-title fs-5" id="summaryModalLabel">Votre RDV</h1></div>
+          <div class="text-center w-100 text-warning"><h1 class="modal-title fs-5" id="summaryModalLabel">Votre RDV</h1></div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body mx-4">
