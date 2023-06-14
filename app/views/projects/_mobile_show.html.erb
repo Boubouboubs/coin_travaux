@@ -16,6 +16,70 @@
     </ul>
 
     <% unless Date.today > @project.visit_date %>
+      <div data-controller="video-call"
+                      data-video-call-access-token-value="<%= @twilio_jwt %>"
+                      data-video-call-room-id-value="<%= @room_id %>"
+                      data-video-call-buddy-video-width-value="200"
+                      data-card-twilio-mobile-target="twilio">
+        <div class="card-call-mobile d-flex justify-content-between mt-4">
+          <div id="project-virtual-visit">
+            <h3 id="day"><strong><%= @project.visit_date.strftime("%d")%></strong></h3>
+            <h3 id="month"><strong><%= l(@project.visit_date, locale: :fr, format: "%^B") %></strong></h3>
+            <h3 id="hour"><strong><%= @project.visit_date.strftime("%Hh%M")%></strong></h3>
+          </div>
+          <p class="sm-9">Ma visite avec <strong><%= @chosen_company.name %></strong></p>
+          <!-- Button trigger modal -->
+          <%= link_to '#',
+                      class: 'btn btn-primary rounded-pill text-white btn-call-start',
+                      data: {
+                        bs_toggle: "modal",
+                        bs_target: "#staticBackdrop",
+                        action: 'click->video-call#joinCall',
+                        video_call_target: 'joinCallButton',
+                        card_twilio_mobile_target: 'joinCallButton'
+                      } do %>
+            <i class="fa-solid fa-phone" style="color: #ffffff;"></i>
+          <% end %>
+          <!-- Modal -->
+          <div class="modal fade mt-5 modal-mobile" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <div class="video-call">
+                    <div class="call-video-views">
+                      <div id="remote-video" data-video-call-target="buddyVideo">
+                        <div class="no-call" data-video-call-target="noCall">
+                          Aucun appel en cours. Cliquez sur appel pour vous connecter !
+                        </div>
+                        <div class="waiting-for-buddy d-none"
+                            data-video-call-target="awaitingBuddy">
+                          En attente de <%= @user.first_name %> pour participer à l'appel...
+                        </div>
+                      </div>
+                      <div id="local-video" data-video-call-target="localVideo"></div>
+                    </div>
+                    <div class="call-buttons">
+                      <%= link_to '#',
+                                  class: 'btn btn-primary rounded-pill text-white btn-end-call',
+                                  data: {
+                                    action: 'click->video-call#endCall',
+                                    video_call_target: 'endCallButton',
+                                    card_twilio_mobile_target: 'endCallButton'
+                                  } do %>
+                        <i class="fa-solid fa-phone-slash" style="color: #ffffff;"></i>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <% unless Date.today > @project.visit_date %>
       <div data-controller="card-twilio-mobile">
         <div class="card-call-mobile d-flex justify-content-between mt-4">
           <div id="project-virtual-visit">
