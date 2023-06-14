@@ -20,11 +20,23 @@ users << celine = User.create!(email: "celine.chader@gmail.com", password: "1234
 users << javier = User.create!(email: "javier@gmail.com", password: "123456", first_name: "Javier", last_name: "Alvarez", phone_number: "0611223399")
 users << youval = User.create!(email: "youval@gmail.com", password: "123456", first_name: "Youval", last_name: "Akouka", phone_number: "0611223399")
 users << helene = User.create!(email: "helene@gmail.com", password: "123456", first_name: "Hélène", last_name: "Becquembois", phone_number: "0611223399")
+users << antoine = User.create!(email: "antoine@gmail.com", password: "123456", first_name: "Antoine", last_name: "Chosson", phone_number: "0611223399")
+users << anthony = User.create!(email: "anthony@gmail.com", password: "123456", first_name: "Anthony", last_name: "Christodoulou", phone_number: "0611223399")
+users << eugene = User.create!(email: "eugene@gmail.com", password: "123456", first_name: "Eugène", last_name: "Dami", phone_number: "0611223399")
+users << malika = User.create!(email: "malika@gmail.com", password: "123456", first_name: "Malika", last_name: "Housni", phone_number: "0611223399")
+users << lesly = User.create!(email: "lesly@gmail.com", password: "123456", first_name: "Lesly", last_name: "Urie", phone_number: "0611223399")
 
 
 
 puts "#{users.size} users created, seedons mes braves!"
-
+javier.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686730691/pdf/Javier_cirspp.jpg'), filename: "#{javier.first_name}.jpg")
+youval.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686730690/pdf/Youval_qm9tes.jpg'), filename: "#{youval.first_name}.jpg")
+helene.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686730691/pdf/Helene_jnhjxh.jpg'), filename: "#{helene.first_name}.jpg")
+antoine.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686730690/pdf/Antoine_coeggl.jpg'), filename: "#{antoine.first_name}.jpg")
+anthony.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686730690/pdf/Anthony_i4quao.jpg'), filename: "#{anthony.first_name}.jpg")
+eugene.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686730691/pdf/Eugene_wjvjfl.jpg'), filename: "#{eugene.first_name}.jpg")
+malika.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686730690/pdf/malika_vew0vp.jpg'), filename: "#{malika.first_name}.jpg")
+lesly.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686730690/pdf/Leslie_rwpnc0.jpg'), filename: "#{lesly.first_name}.jpg")
 camille.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686144516/users/amal_jiocgl.jpg'), filename: "#{camille.first_name}.jpg")
 celine.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686144517/users/celine_iukwgc.png'), filename: "#{celine.first_name}.jpg")
 boubou.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686144517/users/boubou_ktspsm.jpg'), filename: "#{boubou.first_name}.jpg")
