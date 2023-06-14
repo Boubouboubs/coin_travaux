@@ -19,7 +19,7 @@ class CreateQuoteForLastProjectCompany
   private
 
   def quote_url
-    "https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686230104/pdf/test_v99pyl.pdf"
+    "https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686727662/pdf/DEVIS_Spie_Batignolle_-_Camille_Dion_ljrovn.pdf"
   end
 end
 
