@@ -26,8 +26,6 @@ users << eugene = User.create!(email: "eugene@gmail.com", password: "123456", fi
 users << malika = User.create!(email: "malika@gmail.com", password: "123456", first_name: "Malika", last_name: "Housni", phone_number: "0611223399")
 users << lesly = User.create!(email: "lesly@gmail.com", password: "123456", first_name: "Lesly", last_name: "Urie", phone_number: "0611223399")
 
-
-
 puts "#{users.size} users created, seedons mes braves!"
 javier.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686730691/pdf/Javier_cirspp.jpg'), filename: "#{javier.first_name}.jpg")
 youval.photo.attach(io: URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686730690/pdf/Youval_qm9tes.jpg'), filename: "#{youval.first_name}.jpg")
@@ -76,6 +74,7 @@ puts "CSV parsed!!!"
 
 # Main company 2 projects
 puts "parsing of main projects, projects company, reviews"
+users_shuffle = users.dup.shuffle
 CSV.foreach(db_main_projects, headers: :first_row, col_sep: ";") do |row|
   address = "#{row["Address"]}, #{row["Postcode"]}, #{row["City"]}"
   p row["Visit_date"]
@@ -83,7 +82,7 @@ CSV.foreach(db_main_projects, headers: :first_row, col_sep: ";") do |row|
     property_type: row[0],
     address: address,
     surface: row["Surface"],
-    user: users.sample,
+    user: users_shuffle.shift,
     renovation_type: Project::RENOVATION_TYPE[row["Renovation_type"].to_i],
     visit_date: Date.parse(row["Visit_date"])
   )
@@ -102,7 +101,8 @@ CSV.foreach(db_main_projects, headers: :first_row, col_sep: ";") do |row|
   Review.create!(
     project_company: projectcompany,
     rating: row["Rating"],
-    comment: row["Reviews"]
+    comment: row["Reviews"],
+    created_at: Time.now - rand(5..50).days
   )
 end
 puts "CSV parsed"
