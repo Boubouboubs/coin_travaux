@@ -4,7 +4,7 @@ class ChangeLastProjectVisitDate
   end
   def call
     @project.update(
-      visit_date: Time.now - 5.days
+      visit_date: visit_date + 5.days
     )
   end
 end
