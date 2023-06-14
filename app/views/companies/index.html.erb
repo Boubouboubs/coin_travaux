@@ -1,45 +1,43 @@
-<div class="d-flex justify-content-center py-4">
-    <h5> Nous avons trouvé ces entreprises pour vous (<%= @companies.size %>)</h5>
+<div class="d-flex justify-content-center align-items-center px-4 pt-3 ">
+  <%= simple_form_for :filters, url: project_companies_path, method: :get, html: { class:"d-flex", data: { action: 'change->autosubmit#submitForm', controller: 'autosubmit' } } do |f| %>
+    <%= f.input :star_rating,
+      collection: [["1 étoile", 1], ["2 étoiles", 2], ["3 étoiles", 3], ["4 étoiles", 4], ["5 étoiles", 5]],
+      label: false,
+      include_blank: "Note",
+      selected: params.dig(:filters, :star_rating) %>
+
+    <%= f.input :review_number,
+      collection: [[">5", 5], [">10", 10], [">50", 50]],
+      label: false,
+      wrapper_html: { class:"ms-3" },
+      include_blank: "Nombre d'avis",
+      selected: params.dig(:filters, :review_number) %>
+
+    <%= f.input :existence_years,
+      collection: [["Moins de 10 ans", 10], ["10 à 29 ans", 29], [">30 ans", 30]],
+      label: false,
+      wrapper_html: { class:"ms-3" },
+      include_blank: "Ancienneté",
+      selected: params.dig(:filters, :existence_years) %>
+
+    <%= f.input :sorting,
+      collection: ["Note décroissante", "Nombre d'avis décroissant", "Le + ancien"],
+      label: false,
+      wrapper_html: { class:"ms-3" },
+      include_blank: "Trier par",
+      selected: params.dig(:filters, :sorting) %>
+
+    <%= f.input :photo,
+      collection: [true, false],
+      wrapper_html: { class:"d-flex align-items-center"},
+      as: :boolean,
+      input_html: { class: "toggle", checked: params.dig(:filters, :photo) == "1" } %>
+  <% end %>
 </div>
 
-  <div class="d-flex justify-content-center px-4" data-controller="autosubmit" data-action="input->autosubmit#submit">
-    <%= simple_form_for :filters, url: project_companies_path, method: :get, html:{ class:"d-flex" } do |f| %>
-      <%= f.input :star_rating,
-        collection: [["1 étoile", 1], ["2 étoiles", 2], ["3 étoiles", 3], ["4 étoiles", 4], ["5 étoiles", 5]],
-        label: false,
-        include_blank: "Note",
-        selected: params.dig(:filters, :star_rating) %>
-
-      <%= f.input :review_number,
-        collection: [[">5", 5], [">10", 10], [">50", 50]],
-        label: false,
-        wrapper_html: { class:"ms-3" },
-        include_blank: "Nombre d'avis",
-        selected: params.dig(:filters, :review_number) %>
-
-      <%= f.input :existence_years,
-        collection: [["Moins de 10 ans", 10], ["10 à 29 ans", 29], [">30 ans", 30]],
-        label: false,
-        wrapper_html: { class:"ms-3" },
-        include_blank: "Ancienneté",
-        selected: params.dig(:filters, :existence_years) %>
-
-      <%= f.input :sorting,
-        collection: ["Note décroissante", "Nombre d'avis décroissant", "Le + ancien"],
-        label: false,
-        wrapper_html: { class:"ms-3" },
-        include_blank: "Trier par",
-        selected: params.dig(:filters, :sorting) %>
-
-      <%= f.input :photo,
-        collection: [true, false],
-        wrapper_html: { class:"d-flex align-items-center"},
-        as: :boolean,
-        input_html: { class: "toggle", checked: params.dig(:filters, :photo) == "1" } %>
-
-      <div class="ms-4"><%= f.submit 'Filtrer', class:"btn btn-primary text-white" %></div>
-    <% end %>
-  </div>
+<div class="d-flex justify-content-center py-3">
+    <h5><%= icon('fa-solid', 'bell', class:"fa-7x, fa-shake")%> Nous avons trouvé ces entreprises pour vous (<%= @companies.size %>)</h5>
+</div>
 
 <div class="container my-3">
 
