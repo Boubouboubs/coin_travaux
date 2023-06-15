@@ -5,6 +5,7 @@ class Company < ApplicationRecord
   has_many :users, dependent: :destroy
 
   has_one_attached :logo
+  has_one_attached :main_company_photo
 
   def projects_photos
     return nil unless projects.present?
