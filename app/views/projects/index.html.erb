@@ -1,7 +1,7 @@
 <%# mobile version %>
 
 <div class="d-flex justify-content-center mt-3">
-  <h3>Mes projets</h3>
+  <h3>Mon projet</h3>
 </div>
 
 <hr class="celine">
@@ -16,7 +16,7 @@
             <p>Propriété: <%= project.property_type %></p>
             <p>Surface: <%= project.surface %> m2</p>
             <p>Type de rénovation: <%= project.renovation_type %></p>
-            <%= link_to "Les détails de vos projets", project_path(project.id) %>
+            <%= link_to "Les détails de vos projets", project_path(project.last) %>
           </div>
         </div>
       </div>

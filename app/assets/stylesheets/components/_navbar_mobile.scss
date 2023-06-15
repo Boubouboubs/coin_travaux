@@ -1,0 +1,29 @@
+.navbar-lewagon {
+  justify-content: space-between;
+  background-color: color-mix(in srgb, $purple, white 31%);
+  position: sticky;
+  z-index: 10000;
+  top: 0;
+
+}
+
+@media (max-width: 540px) {
+  .navbar-lewagon {
+    background-color: $purple !important;
+  }
+}
+
+.navbar-lewagon .navbar-collapse {
+  flex-grow: 0;
+}
+
+.navbar-lewagon .navbar-brand img {
+  width: 40px;
+}
+
+.navbar h1 {
+  font-family: $headers-font;
+  font-size: 20px;
+  color: white;
+  margin-left: -7px;
+}
