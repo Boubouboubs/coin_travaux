@@ -37,7 +37,7 @@ class ProjectsController < ApplicationController
 
   def current_project
     @project = current_user.projects.last
-    
+    authorize @project
     redirect_to project_path(@project)
   end
 
