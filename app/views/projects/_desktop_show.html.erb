@@ -48,7 +48,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <% unless Date.today > @project.visit_date %>
+                <%# unless Date.today > @project.visit_date %>
                   <div data-controller="card-twilio-mobile" data-card-twilio-mobile-devise-type-value="desktop" class="twilio-desktop-container">
                     <div class="twilio-buttons">
                       <div class="btn btn-primary rounded-pill text-white btn-call-start"
