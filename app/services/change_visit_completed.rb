@@ -17,7 +17,7 @@ end
 #   end
 #   def call
 #     @project.update(
-#       visit_date: visit_date + 5.days
+#       visit_date: @project.visit_date + 5.days
 #     )
 #   end
 # end
