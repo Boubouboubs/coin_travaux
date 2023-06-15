@@ -1,0 +1,28 @@
+.devise-container {
+  width: 1200px;
+  font-family: $body-font;
+  margin: 0 auto;
+  color: #27374D;
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid $secondary-purple;
+  background-color: white;
+  padding: 3em;
+}
+
+.btn-blue {
+  background-color: $turquoise;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 25px;
+  border: none;
+}
+
+// .btn-blue:hover {
+//   background-color: white;
+//   color: $turquoise;
+//   padding: 5px 15px;
+//   border-radius: 25px;
+//   border: 1px solid $turquoise
+// }

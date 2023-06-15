@@ -26,16 +26,16 @@
   <div class="card-show">
     <div class="grid-inside">
       <div id="project-virtual-visit">
-        <% if Date.today < @project.visit_date %>
+        <% if @project.visit_completed == false %>
           <h3> Ma prochaine visite </h3>
           prévue le <strong><%= @project.visit_date.strftime("%d/%m/%Y à %H:%M")%></strong>
-        <% elsif %>
+        <% elsif @project.visit_completed?%>
           <h3> Ma visite </h3>
           effectuée le <strong><%= @project.visit_date.strftime("%d/%m/%Y à %H:%M")%></strong>
         <% end %>
         <br>
         <!-- Button trigger modal -->
-        <% unless Date.today > @project.visit_date %>
+        <% unless @project.visit_completed? %>
           <button type="button" class="btn btn-primary mt-3 text-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Accéder à la visite virtuelle
           </button>
@@ -124,7 +124,7 @@
 
   <div class="card-show">
     <h3> Mes devis </h3>
-    <% if Date.today > @project.visit_date %>
+    <% if @project.visit_completed? %>
       <% if @project.quotes.present? %><tr>
         <table class="table table-sm">
           <thead>
@@ -139,7 +139,7 @@
               <tr>
                 <th scope="row"> <%= quote.company.name%></th>
                 <td><small><%= link_to "Voir le devis", cl_image_path(quote.file.key), target: "_blank" %></small></td>
-                <td><%= quote.price %>€</td>
+                <td><%= number_with_delimiter(quote.price.round, :delimiter => ' ') %> €</td>
               </tr>
             <% end %>
           </tbody>
@@ -147,7 +147,7 @@
       <% else %>
         Vous n'avez pas encore reçu de devis : encore un peu d'attente ⏱️
       <% end %>
-    <% elsif Date.today < @project.created_at %>
+    <% else %>
       Bientôt la visite, bientôt vos devis ! 🔏
     <% end %>
   </div>
