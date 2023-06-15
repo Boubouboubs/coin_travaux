@@ -52,7 +52,7 @@ CSV.foreach(filepath, headers: :first_row, col_sep: ";") do |row|
     address: address,
     creation_date: row["creation_date"]
   )
-  main_company_photo = URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686748611/pdf/beau-entrepreneur-regardant-la-cam%C3%A9ra-277039189_uhfbia.webp')
+  main_company_photo = URI.open('https://res.cloudinary.com/dtxjrhsbk/image/upload/v1686834039/PXL_20230615_125019155.PORTRAIT_yxunxc.jpg')
   company.main_company_photo.attach(io: main_company_photo, filename: "bg.png", content_type: "image/png")
   company.save!
 
