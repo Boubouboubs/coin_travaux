@@ -5,7 +5,7 @@ require "csv"
 require "open-uri"
 require "date"
 
-filepath = Rails.root.join("db", "DB_entrepreneurs.csv")
+filepath = Rails.root.join("db", "DB_entrepreneurs_test.csv")
 db_projects = Rails.root.join("db", "DB_projects.csv")
 db_main_projects = Rails.root.join("db", "DB_main_projects.csv")
 
@@ -60,6 +60,13 @@ CSV.foreach(filepath, headers: :first_row, col_sep: ";") do |row|
   logo.each do |url|
     file = URI.open(url)
     company.logo.attach(io: file, filename: "nes.png", content_type: "image/png")
+    company.save!
+  end
+
+  photo_entrepreneur = row['Photo_entrepreneur'].split(',').map { |url| url.strip }
+  photo_entrepreneur.each do |url|
+    file = URI.open(url)
+    company.photo_entrepreneur.attach(io: file, filename: "nes.png", content_type: "image/png")
     company.save!
   end
 
