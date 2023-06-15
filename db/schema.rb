@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_13_143433) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_15_083848) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_13_143433) do
     t.datetime "updated_at", null: false
     t.string "renovation_type"
     t.string "jwt_token"
+    t.boolean "visit_completed", default: false
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
