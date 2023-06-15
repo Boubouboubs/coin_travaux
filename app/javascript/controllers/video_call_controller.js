@@ -32,13 +32,11 @@ export default class extends Controller {
     if (visible) {
       createLocalVideoTrack().then(track => {
         this.localVideoTarget.appendChild(track.attach())
-        // this.buttonStartTarget.classList.add("d-none")
       })
     } else {
       this.room.localParticipant.tracks.forEach(publication => {
         const attachedElements = publication.track.detach()
         attachedElements.forEach(element => element.remove())
-        // this.buttonEndTarget.classList.add("d-none")
       })
       this.localVideoTarget.innerHTML = ''
     }
@@ -106,7 +104,10 @@ export default class extends Controller {
     connect(this.accessTokenValue, {
       name: this.roomIdValue,
       audio: true,
-      video: { width: this.buddyVideoWidthValue }
+      video: {
+        width: this.buddyVideoWidthValue,
+        facingMode: 'environment'
+      }
     }).then(
       room => {
         this.room = room
@@ -129,21 +130,16 @@ export default class extends Controller {
     this._showBuddyVideo(false)
     this._showLocalVideo(false)
     this.callEnded()
-
   }
 
   callStarted() {
     this.noCallTarget.classList.add('d-none')
     this.awaitingBuddyTarget.classList.remove('d-none')
-    // this.joinCallButtonTarget.classList.add('d-none')
-    // this.endCallButtonTarget.classList.remove('d-none')
   }
 
   callEnded() {
     this.noCallTarget.classList.remove('d-none')
     this.awaitingBuddyTarget.classList.add('d-none')
-    // this.joinCallButtonTarget.classList.remove('d-none')
-    // this.endCallButtonTarget.classList.add('d-none')
   }
 
   buddyJoined() {
@@ -153,17 +149,12 @@ export default class extends Controller {
   buddyLeft() {
   }
 
-  // callStarted(event) {
-  //   this.buttonStartTarget.classList.add("d-none")
-  //   this.buttonEndTarget.classList.remove("d-none")
-  // }
-
-  // callEnded(event) {
-  //   this.buttonEndTarget.classList.add("d-none")
-  //   this.buttonStartTarget.classList.remove("d-none")
-  // }
-
-  // buddyJoined() {}
-
-  // buddyLeft() {}
+  switchCamera() {
+    if (this.room && this.room.localParticipant) {
+      const localVideoTrack = this.room.localParticipant.videoTracks.get(0).track;
+      if (localVideoTrack) {
+        localVideoTrack.restart({ facingMode: 'environment' });
+      }
+    }
+  }
 }

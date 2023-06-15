@@ -29,6 +29,7 @@
           </div>
           <p class="sm-9">Ma visite avec <strong><%= @chosen_company.name %></strong></p>
           <!-- Button trigger modal -->
+
           <%= link_to '#',
                       class: 'btn btn-primary rounded-pill text-white btn-call-start',
                       data: {
@@ -60,15 +61,16 @@
                       <div id="local-video" data-video-call-target="localVideo"></div>
                     </div>
                     <div class="call-buttons">
-                      <%= link_to '#',
-                                  class: 'btn btn-primary rounded-pill text-white btn-end-call',
-                                  data: {
-                                    action: 'click->video-call#endCall',
-                                    video_call_target: 'endCallButton',
-                                    card_twilio_mobile_target: 'endCallButton'
-                                  } do %>
-                        <i class="fa-solid fa-phone-slash" style="color: #ffffff;"></i>
-                      <% end %>
+                      <button id="switch-camera-button" data-action="click->video-call#switchCamera">Switch Camera</button>
+                    <%= link_to '#',
+                                class: 'btn btn-primary rounded-pill text-white btn-end-call',
+                                data: {
+                                  action: 'click->video-call#endCall',
+                                  video_call_target: 'endCallButton',
+                                  card_twilio_mobile_target: 'endCallButton'
+                                } do %>
+                      <i class="fa-solid fa-phone-slash" style="color: #ffffff;"></i>
+                    <% end %>
                     </div>
                   </div>
                 </div>
