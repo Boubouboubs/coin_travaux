@@ -1,0 +1,5 @@
+<% if DeviceDetector.new(request.user_agent).device_type == "desktop" %>
+  <%= render "pages/desktop_profile"  %>
+<% else %>
+  <%= render "pages/mobile_profile" %>
+<% end %>
