@@ -5,7 +5,7 @@ require "csv"
 require "open-uri"
 require "date"
 
-filepath = Rails.root.join("db", "DB_entrepreneurs_test.csv")
+filepath = Rails.root.join("db", "DB_entrepreneurs.csv")
 db_projects = Rails.root.join("db", "DB_projects.csv")
 db_main_projects = Rails.root.join("db", "DB_main_projects.csv")
 
