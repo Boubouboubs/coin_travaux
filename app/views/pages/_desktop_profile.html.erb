@@ -1,7 +1,13 @@
-<div class="d-flex justify-content-center mt-3">
-  <h3>Mon profil</h3>
+
+<div class="d-flex justify-content-center my-5">
 </div>
-
-<h1>avatar picture</h1>
-
-<h1>mon projet en cours</h1>
+<div class="d-flex justify-content-center my-5">
+<h3>Mon profil</h3>
+</div>
+<div class="d-flex justify-content-center my-5">
+  <%= cl_image_tag current_user.photo.key, class: "avatar-mobile" %>
+</div>
+<hr class="celine">
+<div class="d-flex justify-content-center my-3">
+<%= link_to "Mon projet en cours", current_project_projects_path, class:"btn btn-primary mt-5 text-white" %>
+</div>
