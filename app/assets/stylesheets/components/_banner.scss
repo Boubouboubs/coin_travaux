@@ -3,29 +3,6 @@
   min-height: 60vh;
   max-height: 80vh;
   padding: 4em 10em 0;
-  .btn-big-white {
-    background-color: white;
-    color: $dark-blue;
-    font-family: $headers-font;
-    font-size: 20px;
-    padding: 15px 55px;
-    border-radius: 10px;
-    margin-top: 4rem;
-    display: inline-block;
-    transition: 0.3s ease;
-  }
-  .btn-big-white:hover {
-    color: $white;
-    transform: translate(-0.25rem,-0.25rem);
-    background: $turquoise;
-    box-shadow: 0.25rem 0.25rem white;
-  }
-
-  .button:active {
-    transform: translate(0);
-    box-shadow: none;
-  }
-
 }
 
 .banner-container {
