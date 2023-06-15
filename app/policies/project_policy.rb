@@ -21,4 +21,8 @@ class ProjectPolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def current_project?
+    true
+  end
 end
