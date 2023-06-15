@@ -13,7 +13,7 @@
     <title><%= meta_title %></title>
     <meta name="description" content="<%= meta_description %>">
 
- <!-- PWA -->
+    <!-- PWA -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="manifest" href="<%= asset_path 'manifest.json' %>">
@@ -37,10 +37,11 @@
   </head>
 
   <body>
-<%= render "shared/navbar" %>
-<%= render "shared/flashes" %>
-<div style="min-height:calc(100vh - 120px)">
-        <%= yield %>
-  <%= render "shared/footer" %>
+    <%= render "shared/navbar" %>
+    <%= render "shared/flashes" %>
+    <div style="min-height:calc(100vh - 120px)">
+      <%= yield %>
+    </div>
+    <%= render "shared/footer" %>
   </body>
 </html>
