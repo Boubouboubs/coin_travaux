@@ -3,7 +3,7 @@ class CompaniesController < ApplicationController
     @companies = policy_scope(Company)
     @project_id = params[:project_id].to_i
     if params.dig(:filters, :star_rating).present?
-      @companies = @companies.select { |c| c.average_rating.round == params[:filters][:star_rating].to_i }
+      @companies = @companies.select { |c| c.average_rating.round >= params[:filters][:star_rating].to_i }
     end
 
     if params.dig(:filters, :review_number).present?
@@ -14,7 +14,7 @@ class CompaniesController < ApplicationController
       if params.dig(:filters, :existence_years) == "10"
         @companies = @companies.select { |c| (Time.now.to_date - c.creation_date).ceil / 365 < 10 }
       elsif params.dig(:filters, :existence_years) == "29"
-        @companies = @companies.select { |c| (Time.now.to_date - c.creation_date).ceil / 365 <= 29 && (Time.now.to_date - c.creation_date).ceil / 365 >= 10 }
+        @companies = @companies.select { |c| (Time.now.to_date - c.creation_date).ceil / 365 <= 30 && (Time.now.to_date - c.creation_date).ceil / 365 >= 10 }
       elsif params.dig(:filters, :existence_years) == "30"
         @companies = @companies.select { |c| (Time.now.to_date - c.creation_date).ceil / 365 > 30 }
       end
