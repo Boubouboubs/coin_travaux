@@ -1,19 +1,45 @@
-<div class="container mt-5">
-  <div class="d-flex justify-content-between">
+<div style="height: 160px;"
+  class="mobile-map"
+  data-controller="map"
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
+<div class="container mt-4">
+  <div class="">
     <div id="project-place-info">
-      <h3 class="mb-4">
+      <h3 class="text-center mb-3">
         <% if @project.property_type = "Appartement neuf" || "Appartement ancien"%>
           Mon appartement
         <% elsif @project.property_type = "Maison ancienne" || "Maison neuve" %>
           Ma maison
         <% end %>
       </h3>
-      <ul class="list-unstyled">
-      <li class="mt-2"><i class="fa-solid fa-location-dot fa-lg me-1"></i> <%= @project.address.gsub(",","") %></li>
-      <li class="mt-2"><i class="fa-solid fa-ruler-horizontal fa-lg me-1"></i> <%= @project.surface %> m²</li>
-      <li class="mt-2"><i class="fa-solid fa-house fa-lg me-1"></i> <%= @project.property_type %></li>
-      <li class="mt-2"><i class="fa-solid fa-screwdriver-wrench fa-lg me-1"></i> <%= @project.renovation_type %></li>
-    </ul>
+      <div class="mobile-project-infos-card d-flex">
+        <div>
+          <div class="mobile-project-infos-card-section">
+            <i class="fa-solid fa-location-dot fa-lg"></i>
+            <span><%= @project.address.gsub(",","") %></span>
+          </div>
+          <div class="mobile-project-infos-card-section">
+            <i class="fa-solid fa-ruler-horizontal fa-lg"></i>
+            <span><%= @project.surface %> m²</span>
+          </div>
+        </div>
+        <div>
+          <div class="mobile-project-infos-card-section">
+            <i class="fa-solid fa-house fa-lg"></i>
+            <span><%= @project.property_type %></span>
+          </div>
+          <div class="mobile-project-infos-card-section">
+            <i class="fa-solid fa-screwdriver-wrench fa-lg"></i>
+            <span><%= @project.renovation_type %></span>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="text-center mt-4 mb-3">
+        Ma prochaine visite
+      </h3>
 
     <% unless Date.today > @project.visit_date %>
       <div data-controller="video-call"
@@ -27,7 +53,7 @@
             <h3 id="month"><strong><%= l(@project.visit_date, locale: :fr, format: "%^B") %></strong></h3>
             <h3 id="hour"><strong><%= @project.visit_date.strftime("%Hh%M")%></strong></h3>
           </div>
-          <p class="sm-9">Ma visite avec <strong><%= @chosen_company.name %></strong></p>
+          <p class="sm-9 text-start"><strong><%= @chosen_company.name %></strong></p>
           <!-- Button trigger modal -->
           <%= link_to '#',
                       class: 'btn btn-primary rounded-pill text-white btn-call-start',
@@ -46,7 +72,7 @@
               <div class="modal-content">
                 <div class="modal-body">
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  <div class="video-call">
+                  <div class="video-call mobile-version">
                     <div class="call-video-views">
                       <div id="remote-video" data-video-call-target="buddyVideo">
                         <div class="no-call" data-video-call-target="noCall">
