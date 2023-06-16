@@ -17,7 +17,8 @@ class ProjectsController < ApplicationController
     # @projects = policy_scope(Project).where(user_id: current_user.id)
     @markers = [{
       lat: @project.latitude,
-      lng: @project.longitude
+      lng: @project.longitude,
+      marker_html: render_to_string(partial: "marker")
     }]
 
     @chosen_company = @project.companies.order(:created_at).first

@@ -25,3 +25,7 @@ end
 
 # CreateQuoteForLastProjectCompany.new(project: Project.find(46)).call
 # CreateQuoteForLastProjectCompany.new.call
+
+
+# ChangeVisitCompleted.new.call
+# CreateQuoteForLastProjectCompany.new.call
