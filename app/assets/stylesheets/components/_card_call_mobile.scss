@@ -1,11 +1,15 @@
 .card-call-mobile {
-  padding: 1em;
-  box-shadow: 0 16px 30px rgba(110, 85, 224, 0.3);
+  padding: 1.2rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 15px;
+  border-radius: 10px;
   background-color: white;
-  border-radius: 5px;
   text-align: center;
   align-items: center;
   margin-bottom: 1rem;
+  p {
+    flex-grow: 1;
+    padding: 0 1.5rem;
+  }
   .justify-content-between{
     align-items: center;
     justify-content: space-between;
